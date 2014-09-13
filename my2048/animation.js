@@ -2,6 +2,7 @@ function showNumWithAnimation(i,j,randomNum){
 	var numberCell = $('#number_cell_'+i+'_'+j);
 	numberCell.css('background-color',getNumBackgroundColor(board[i][j]))
 		.css('color',getNumColor(board[i][j]))
+		.css('box-shadow', '0px 0px 1px 1px white')
 		.text(randomNum);
 	numberCell.animate({
 		'width':cellSideLength+'px',

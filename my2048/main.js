@@ -67,6 +67,7 @@ function updateBoardView(){
 					.css('height',cellSideLength)
 					.css('top',getPosTop(i))
 					.css('left',getPosLeft(j))
+					.css('box-shadow', '0px 0px 1px 1px white')
 					.css('background-color',getNumBackgroundColor(board[i][j]))
 					.css('color',getNumColor(board[i][j]))
 					.text(board[i][j]);
