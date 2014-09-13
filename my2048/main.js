@@ -155,9 +155,13 @@ document.addEventListener( 'touchstart',function(evt){
 });
 
 document.addEventListener( 'touchmove',function(evt){
-	//evt.preventDefault();//解决android4.0 touchstart可能不可用的bug
-		endx = evt.touches[0].pageX;
-	endy = evt.touches[0].pageY;
+	evt.preventDefault();//解决android4.0 touchstart可能不可用的bug fix 滚动条滚动
+	//触发过程 touchstart --> touchmove -->touchmove ... -->touchend
+});
+
+document.addEventListener( 'touchend',function(evt){
+	endx = evt.changedTouches[0].pageX;
+	endy = evt.changedTouches[0].pageY;
 
 	var detalx = endx - startx;
 	var detaly = endy - starty;
@@ -198,50 +202,6 @@ document.addEventListener( 'touchmove',function(evt){
 		}
 	}
 });
-
-// document.addEventListener( 'touchend',function(evt){
-// 	endx = evt.changedTouches[0].pageX;
-// 	endy = evt.changedTouches[0].pageY;
-
-// 	var detalx = endx - startx;
-// 	var detaly = endy - starty;
-// 	if( Math.abs(detaly) < 0.3*documentWidth && Math.abs(detalx) < 0.3*documentWidth ){
-// 		return;
-// 	}
-
-// 	if( Math.abs(detalx) > Math.abs(detaly) ){
-// 		if( detalx > 0 ){
-// 			//right
-// 			if(moveRight()){
-// 				setTimeout(generateOneNumber,210);
-// 				setTimeout(isGameOver,400);
-// 			}
-// 		}
-// 		else{
-// 			//left
-// 			if(moveLeft()){
-// 				setTimeout(generateOneNumber,210);
-// 				setTimeout(isGameOver,400);
-// 			}
-// 		}
-// 	}
-// 	else{
-// 		if( detaly > 0 ){
-// 			//down
-// 			if(moveDown()){
-// 				setTimeout(generateOneNumber,210);
-// 				setTimeout(isGameOver,400);
-// 			}
-// 		}
-// 		else{
-// 			//up
-// 			if(moveUp()){
-// 				setTimeout(generateOneNumber,210);
-// 				setTimeout(isGameOver,400);
-// 			}
-// 		}
-// 	}
-// });
 
 function moveLeft(){
 	if(!canMoveLeft(board)){
