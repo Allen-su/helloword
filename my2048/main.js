@@ -333,7 +333,7 @@ function moveDown(){
 						board[i][j] = 0;
 						continue;
 					}
-					else if( board[k][j] === board[i][j] && noBlockVertical(j,i,k,board) && !hasConflicted[i][j] ){
+					else if( board[k][j] === board[i][j] && noBlockVertical(j,i,k,board) && !hasConflicted[i][k] ){
 						//move
 						showMoveAnimotion(i,j,k,j);
 						//add
