@@ -4,7 +4,7 @@ header{
 	text-align: center;
 }
 header h1{
-	font-family: sans-serif;
+	font-family: '微软雅黑' 'Microsoft YaHei';
 	font-size: 40px;
 	font-weight: bold;
 	margin: 5px auto;
@@ -17,7 +17,7 @@ header #new_game_button{
 	padding: 7px 7px;
 	background-color: #8f7a66;
 	border-radius: 3px;
-	font-family: sans-serif;
+	font-family: '微软雅黑' 'Microsoft YaHei';
 	color:white;
 }
 header #new_game_button:hover{
@@ -25,7 +25,7 @@ header #new_game_button:hover{
 }
 header p{
 	font-size: 16px;
-	font-family: sans-serif;
+	font-family: '微软雅黑' 'Microsoft YaHei';
 	margin: 5px auto;
 }
 
@@ -54,7 +54,7 @@ header p{
 	font-weight: bold;
 	line-height: 100px;
 	text-align: center;
-	font-size: 60px;
+	font-size: 40px;
 
 	position: absolute;
 }

@@ -1,13 +1,14 @@
-var board = [];
-var score = 0;
-var hasConflicted = [];
-var startx,starty,endx,endy;
+var board = [];//每个格子所保存的数字
+var score = 0;//当前分数
+var hasConflicted = [];//本次移动后当前格子是否已经发生过碰撞，发生后，不能再次碰撞
+var startx,starty,endx,endy;//手机滑动的坐标
 
 $(function(){
 	prepareForMobile();
 	newGame();
 });
 
+//初始化样式大小
 function prepareForMobile(){
 	if( documentWidth > 500 ){
 		gridContainerWidth = 500;
@@ -74,7 +75,7 @@ function updateBoardView(){
 		}
 	}
 	$('.number_cell').css('line-height',cellSideLength+'px')
-					.css('font-size',cellSideLength*0.6+'px');
+					.css('font-size',cellSideLength*0.4+'px');
 }
 
 function generateOneNumber(){
@@ -333,7 +334,7 @@ function moveDown(){
 						board[i][j] = 0;
 						continue;
 					}
-					else if( board[k][j] === board[i][j] && noBlockVertical(j,i,k,board) && !hasConflicted[i][k] ){
+					else if( board[k][j] === board[i][j] && noBlockVertical(j,i,k,board) && !hasConflicted[k][j] ){
 						//move
 						showMoveAnimotion(i,j,k,j);
 						//add
@@ -342,7 +343,7 @@ function moveDown(){
 
 						score += board[k][j];
 						updateScore(score);
-						hasConflicted[i][j] = true;
+						hasConflicted[k][j] = true;
 						continue;
 					}
 				}
@@ -363,6 +364,7 @@ function isGameOver(){
 
 function gameOver(){
 	alert('gameover!');
+	newGame();
 }
 
 
