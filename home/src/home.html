@@ -17,16 +17,20 @@
 	</ul>
 	<div id="pagepiling">
 	    <div class="section"></div>
-	    <div class="section"></div>
-	    <div class="section"></div>
-	    <div class="section"></div>
+	    <div class="section">
+	    	<iframe src="http://nanblog.net/my2048/index.html"></iframe>
+	    </div>
+	    <div class="section"><div class="continued">To be continued</div></div>
+	    <div class="section"><div class="continued">To be continued</div></div>
 	</div>
 	<script type="text/javascript" src="../lib/jquery-2.1.1.min.js"></script>
 	<script type="text/javascript" src="../lib/pagepiling/jquery.pagepiling.min.js"></script>
 	<script type="text/javascript">
 		$(document).ready(function() {
 		    $('#pagepiling').pagepiling({
-		    	anchors: ['firstPage', 'secondPage', 'thirdPage', 'fourthPage', 'lastPage'],
+		    	menu:'#myMenu',
+		    	anchors: ['firstPage', 'secondPage', 'thirdPage', 'fourthPage'],
+		    	navigation:false,
 		    	easing:'linear',
 		    	loopTop:false,
 		    	css3:true,
