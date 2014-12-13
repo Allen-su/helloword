@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Allen</title>
+	<link rel="stylesheet" type="text/css" href="../lib/pagepiling/jquery.pagepiling.css" />
+	<link rel="stylesheet" type="text/css" href="css/reset.css">
+	<link rel="stylesheet" type="text/css" href="css/main.css">
+</head>
+<body>
+	<a href="https://github.com/Allen-su/helloword"><img style="position: fixed;z-index:99; top: 0; right: 0; border: 0;" src="img/forkme_right.png" alt="Fork me on GitHub"></a>
+	<ul id="myMenu">
+	    <li data-menuanchor="firstPage" class="active"><a href="#firstPage">Page1</a></li>
+	    <li data-menuanchor="secondPage"><a href="#secondPage">Page2</a></li>
+	    <li data-menuanchor="thirdPage"><a href="#thirdPage">Page3</a></li>
+	    <li data-menuanchor="fourthPage"><a href="#fourthPage">Page4</a></li>
+	</ul>
+	<div id="pagepiling">
+	    <div class="section"></div>
+	    <div class="section"></div>
+	    <div class="section"></div>
+	    <div class="section"></div>
+	</div>
+	<script type="text/javascript" src="../lib/jquery-2.1.1.min.js"></script>
+	<script type="text/javascript" src="../lib/pagepiling/jquery.pagepiling.min.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function() {
+		    $('#pagepiling').pagepiling({
+		    	anchors: ['firstPage', 'secondPage', 'thirdPage', 'fourthPage', 'lastPage'],
+		    	easing:'linear',
+		    	loopTop:false,
+		    	css3:true,
+		    	animateAnchor:true,
+		       	sectionsColor: ['white', '#ee005a', '#2C3E50', '#39C']
+		    });
+		});
+
+	</script>
+</body>
+</html>

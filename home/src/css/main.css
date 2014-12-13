@@ -1,0 +1,19 @@
+#myMenu {
+	position: fixed;
+	list-style: none;
+	z-index: 10;
+}
+#myMenu li {
+	float: left;
+	margin: 10px 5px;
+	border-radius: 5px;
+	background-color: rgba(255,255,255,0.5);
+}
+#myMenu li a {
+	display: block;
+	padding: 10px;
+	color: purple;
+}
+#myMenu li:hover {
+	background-color:#fff;
+}
