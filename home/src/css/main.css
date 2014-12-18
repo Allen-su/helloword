@@ -56,6 +56,20 @@ iframe {
   	-webkit-animation-duration: 20s;
   	-webkit-animation-iteration-count: infinite;
 }
+@media screen and (max-width: 640px){
+	.first-animate {
+		width: 640px;
+		height: 405px;
+		max-width: 100%;
+		max-height: 100%;
+		margin: auto;
+		background-size: contain; 
+		box-shadow:0 0 5px rgba(0,0,0,1);
+		-webkit-animation-name: myfirst;
+	  	-webkit-animation-duration: 20s;
+	  	-webkit-animation-iteration-count: infinite;
+	}
+}
 
 @-webkit-keyframes myfirst {
 	0% {
