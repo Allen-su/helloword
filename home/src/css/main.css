@@ -42,3 +42,73 @@ iframe {
 	color:#fff;
 	font-size: 25px;
 }
+
+
+.first-animate {
+	width: 750px;
+	height: 400px;
+	max-width: 100%;
+	max-height: 100%;
+	margin: auto;
+	background-size: contain; 
+	box-shadow:0 0 5px rgba(0,0,0,1);
+	-webkit-animation-name: myfirst;
+  	-webkit-animation-duration: 20s;
+  	-webkit-animation-iteration-count: infinite;
+}
+
+@-webkit-keyframes myfirst {
+	0% {
+		background : url(../img/background/b.png) no-repeat;
+	}
+	25% {
+		background : url(../img/background/b2.png) no-repeat;
+	}
+	50% {
+		background : url(../img/background/b3.png) no-repeat;
+	}
+	75% {
+		background : url(../img/background/b4.png) no-repeat;
+	}
+	100% {
+		background : url(../img/background/b5.png) no-repeat;
+	}
+
+}
+
+@keyframes myfirst {
+	0% {
+		background : url(../img/background/b.png) no-repeat;
+	}
+	25% {
+		background : url(../img/background/b2.png) no-repeat;
+	}
+	50% {
+		background : url(../img/background/b3.png) no-repeat;
+	}
+	75% {
+		background : url(../img/background/b4.png) no-repeat;
+	}
+	100% {
+		background : url(../img/background/b5.png) no-repeat;
+	}
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
