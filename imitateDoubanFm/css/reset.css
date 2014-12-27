@@ -10,4 +10,5 @@ ul {list-style: none;}
 .clearfix:after {content: "";height: 0;width: 0;display: block;clear: both;}
 .fr {float: right;}
 .fl {float:left;}
+i {font-style: normal;}
 
