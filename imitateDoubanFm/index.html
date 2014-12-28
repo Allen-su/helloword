@@ -19,39 +19,44 @@
 			</nav>
 		</header>
 		<section id="program">
-			<nav class="clearfix">
-				<i>搜索</i>
-				<ul class="pro_nav_list">
-					<li class="active">MHz</li>
-					<li>节目</li>
-				</ul>
-			</nav>
-			<section id="channel">
-				<dl >
-					<dt class="channel_title">我的兆赫</dt>
-						<dd class="channel_content">我的私人 MHz</dd>
-						<dd class="channel_content">我的红心 MHz</dd>
-						<dd class="channel_content">夏天涌进耳朵里 MHz</dd>
-						<dd class="channel_content">工作学习 MHz</dd>
-					<dt class="channel_title">推荐兆赫</dt>
-						<dd class="channel_content">我的私人 MHz</dd>
-						<dd class="channel_content">我的红心 MHz</dd>
-						<dd class="channel_content">夏天涌进耳朵里 MHz</dd>
-						<dd class="channel_content">工作学习 MHz</dd>
-					<dt class="channel_title">热门兆赫</dt>
-						<dd class="channel_content">我的私人 MHz</dd>
-						<dd class="channel_content">我的红心 MHz</dd>
-						<dd class="channel_content">夏天涌进耳朵里 MHz</dd>
-						<dd class="channel_content">工作学习 MHz</dd>
-				</dl>
-			</section>
+			<div id="find_program">
+				<nav class="clearfix">
+					<i>搜索</i>
+					<ul class="pro_nav_list">
+						<li class="active">MHz</li>
+						<li>节目</li>
+					</ul>
+				</nav>
+				<section id="channel">
+					<dl >
+						<dt class="channel_title">我的兆赫</dt>
+							<dd class="channel_content">我的私人 MHz</dd>
+							<dd class="channel_content">我的红心 MHz</dd>
+							<dd class="channel_content">夏天涌进耳朵里 MHz</dd>
+							<dd class="channel_content">工作学习 MHz</dd>
+						<dt class="channel_title">推荐兆赫</dt>
+							<dd class="channel_content">我的私人 MHz</dd>
+							<dd class="channel_content">我的红心 MHz</dd>
+							<dd class="channel_content">夏天涌进耳朵里 MHz</dd>
+							<dd class="channel_content">工作学习 MHz</dd>
+						<dt class="channel_title">热门兆赫</dt>
+							<dd class="channel_content">我的私人 MHz</dd>
+							<dd class="channel_content">我的红心 MHz</dd>
+							<dd class="channel_content">夏天涌进耳朵里 MHz</dd>
+							<dd class="channel_content">工作学习 MHz</dd>
+					</dl>
+				</section>
+			</div>
+			<div id="my_program"></div>
 		</section>
-		<footer id="menu" class="clearfix">
-			<aside class="control" >
+		<section id="control_box">
+			<div class="control" >
 				<div class="progress"></div>
 				<div class="control_bg"></div>
 				<div class="pause"></div>
-			</aside>
+			</div>
+		</section>
+		<footer id="menu" class="clearfix">
 			<section class="attach clearfix" >
 				<a href="javascript:;" class="like"></a>
 				<a href="javascript:;" class="delete"></a>
@@ -59,5 +64,16 @@
 			</section>
 		</footer>
 	</div>
+	<script src="lib/seajs/sea.js"></script>
+	<script type="text/javascript">
+		seajs.config({
+			base: './js',
+			debug: true,
+			alias: {
+				'jquery': '../lib/jquery/2.11/jquery.js'
+			}
+		});
+		seajs.use('main');
+	</script>
 </body>
 </html>

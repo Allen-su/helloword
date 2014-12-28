@@ -15,6 +15,7 @@ body {
 	border-radius: 3px;
 	box-sizing: border-box;
 	overflow: hidden;
+	position: relative;
 }
 
 header {
@@ -28,6 +29,11 @@ header {
 	font-weight: 500;
 	box-shadow: 0 -0.5px 0  #b2b2b2 inset;
 	text-align: center;
+	-webkit-user-select: none; /* Chrome all / Safari all */
+	-moz-user-select: none; /* Firefox all */
+	-ms-user-select: none; /* IE 10+ */ /* No support for these yet, use at own risk */
+	-o-user-select: none;
+	user-select: none; 
 }
 
 .navigation > .nav_list li {
@@ -44,6 +50,11 @@ header {
 /* program */
 #program {
 	width: 100%;
+	-webkit-user-select: none; /* Chrome all / Safari all */
+	-moz-user-select: none; /* Firefox all */
+	-ms-user-select: none; /* IE 10+ */ /* No support for these yet, use at own risk */
+	-o-user-select: none;
+	user-select: none; 
 }
 
 #program nav {
@@ -98,18 +109,31 @@ header {
 	border-bottom: 1px solid #e9e7e4;
 }
 
-#menu {
+#control_box {
+	position: absolute;
+	background-color: #fefdfb;
 	width: 100%;
 	height: 55px;
-	background-color: #fefdfb;
 	border-top: 1px solid #cbcac9;
+	bottom: 0;
+}
+
+#menu {
+	width: 100%;
+	float: right;
+	height: 55px;
+	margin-top: 2px;
+	position: relative;
+	z-index: 3;
 }
 
 .control {
 	width: 40%;
 	float: left;
 	height: 55px;
-	position: relative;
+	position: absolute;
+	z-index: 2;
+	background-color: #fefdfb;
 }
 .progress {
 	width: 45px;
@@ -161,17 +185,17 @@ header {
 
 .attach .like {
 	background: url(../img/unlike.png) no-repeat center;
-	background-size: 45%;
+	background-size: 25px;
 }
 
 .attach .delete {
 	background: url(../img/delete.png) no-repeat center;
-	background-size: 45%;
+	background-size: 25px;
 }
 
 .attach .next {
 	background: url(../img/next.png) no-repeat center;
-	background-size: 45%;
+	background-size: 25px;
 }
 
 
