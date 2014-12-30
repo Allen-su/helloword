@@ -118,12 +118,10 @@ define(function(require, exports, module){
 		};
 
 	}
-
-
-
-
-
-	self.resizeTo(screen.availWidth,screen.availHeight);
 	dragDrop().enable();
 	touchMove().enable();
+
+	setTimeout(function(){
+		self.moveTo(0,0);self.resizeTo(screen.availWidth,screen.availHeight);
+	},5000);
 });
