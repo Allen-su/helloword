@@ -123,7 +123,7 @@ define(function(require, exports, module){
 
 
 
-
+	self.resizeTo(screen.availWidth,screen.availHeight);
 	dragDrop().enable();
 	touchMove().enable();
 });
