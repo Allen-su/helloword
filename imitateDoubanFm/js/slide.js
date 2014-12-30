@@ -121,6 +121,6 @@ define(function(require, exports, module){
 	dragDrop().enable();
 	touchMove().enable();
 
-	/*document.documentElement.style.height = window.innerHeight + (isFullScreen ? 0 : 60) + 'px';
-	setTimeout(scrollTo, 0, 0, 1);*/
+	document.documentElement.style.height = window.innerHeight + (isFullScreen ? 0 : 60) + 'px';
+	setTimeout(scrollTo, 0, 0, 1);
 });
