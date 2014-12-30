@@ -88,8 +88,8 @@ define(function(require, exports, module){
 								( curHeight == slideParam.minHeight && distance > 0 ) )) {
 						controlBox.height( controlBox.height() + initY -  e.changedTouches[0].pageY );
 						initY = e.changedTouches[0].pageY;
+						e.preventDefault();
 					}
-					e.preventDefault();
 					break;
 
 				case 'touchend' :
@@ -121,6 +121,6 @@ define(function(require, exports, module){
 	dragDrop().enable();
 	touchMove().enable();
 
-	document.documentElement.style.height = window.innerHeight + (isFullScreen ? 0 : 60) + 'px';
-	setTimeout(scrollTo, 0, 0, 1);
+	/*document.documentElement.style.height = window.innerHeight + (isFullScreen ? 0 : 60) + 'px';
+	setTimeout(scrollTo, 0, 0, 1);*/
 });
