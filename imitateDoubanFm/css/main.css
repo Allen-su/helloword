@@ -140,7 +140,8 @@ header {
 	height: 45px;
 	margin-top: 5px;
 	border-radius: 300px;
-	background-color: #e8f3ea;
+	/*background-color: #e8f3ea;*/
+	background-color: red;
 	left: 30px;
 	position: absolute;
 }
@@ -169,13 +170,13 @@ header {
 	background-size: 30%;
 }
 
-.attach {
+.extras {
 	width: 60%;
 	float: right;
 	line-height: 55px;
 }
 
-.attach > a {
+.extras > a {
 	width: 33.33%;
 	height: 55px;
 	line-height: 55px;
@@ -183,17 +184,17 @@ header {
 	float: left;
 }
 
-.attach .like {
+.extras .like {
 	background: url(../img/unlike.png) no-repeat center;
 	background-size: 25px;
 }
 
-.attach .delete {
+.extras .delete {
 	background: url(../img/delete.png) no-repeat center;
 	background-size: 25px;
 }
 
-.attach .next {
+.extras .next {
 	background: url(../img/next.png) no-repeat center;
 	background-size: 25px;
 }

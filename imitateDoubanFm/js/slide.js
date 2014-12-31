@@ -7,67 +7,87 @@ define(function(require, exports, module){
 		maxHeight: 410,//滑动的最高距离
 		minHeight: 55,//控制栏显示最小高度
 		autoDistance: 270,//超过此距离可以自动到达maxHeight值
-	},
-	progressData = {
-		initTop: 0,
-		initLeft: 30,
-		initSize: 45,
-		finalTop: 40,
-		finalLeft: 102,
-		finalSize: 120,
-		curHeight: 0
-	},
-	pauseData = {
-		initTop: 2,
-		initLeft: 32,
-		initSize: 41,
-		finalTop: 42,
-		finalLeft: 0,
-		finalSize: 110,
-		curHeight: 0
 	};
+	
 
 	var Linkage = (function(){
 		var wrapWidth = $('.wrapper').width(),
 			progress = $('.progress'),
 			controlBg = $('.control_bg'),
 			pause = $('.pause'),
+			extras = $('.extras'),
 			slideDistance = slide.maxHeight - slide.minHeight;
+		var progressData = {
+			initTop: 0,
+			initLeft: 30,
+			initSize: 45,
+			finalTop: 40,
+			finalLeft: 0,
+			finalSize: 118,
+			curHeight: 0
+		},
+		pauseData = {
+			initTop: 2,
+			initLeft: 32,
+			initSize: 41,
+			finalTop: 43,
+			finalLeft: 0,
+			finalSize: 112,
+			curHeight: 0
+		},
+		extrasData = {
+			initWidth: extras.width(),
+			finalWidth: wrapWidth
+		};
+
 
 		progressData.initTop = parseInt( progress.css('top') , 10 ) || 0;
 		progressData.initLeft = parseInt( progress.css('left') , 10 ) || 0;
 		progressData.initSize = parseInt( progress.css('width') , 10 ) || 0;
-		progressData.finalLeft = ( wrapWidth - progressData.finalLeft ) / 2;
-		progressData.percentSize = (progressData.finalSize - progressData.initSize) / slideDistance;
-		progressData.percentTop = (progressData.finalTop - progressData.initTop) / slideDistance;
-		progressData.percentLeft = (progressData.finalLeft - progressData.initLeft) / slideDistance;
+		progressData.finalLeft = ( wrapWidth - progressData.finalSize ) / 2;
 
 
 		pauseData.initTop = parseInt( pause.css('top') , 10 ) || 0;
 		pauseData.initLeft = parseInt( pause.css('left') , 10 ) || 0;
 		pauseData.initSize = parseInt( pause.css('width') , 10 ) || 0;
-		pauseData.finalLeft = ( wrapWidth - pauseData.finalLeft ) / 2;
-		pauseData.percentSize = (pauseData.finalSize - pauseData.initSize) / slideDistance;
-		pauseData.percentTop = (pauseData.finalTop - pauseData.initTop) / slideDistance;
-		pauseData.percentLeft = (pauseData.finalLeft - pauseData.initLeft) / slideDistance;
+		pauseData.finalLeft = ( wrapWidth - pauseData.finalSize ) / 2;
 
-		
+		//公式: 获取当前元素位置: 
+		//		( height - init1 ) / distance1 = ( x - init2 ) / distance2;
+		//		x = distance2 * ( height -init1 ) / distance1 + init2
+		var getCurPos = function( height, init2, distance2 ) {
+			return distance2 * ( height - slide.minHeight ) / slideDistance + init2;
+		};
+		//根据鼠标移动**************************************
 		var progressMotion = function( height ){
-			var size = height * progressData.percentSize,
-				top = height * progressData.percentTop,
-				left = height * progressData.percentLeft;
+			var size = getCurPos(height, progressData.initSize,
+					progressData.finalSize - progressData.initSize ),
+				top = getCurPos(height, progressData.initTop,
+					progressData.finalTop - progressData.initTop ),
+				left = getCurPos(height, progressData.initLeft,
+					progressData.finalLeft - progressData.initLeft );
 			progress.css({'width': size, 'height': size, 'top': top, 'left': left});
-			console.log(size + '```' + top + '```' + left);
 		};
 
 		var pauseMotion = function( height ){
-			var size = height * pauseData.percentSize,
-				top = height * pauseData.percentTop,
-				left = height * pauseData.percentLeft;
+			var size = getCurPos(height, progressData.initSize,
+					progressData.finalSize - progressData.initSize ),
+				top = getCurPos(height, progressData.initTop,
+					progressData.finalTop - progressData.initTop ),
+				left = getCurPos(height, progressData.initLeft,
+					progressData.finalLeft - progressData.initLeft );
 			pause.css({'width': size, 'height': size, 'top': top, 'left': left});
 			controlBg.css({'width': size, 'height': size, 'top': top, 'left': left});
+			//console.log(size + '```' + top + '```' + left);
+		};
+		console.log(extrasData.initWidth + '````' + extrasData.finalWidth);
+		var extrasMotion = function( height ){
+			var width = getCurPos(height, extrasData.initWidth,
+					extrasData.finalWidth - extrasData.initWidth );
+			extras.css({'width': width});
 		};
 
+		//惯性移动**********************************
 		var progressInertia = function( toTop ){
 			if ( toTop ) {
 				progress.animate({
@@ -101,20 +121,31 @@ define(function(require, exports, module){
 			}
 		};
 
+		var extrasInertia = function( toTop ) {
+			if ( toTop ) {
+				extras.animate({'width': extrasData.finalWidth});
+			} else {
+				extras.animate({'width': extrasData.initWidth});
+			}
+		};
+
 		return {
+			//按钮联动
 			linkage : function( height ){
 				progressMotion(height);
 				pauseMotion(height);
+				extrasMotion(height);
 			},
+			//按钮惯性
 			inertia : function( toTop ){
 				progressInertia(toTop);
 				pauseInertia(toTop);
+				extrasInertia(toTop);
 			}
 		};
 	})();
 
 
-	//slide.initInfo();
 	var dragDrop = function() {
 		var draging = null,
 			initY = 0,
