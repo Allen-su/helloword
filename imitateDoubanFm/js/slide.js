@@ -236,6 +236,7 @@ define(function(require, exports, module){
 								( curHeight == slide.maxHeight && distance < 0 ) ||
 								( curHeight == slide.minHeight && distance > 0 ) )) {
 						controlBox.height( controlBox.height() + initY -  e.changedTouches[0].pageY );
+						Linkage.linkage( curHeight );
 						initY = e.changedTouches[0].pageY;
 						e.preventDefault();
 					}
@@ -245,8 +246,10 @@ define(function(require, exports, module){
 					curHeight = controlBox.height();
 					if ( curHeight >= slide.autoDistance ) {
 						controlBox.animate({height:slide.maxHeight});
+						Linkage.inertia( true );
 					} else {
 						controlBox.animate({height:slide.minHeight});
+						Linkage.inertia( false );
 					}
 					draging = null;
 					initY = 0;
