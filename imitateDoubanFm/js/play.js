@@ -19,6 +19,10 @@ define(function(require, exports, module){
 		}
 	});
 
+	$('.next').bind('click', function(){
+		sound.next();
+	});
+
 	sound.play();
 
 });

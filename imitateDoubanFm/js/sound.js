@@ -1,7 +1,7 @@
 define(function(require, exports, module){
 
 	var sound = {
-		allSound : ['test.mp3', 'test1.mp3'],
+		allSound : ['test.mp3', 'test1.mp3', 'test2.mp3', 'test3.mp3'],
 		curIndex : 0,
 		curAudio : null,
 		paused : 'yes',
@@ -30,7 +30,7 @@ define(function(require, exports, module){
 		if ( ++this.curIndex && this.curIndex  >= this.allSound.length ) {
 			this.curIndex = 0;
 		}
-		this.curAudio = null;
+		this.curAudio.src = this.url + this.allSound[this.curIndex];
 		this.play();
 	};
 

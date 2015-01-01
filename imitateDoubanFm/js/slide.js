@@ -9,7 +9,7 @@ define(function(require, exports, module){
 		autoDistance: 270,//超过此距离可以自动到达maxHeight值
 	};
 	
-
+	//滑动时的其它联动效果
 	var Linkage = (function(){
 		var wrapWidth = $('.wrapper').width(),
 			progress = $('.progress'),
