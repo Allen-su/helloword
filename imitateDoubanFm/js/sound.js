@@ -31,13 +31,13 @@ define(function(require, exports, module){
 			this.curIndex = 0;
 		}
 		this.curAudio = null;
-		this.curAudio.play();
+		this.play();
 	};
 
 	sound.init = function(){
-		this.curAudio.addEventListener( 'ended', $.proxy(this, function(){
+		this.curAudio.addEventListener( 'ended', $.proxy(function(){
 			this.next();
-		}));
+		}, this));
 	};
 
 	module.exports = sound;
