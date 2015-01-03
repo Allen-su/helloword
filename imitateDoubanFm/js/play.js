@@ -1,6 +1,6 @@
 define(function(require, exports, module){
 	require('jquery');
-	var sound = require('./sound');
+	var audio = require('./audio');
 	var isPlay = 'yes' ,
 		pause = $('.pause'),
 		bg = $('.control_bg');
@@ -10,19 +10,22 @@ define(function(require, exports, module){
 			pause.css('z-index', 100);
 			bg.css('z-index', 99);
 			isPlay = 'no';
-			sound.pause();
+			audio.pause();
 		} else {
 			pause.css('z-index', 99);
 			bg.css('z-index', 100);
 			isPlay = 'yes';
-			sound.play();
+			audio.play();
 		}
 	});
 
 	$('.next').bind('click', function(){
-		sound.next();
+		pause.css('z-index', 99);
+		bg.css('z-index', 100);
+		isPlay = 'yes';
+		audio.next();
 	});
 
-	sound.play();
+	audio.play();
 
 });
