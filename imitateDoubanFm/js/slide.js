@@ -82,9 +82,14 @@ define(function(require, exports, module){
 		};
 		console.log(extrasData.initWidth + '````' + extrasData.finalWidth);
 		var extrasMotion = function( height ){
-			var width = getCurPos(height, extrasData.initWidth,
-					extrasData.finalWidth - extrasData.initWidth );
-			extras.css({'width': width});
+			clearTimeout( arguments.callee.timeoutId );
+			arguments.callee.timeoutId = setTimeout(function(){
+				var width = getCurPos(height, extrasData.initWidth,
+						extrasData.finalWidth - extrasData.initWidth );
+				extras.css({'width': width});
+			},10);
+			
+
 		};
 
 		//惯性移动**********************************
