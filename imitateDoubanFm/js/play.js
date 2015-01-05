@@ -45,7 +45,7 @@ define(function(require, exports, module){
 			time = audio.getTime();
 			progressBar.setSize( progressBox.width() );
 			progressBar.draw(time.curTime / time.allTime);
-		} ,50);
+		} ,10);
 	}
 	/*module.exports = {
 		progress : progressBar

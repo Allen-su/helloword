@@ -32,7 +32,6 @@ header {
 	-webkit-user-select: none; /* Chrome all / Safari all */
 	-moz-user-select: none; /* Firefox all */
 	-ms-user-select: none; /* IE 10+ */ /* No support for these yet, use at own risk */
-	-o-user-select: none;
 	user-select: none; 
 }
 
@@ -53,7 +52,6 @@ header {
 	-webkit-user-select: none; /* Chrome all / Safari all */
 	-moz-user-select: none; /* Firefox all */
 	-ms-user-select: none; /* IE 10+ */ /* No support for these yet, use at own risk */
-	-o-user-select: none;
 	user-select: none; 
 }
 
@@ -146,6 +144,7 @@ header {
 	position: absolute;
 }
 
+
 .control > .progress ~ div {
 	width: 41px;
 	height: 41px;
@@ -167,7 +166,7 @@ header {
 	background-image: url(../img/play.png);
 	background-repeat: no-repeat;
 	background-position: center;
-	background-size: 30%;
+	background-size: 25%;
 }
 
 .extras {

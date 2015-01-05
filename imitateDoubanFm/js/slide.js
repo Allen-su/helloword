@@ -23,14 +23,14 @@ define(function(require, exports, module){
 			initSize: 45,
 			finalTop: 40,
 			finalLeft: 0,
-			finalSize: 118,
+			finalSize: 122,
 			curHeight: 0
 		},
 		pauseData = { //播放按钮和歌曲背景图片参数 （会变 大/小）
 			initTop: 2,
 			initLeft: 32,
 			initSize: 41,
-			finalTop: 43,
+			finalTop: 45,//和progress间距是4px
 			finalLeft: 0,
 			finalSize: 112,
 			curHeight: 0
@@ -275,7 +275,7 @@ define(function(require, exports, module){
 		};
 
 	};
-	
+
 	//启动***************************
 	dragDrop().enable();
 	touchMove().enable();
