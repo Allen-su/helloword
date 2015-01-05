@@ -1,6 +1,6 @@
 define(function(require, exports, module){
 	require('jquery');
-
+	var play = require('play');
 	var controlBox = $('#control_box'),
 		footer = $('#menu');
 	var slide = {
@@ -9,7 +9,7 @@ define(function(require, exports, module){
 		autoDistance: 270,//超过此距离可以自动到达maxHeight值
 	};
 	
-	//滑动时的其它联动效果
+	//滑动时的其它联动效果********************************************************************
 	var Linkage = (function(){
 		var wrapWidth = $('.wrapper').width(),
 			progress = $('.progress'),
@@ -17,7 +17,7 @@ define(function(require, exports, module){
 			pause = $('.pause'),
 			extras = $('.extras'),
 			slideDistance = slide.maxHeight - slide.minHeight;
-		var progressData = {
+		var progressData = { //进度条参数 （会变 大/小）
 			initTop: 0,
 			initLeft: 30,
 			initSize: 45,
@@ -26,7 +26,7 @@ define(function(require, exports, module){
 			finalSize: 118,
 			curHeight: 0
 		},
-		pauseData = {
+		pauseData = { //播放按钮和歌曲背景图片参数 （会变 大/小）
 			initTop: 2,
 			initLeft: 32,
 			initSize: 41,
@@ -35,7 +35,7 @@ define(function(require, exports, module){
 			finalSize: 112,
 			curHeight: 0
 		},
-		extrasData = {
+		extrasData = { //控制栏会（喜欢，删除，下一首） 变宽 / 变窄
 			initWidth: extras.width(),
 			finalWidth: wrapWidth
 		};
@@ -88,8 +88,6 @@ define(function(require, exports, module){
 						extrasData.finalWidth - extrasData.initWidth );
 				extras.css({'width': width});
 			},10);
-			
-
 		};
 
 		//惯性移动**********************************
@@ -149,8 +147,9 @@ define(function(require, exports, module){
 			}
 		};
 	})();
+	//**********************************************************************************************
 
-
+	//鼠标拖动事件
 	var dragDrop = function() {
 		var draging = null,
 			initY = 0,
@@ -218,6 +217,7 @@ define(function(require, exports, module){
 		};
 	};
 
+	//touch拖动事件
 	var touchMove = function() {
 		var draging = null,
 			initY = 0,
@@ -275,6 +275,8 @@ define(function(require, exports, module){
 		};
 
 	};
+	
+	//启动***************************
 	dragDrop().enable();
 	touchMove().enable();
 
