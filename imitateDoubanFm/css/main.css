@@ -8,7 +8,6 @@ body {
 }
 .wrapper {
 	width: 320px;
-	height: 470px;
 	background-color: #fefdfb;
 	margin: auto;
 	box-shadow: 1px 1px 3px #ccc;
@@ -89,6 +88,7 @@ header {
 }
 #channel > dl {
 	overflow-y: scroll;
+	margin-bottom: 55px;
 	height: 290px;
 }
 
