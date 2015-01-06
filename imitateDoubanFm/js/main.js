@@ -7,7 +7,7 @@ define(function(require, exports, module){
 			header = $('header').height(),
 			nav = $('#find_program > nav').height(),
 			footer = $('#control_box').height();
-		$('#channel dl').height( body - header - nav - footer - 30);
+		$('#channel dl').height( body - header - nav - footer - 10);
 	});
 	
 });
