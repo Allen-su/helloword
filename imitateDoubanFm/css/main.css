@@ -121,7 +121,8 @@ header {
 	float: right;
 	height: 55px;
 	margin-top: 2px;
-	position: relative;
+	position: absolute;
+	bottom:0;
 	z-index: 3;
 }
 
