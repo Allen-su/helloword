@@ -4,9 +4,9 @@ define(function(require, exports, module){
 
 	$(function(){
 		var body = document.body.clientHeight,
-			header = $('header').outerHeight(),
-			nav = $('#find_program > nav').outerHeight(),
-			footer = $('#control_box').outerHeight();
+			header = $('header').outerHeight(true),
+			nav = $('#find_program > nav').outerHeight(true),
+			footer = $('#control_box').outerHeight(true);
 		$('#channel dl').height( body - header - nav - footer);
 	});
 	
