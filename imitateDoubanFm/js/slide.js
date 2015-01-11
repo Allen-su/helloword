@@ -177,7 +177,8 @@ define(function(require, exports, module){
 			var target = e.target || e.srcElement;
 			switch( e.type ){
 				case 'mousedown' :
-					if ( target == controlBox[0] || target == footer[0] ) {
+					if ( $(target).closest('#control_box').length > 0 || 
+						$(target).closest('#menu').length > 0 ) {
 						draging = controlBox;
 					}
 					initY = e.clientY;
@@ -233,7 +234,8 @@ define(function(require, exports, module){
 				
 			switch ( e.type ){
 				case 'touchstart' :
-					if ( target == controlBox[0] || target == footer[0] ) {
+					if ( $(target).closest('#control_box').length > 0 || 
+						$(target).closest('#menu').length > 0 ) {
 						draging = controlBox;
 					}
 					initY = e.touches[0].pageY;
