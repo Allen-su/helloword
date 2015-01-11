@@ -13,26 +13,32 @@ define(function(require, exports, module){
 	var Linkage = (function(){
 		var wrapWidth = $('.wrapper').width(),
 			progress = $('.progress'),
+			progressStyle = progress[0].style,
 			controlBg = $('.control_bg'),
+			controlBgStyle = controlBg[0].style,
 			pause = $('.pause'),
+			pauseStyle = pause[0].style,
 			extras = $('.extras'),
+			extrasStyle = extras[0].style,
+			progressMinWidth = 2;//进度条最小宽度 2px
+			progressMaxWidth = 5;//进度条宽度 5px
 			slideDistance = slide.maxHeight - slide.minHeight;
 		var progressData = { //进度条参数 （会变 大/小）
 			initTop: 0,
 			initLeft: 30,
 			initSize: 45,
-			finalTop: 40,
+			finalTop: 60,
 			finalLeft: 0,
 			finalSize: 122,
 			curHeight: 0
 		},
 		pauseData = { //播放按钮和歌曲背景图片参数 （会变 大/小）
-			initTop: 2,
-			initLeft: 32,
-			initSize: 41,
-			finalTop: 45,//和progress间距是4px
+			initTop: progressMinWidth,
+			initLeft: progressData.initLeft + progressMinWidth,
+			initSize: progressData.initSize - progressMinWidth * 2,
+			finalTop: progressData.finalTop + progressMaxWidth,//和progress间距是5px
 			finalLeft: 0,
-			finalSize: 112,
+			finalSize: progressData.finalSize - progressMaxWidth * 2,
 			curHeight: 0
 		},
 		extrasData = { //控制栏会（喜欢，删除，下一首） 变宽 / 变窄
@@ -60,48 +66,43 @@ define(function(require, exports, module){
 		};
 		//根据鼠标移动**************************************
 		var progressMotion = function( height ){
-			var size = getCurPos(height, progressData.initSize,
-					progressData.finalSize - progressData.initSize ),
-				top = getCurPos(height, progressData.initTop,
-					progressData.finalTop - progressData.initTop ),
-				left = getCurPos(height, progressData.initLeft,
-					progressData.finalLeft - progressData.initLeft );
-			progress.css({'width': size, 'height': size, 'top': top, 'left': left});
+			progressStyle.display = 'none';
 		};
 
 		var pauseMotion = function( height ){
-			var size = getCurPos(height, progressData.initSize,
-					progressData.finalSize - progressData.initSize ),
-				top = getCurPos(height, progressData.initTop,
-					progressData.finalTop - progressData.initTop ),
-				left = getCurPos(height, progressData.initLeft,
-					progressData.finalLeft - progressData.initLeft );
-			pause.css({'width': size, 'height': size, 'top': top, 'left': left});
-			controlBg.css({'width': size, 'height': size, 'top': top, 'left': left});
-			//console.log(size + '```' + top + '```' + left);
+			controlBgStyle.height = controlBgStyle.width = 
+				pauseStyle.height = pauseStyle.width = getCurPos(height, progressData.initSize,
+					progressData.finalSize - progressData.initSize ) + 'px';
+			controlBgStyle.top = pauseStyle.top = getCurPos(height, progressData.initTop,
+					progressData.finalTop - progressData.initTop ) + 'px';
+			controlBgStyle.left = pauseStyle.left = getCurPos(height, progressData.initLeft,
+					progressData.finalLeft - progressData.initLeft ) + 'px';
+
+			//console.log(controlBgStyle.height +'`````'+ pauseStyle.height);
 		};
-		console.log(extrasData.initWidth + '````' + extrasData.finalWidth);
+		//console.log(extrasData.initWidth + '````' + extrasData.finalWidth);
 		var extrasMotion = function( height ){
 			clearTimeout( arguments.callee.timeoutId );
 			arguments.callee.timeoutId = setTimeout(function(){
-				var width = getCurPos(height, extrasData.initWidth,
-						extrasData.finalWidth - extrasData.initWidth );
-				extras.css({'width': width});
+				extrasStyle.width = getCurPos(height, extrasData.initWidth,
+						extrasData.finalWidth - extrasData.initWidth ) + 'px';
 			},10);
 		};
 
 		//惯性移动**********************************
 		var progressInertia = function( toTop ){
 			if ( toTop ) {
-				progress.animate({
-					'width': progressData.finalSize,
-					'height': progressData.finalSize,
-					'top': progressData.finalTop, 'left': progressData.finalLeft});
+				progressStyle.width = progressData.finalSize + 'px';
+				progressStyle.height = progressData.finalSize + 'px';
+				progressStyle.top = progressData.finalTop + 'px';
+				progressStyle.left = progressData.finalLeft + 'px';
 			} else {
-				progress.animate({'width': progressData.initSize,
-					'height': progressData.initSize,
-					'top': progressData.initTop, 'left': progressData.initLeft});
+				progressStyle.width = progressData.initSize + 'px';
+				progressStyle.height = progressData.initSize + 'px';
+				progressStyle.top = progressData.initTop + 'px';
+				progressStyle.left = progressData.initLeft + 'px';
 			}
+			progress.fadeIn();
 		};
 
 		var pauseInertia = function( toTop ) {
@@ -113,14 +114,18 @@ define(function(require, exports, module){
 				controlBg.animate({
 					'width': pauseData.finalSize,
 					'height': pauseData.finalSize,
-					'top': pauseData.finalTop, 'left': pauseData.finalLeft});
+					'top': pauseData.finalTop, 'left': pauseData.finalLeft}, function(){
+						progressInertia( toTop );
+					});
 			} else {
 				pause.animate({'width': pauseData.initSize,
 					'height': pauseData.initSize,
 					'top': pauseData.initTop, 'left': pauseData.initLeft});
 				controlBg.animate({'width': pauseData.initSize,
 					'height': pauseData.initSize,
-					'top': pauseData.initTop, 'left': pauseData.initLeft});
+					'top': pauseData.initTop, 'left': pauseData.initLeft}, function(){
+						progressInertia( toTop );
+					});
 			}
 		};
 
@@ -137,11 +142,11 @@ define(function(require, exports, module){
 			linkage : function( height ){
 				progressMotion(height);
 				pauseMotion(height);
-				extrasMotion(height);
+				//extrasMotion(height);
 			},
 			//按钮惯性
 			inertia : function( toTop ){
-				progressInertia(toTop);
+				//progressInertia(toTop);
 				pauseInertia(toTop);
 				extrasInertia(toTop);
 			}
