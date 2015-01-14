@@ -1,7 +1,7 @@
 define(function(require, exports, module){
 	require('navigation');
 	require('slide');
-
+	require('iscroll');
 	$(function(){
 		var body = document.body,
 			header = $('header'),
@@ -17,5 +17,6 @@ define(function(require, exports, module){
 					nav.outerHeight(true) - footer.outerHeight(true));
 			},100);
 		};
+		new IScroll('#channel');
 	});
 });
