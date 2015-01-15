@@ -91,11 +91,15 @@ header {
 /* channel */
 #channel {
 	width: 100%;
+	position: relative;
+	margin-bottom: 55px;
+	overflow: hidden;
 }
 #channel > dl {
-	overflow-y: scroll;
-	margin-bottom: 55px;
-	height: 290px;
+	width: 100%;
+	/*margin-bottom: 55px;*/
+	position: absolute;
+	/*height: 290px;*/
 }
 
 .channel_title {

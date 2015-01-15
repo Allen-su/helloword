@@ -7,7 +7,7 @@ define(function(require, exports, module){
 			header = $('header'),
 			nav = $('#find_program > nav'),
 			footer = $('#control_box'),
-			dl = $('#channel dl');
+			dl = $('#channel');
 		dl.height( body.clientHeight - header.outerHeight(true) - 
 			nav.outerHeight(true) - footer.outerHeight(true));
 		window.onresize = function(){
@@ -17,6 +17,7 @@ define(function(require, exports, module){
 					nav.outerHeight(true) - footer.outerHeight(true));
 			},100);
 		};
-		new IScroll('#channel');
+		new IScroll('#channel', { scrollY: true, freeScroll: true });
+		
 	});
 });
