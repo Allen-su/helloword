@@ -1,0 +1,140 @@
+@charset "utf-8";
+/* CSS Document */
+
+body {
+	padding: 0;
+	margin: 0;
+}
+
+ul {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+li {
+	padding: 10px 0;
+}
+
+li:first-child {
+	background-color: #d35400;
+}
+
+.square {
+	width: 30px;
+  	height: 30px;
+  	background-color: #fff;
+  	margin: 30px auto;
+	
+	-webkit-animation: rotateplane 1.2s infinite ease-in-out;
+	
+	        animation: rotateplane 1.2s infinite ease-in-out;  	
+}
+
+@-webkit-keyframes rotateplane {
+	0% {
+		-webkit-transform : rotate(0) perspective(120px);
+		        transform : rotate(0) perspective(120px);
+	}
+	50% {
+		-webkit-transform : rotateY(180deg) perspective(120px);
+		        transform : rotateY(180deg) perspective(120px);/*里面的数值不是旋转多少度数, 而是相对于原始位置旋转到多少度数*/
+	}
+	100% {
+		-webkit-transform : rotateY(180deg) rotateX(-180deg) perspective(120px);
+		        transform : rotateY(180deg) rotateX(-180deg) perspective(120px);
+		/* 
+		*	此处如果不写 rotateY 动画就会变成 既要沿 X 轴旋转180度, 同时 Y 轴要返回初始位置即旋转 -180度,这样就
+		*	变成了沿 z 轴旋转 180 度. 此处的 rotateY(180deg) 个人感觉有声明的意思
+		*/
+	}
+}
+
+@keyframes rotateplane {
+	0% {
+		-webkit-transform : rotate(0) perspective(120px);
+		        transform : rotate(0) perspective(120px);
+	}
+	50% {
+		-webkit-transform : rotateY(180deg) perspective(120px);
+		        transform : rotateY(180deg) perspective(120px);/*里面的数值不是旋转多少度数, 而是相对于原始位置旋转到多少度数*/
+	}
+	100% {
+		-webkit-transform : rotateY(180deg) rotateX(-180deg) perspective(120px);
+		        transform : rotateY(180deg) rotateX(-180deg) perspective(120px);
+		/* 
+		*	此处如果不写 rotateY 动画就会变成 既要沿 X 轴旋转180度, 同时 Y 轴要返回初始位置即旋转 -180度,这样就
+		*	变成了沿 z 轴旋转 180 度. 此处的 rotateY(180deg) 个人感觉有声明的意思
+		*/
+	}
+}
+
+/* @double-bounce *******************************************************/
+
+li:nth-child(2) {
+	background-color: #2c3e50;
+}
+
+.double-bounce {
+	width: 40px;
+	height: 40px;
+	margin: 25px auto;
+	position: relative;
+}
+
+.double-bounce1, .double-bounce2 {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background-color: #fff;
+  opacity: 0.6;
+  position: absolute;
+  top: 0;
+  left: 0;
+  
+  -webkit-animation: bounce 2.0s infinite ease-in-out;
+  animation: bounce 2.0s infinite ease-in-out;
+}
+
+.double-bounce2 {
+	-webkit-animation-delay: -1.0s;
+	        animation-delay: -1.0s;
+}
+
+@-webkit-keyframes bounce {
+	0%, 100% {
+		-webkit-transform: scale(0);
+		        transform: scale(0);
+	}
+	50% {
+		-webkit-transform: scale(1.0);
+		        transform: scale(1.0);
+	}
+}
+
+@keyframes bounce {
+	0%, 100% {
+		-webkit-transform: scale(0);
+		        transform: scale(0);
+	}
+	50% {
+		-webkit-transform: scale(1.0);
+		        transform: scale(1.0);
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
