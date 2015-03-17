@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"> 
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+	<title>微课云</title>
+	<link rel="stylesheet" type="text/css" href="../css/reset.css" />
+	<link rel="stylesheet" type="text/css" href="../css/common.css" />
+	<link rel="stylesheet" type="text/css" href="../css/search.css" />
+</head>
+<body>
+	<header>
+		<div class="title_left">
+			<a href="home.html"></a>
+		</div>
+		<div class="title">
+			搜索
+		</div>
+	</header>
+	<section class="scroll_wrap">
+		<section id="search_page" style="display:block;">
+			<section class="search_box">
+				<div class="search">
+					<input type="text" id="search_content"/>
+					<input type="button" value="搜索" id="search"/>
+				</div>
+			</section>
+			<section class="history">
+				<div class="legend">
+					<div class="title">历史搜索记录</div>
+					<div class="clear_btn">清除搜索记录</div>
+				</div>
+				<!-- 历史记录限制数量，最好只保存最新10条左右 -->
+				<div>
+					<div class="history_item">正余弦定理的综合</div>
+					<div class="history_item">有机物及应用</div>
+					<div class="history_item">非金属及其化合物</div>
+				</div>
+			</section>
+		</section>
+		<section id="result_page" >
+			<div class="cur_filter">
+				<span>全部课程</span>
+				<i></i>
+			</div>
+			<div class="search_result">
+				<div class="search_count">
+					共有18条搜索结果
+				</div>
+				<div class="vedio_list">
+					<div class="vedio_item">
+						<div class="avatar">
+							<img src="../img/course.jpg" alt="课程" />
+							<i></i>
+						</div>
+						<div class="desc">
+							<div class="title">和熊孩子过招的心理战术</div>
+							<div class="author">主要讲师：李维宗</div>
+							<div class="type">翻转课堂</div>
+						</div>
+					</div>
+					<div class="vedio_item">
+						<div class="avatar">
+							<img src="../img/course.jpg" alt="课程" />
+							<i></i>
+						</div>
+						<div class="desc">
+							<div class="title">和熊孩子过招的心理战术</div>
+							<div class="author">主要讲师：李维宗</div>
+							<div class="type">MOOC</div>
+						</div>
+					</div>
+					<div class="vedio_item">
+						<div class="avatar">
+							<img src="../img/course.jpg" alt="课程" />
+							<i></i>
+						</div>
+						<div class="desc">
+							<div class="title">和熊孩子过招的心理战术</div>
+							<div class="author">主要讲师：李维宗</div>
+							<div class="type">微课程</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+		<section id="search_filter">
+			<div>全部课程<i></i></div>
+			<div>翻转课堂<i></i></div>
+			<div>MOOC<i></i></div>
+			<div>微课程<i></i></div>
+		</section>
+	</section>
+</body>
+</html>

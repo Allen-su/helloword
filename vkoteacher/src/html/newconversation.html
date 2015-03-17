@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"> 
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+	<title>微课云</title>
+	<link rel="stylesheet" type="text/css" href="../css/reset.css" />
+	<link rel="stylesheet" type="text/css" href="../css/common.css" />
+	<link rel="stylesheet" type="text/css" href="../css/newconversation.css" />
+
+</head>
+<body>
+	<header>
+		<div class="title_left">
+			<i id="back"></i>
+		</div>
+		<div class="title">发消息</div>
+	</header>
+	<section class="scroll_wrap">
+
+		<section id="sendtype" class="itembox" style="display:none;">
+			<div class="item" id="to_one">发送单条信息<i></i></div>
+			<div class="item" id="to_grade">发送班级消息<i></i></div>
+			<div class="item" id="to_more">指定部分人群<i></i></div>
+		</section>
+
+		<section class="itembox"  style="display:none;">
+			<div class="item">高一 1 班<i></i></div>
+			<div class="item">高一 2 班<i></i></div>
+			<div class="item">高一 3 班<i></i></div>
+		</section >
+
+		<section style="display:none;">
+			<div class="itembox" >
+				<div class="item">发送单条信息<i></i></div>
+			</div>
+			<dl class="single_student_selector">
+				<dt class="cur_grade">高一 1 班<i></i></dt>
+				<dd class="single_student">
+					<div class="item clearfix">
+						<img src="../img/avatar.jpg" />
+						<i></i>
+						<span>郭金奎</span>
+					</div>
+				</dd>
+				<dt class="grade">高一 1 班<i></i></dt>
+				<dd class="single_student">
+					<div class="item clearfix">
+						<img src="../img/avatar.jpg" />
+						<i></i>
+						<span>郭金奎</span>
+					</div>
+				</dd>
+			</dl>
+
+		</section>
+			
+		<section id="multi_selector_page" style="display:block;">
+			<div class="students" >
+				<div class="item clearfix">
+					<div class="checkbox"></div>
+					<i></i>
+					<span>郭金奎</span>
+				</div>
+				<div class="item clearfix">
+					<div class="checkbox checked"></div>
+					<i></i>
+					<span>王奎奎</span>
+				</div>
+				<div class="item clearfix">
+					<div class="checkbox"></div>
+					<i></i>
+					<span>郭金奎</span>
+				</div>
+			</div>
+			<div class="btn_box">
+				<div class="select_all">
+					全选
+				</div>
+				<div class="complete">
+					确定
+				</div>
+			</div>
+			
+		</section>
+	</section>
+	<section class="sendpage" style="display:none">
+		<section class="send_to clearfix">
+			<div class="send_label">发送给：</div>
+			<div class="add_student"></div>
+			<div class="receive">王佳佳、李冰冰、叶一茜、李易峰</div>
+		</section>
+		<section class="send_box">
+			<div id="camera"><i></i></div>
+			<div id="send_btn">发送</div>
+			<div id="send_content">
+				<input type="text" id="content" />
+			</div>
+		</section>
+	</section>
+	<script type="text/javascript" src="../lib/zepto.js"></script>
+</body>
+<script type="text/javascript">
+	var checkbox = document.querySelector('.more_students');
+	checkbox.addEventListener('click', function( e ){
+		var target = e.target;
+		if ( target.className.indexOf('checkbox') > -1 ) {
+			target.classList.add('checked');
+		}
+	},  false);
+
+</script>
+</html>

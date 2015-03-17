@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"> 
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+	<title>微课云</title>
+	<link rel="stylesheet" type="text/css" href="../css/reset.css" />
+	<link rel="stylesheet" type="text/css" href="../css/common.css" />
+	<link rel="stylesheet" type="text/css" href="../css/wrong_title.css" />
+</head>
+<body>
+	<header>
+		<div class="title_left">
+			<a href="home.html"></a>
+		</div>
+		<div class="title">
+			班级错题本
+		</div>
+	</header>
+	<section class="scroll_wrap">
+		<div class="filter_wrap">
+			<div class="legend">
+				<i></i>
+				<span>筛选</span>
+				<i></i>
+			</div>
+			<div class="filter">
+				<ul class="tabs clearfix">
+					<li data-tab="klass" >班级</li>
+					<li data-tab="subject">科目</li>
+					<li data-tab="point">知识点</li>
+				</ul>
+				<div class="tabs_content">
+					<ul data-tab="klass" class="klass clearfix" >
+						<li>高一1班</li>
+						<li>高一2班</li>
+					</ul>
+					<ul data-tab="subject" class="subject clearfix" >
+						<li>语文</li>
+						<li>数学</li>
+					</ul>
+					<ul data-tab="point" class="point clearfix">
+						<li>推理证明</li>
+						<li>立体几何</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div class="data_wrap">
+			<div>
+				<section class="data">
+					<div class="data_item clearfix">
+						<div class="name">
+							李佳佳
+						</div>
+						<div class="content">
+							<div class="progress">
+								<div class="curpro" style="width:45%"></div>
+								<span class="num">75错/共回答109题</span>
+							</div>
+						</div>
+					</div>
+				</section>
+				<section class="errordata">
+					<div>1 行星绕恒星的运动轨道如果是圆形，那么--教育资源门户提供试卷、教案、课件</div>
+					<div>2 竖直向上飞行的子弹，达到最高点后又返回原处，设整个运动过</div>
+					<div>3 竖直向上飞行的子弹，达到最高点后又返回原处，设整个运动过程中，子弹受到的阻力与速率成正比</div>
+				</section>
+			</div>
+		</div>
+	</section>
+	<script src="../lib/zepto.js"></script>
+	<script src="../lib/iscroll-probe.js"></script>
+	<script src="../js/common/common.js"></script>
+	<script src="../js/common/plug_zepto.js"></script>
+	<script src="../js/wrong_title/wrong_title.js"></script>
+</body>
+</html>

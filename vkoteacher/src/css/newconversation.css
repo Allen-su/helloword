@@ -1,0 +1,337 @@
+@charset "utf-8";
+/* CSS Document */
+/* @conversation type *******************************************************/
+.scroll_wrap {
+	background-color: #f5f5f5;
+	font-size: 13px;
+	color: #555;
+}
+
+.itembox {
+	width: 100%;
+	margin-top: 30px;
+	border: solid 1px #e0e0e0;
+	border-width: 1px 0;
+	background-color: #fff;
+}
+
+.itembox .item {
+	padding: 17px 0 15px 18px;
+	font-size: 13px;
+	position: relative;
+	white-space: nowrap;
+}
+
+.itembox .item + .item {
+	border-top: solid 1px #e0e0e0;
+}
+
+.itembox .item i {
+	width: 26px;
+	height: 41px;
+	position: absolute;
+	right: 15px;
+	top: 0;
+	background-image: url(../img/icon.png);
+	background-repeat: no-repeat;
+	background-position: -48px -85px;
+	-webkit-transform:scale(0.5);
+	        transform:scale(0.5);
+}
+
+.single_student_selector {
+	margin-top: 15px;
+	border-top: solid 1px #e0e0e0;
+}
+
+.single_student_selector .grade, .single_student_selector .cur_grade {
+	padding: 17px 0 15px 21px;
+	border: solid 1px #e0e0e0;
+	border-width: 0 0 1px 0;
+	background-color: #fff;
+	position: relative;
+}
+
+.single_student_selector .grade i {
+	width: 26px;
+	height: 41px;
+	position: absolute;
+	right: 15px;
+	top: 0;
+	background-image: url(../img/icon.png);
+	background-repeat: no-repeat;
+	background-position: -48px -85px;
+	-webkit-transform:scale(0.5);
+	        transform:scale(0.5);
+}
+
+.single_student_selector .cur_grade i {
+	width: 42px;
+	height: 28px;
+	position: absolute;
+	right: 10px;
+	top: 15px;
+	background-image: url(../img/icon.png);
+	background-repeat: no-repeat;
+	background-position: -43px -144px;
+	-webkit-transform:scale(0.5);
+	        transform:scale(0.5);
+}
+
+
+/* @single student selector **********************************************************/
+.single_student, .more_students {
+	border-width: 1px 0 0 0;
+}
+
+.single_student .item {
+	padding: 8px 0 6px 20px;
+	font-size: 13px;
+	position: relative;
+	white-space: nowrap;
+	background-color: #fff;
+	border-bottom: solid 1px #e0e0e0;
+}
+
+/*.single_student .item + .item {
+	border-top: solid 1px #e0e0e0;
+}*/
+
+.single_student .item img {
+	float: left;
+	width: 30px;
+	height: 30px;
+	border-radius: 3px;
+}
+
+.single_student .item span {
+	display: block;
+	margin-left: 45px;
+	line-height: 30px;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+
+.single_student .item i {
+	float: right;
+	width: 26px;
+	height: 41px;
+	margin-top: -7px;
+	margin-right: 15px;
+	background-image: url(../img/icon.png);
+	background-repeat: no-repeat;
+	background-position: -48px -85px;
+	-webkit-transform:scale(0.5);
+	        transform:scale(0.5);
+}
+
+
+/* @more students selector **********************************************************/
+#multi_selector_page {
+	overflow: hidden;
+}
+
+#multi_selector_page .students .item {
+	border-bottom: solid 1px #e0e0e0;
+	font-size: 13px;
+	position: relative;
+	white-space: nowrap;
+	background-color: #fff;
+}
+
+
+#multi_selector_page .students .item .checkbox {
+	float: left;
+	width: 45px;
+	height: 45px;
+	margin: 0 10px;
+	background-image: url(../img/icon.png);
+	background-repeat: no-repeat;
+	background-position: -45px -179px;
+	-webkit-transform:scale(0.5);
+	        transform:scale(0.5);
+}
+
+
+#multi_selector_page .students .item .checked {
+	background-position: -45px -227px;
+}
+
+#multi_selector_page .students .item span {
+	display: block;
+	margin-left: 60px;
+	line-height: 42px;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+
+#multi_selector_page .students .item i {
+	float: right;
+	width: 26px;
+	height: 41px;
+	margin-right: 15px;
+	background-image: url(../img/icon.png);
+	background-repeat: no-repeat;
+	background-position: -48px -85px;
+	-webkit-transform:scale(0.5);
+	        transform:scale(0.5);
+}
+
+#multi_selector_page .btn_box {
+	margin: 15px 15px 30px 15px;
+	overflow: hidden;
+}
+
+#multi_selector_page .btn_box .select_all {
+	float: left;
+	padding: 0.5em 1em;
+	border: solid 1px #77d028;
+	border-radius: 3px;
+	background-color: #fff;
+	font-size: 15px;
+	color: #77d028;
+}
+
+#multi_selector_page .btn_box .complete {
+	float: right;
+	padding: 0.5em 1em;
+	border: solid 1px #77d028;
+	border-radius: 3px;
+	background-color: #77d028;
+	font-size: 15px;
+	color: #fff;
+}
+
+
+/* @send page *********************************************************************/
+.sendpage {
+	position: absolute;
+	width: 100%;
+	top: 60px;
+	bottom: 0;
+	background-color: #f5f5f5;
+  	font-size: 13px;
+  	color: #555;
+}
+
+.sendpage .send_to {
+	height: 45px;
+	background-color: #fff;
+	line-height: 45px;
+}
+
+.sendpage .send_to .send_label {
+	float: left;
+	margin-left: 18px;
+}
+
+.sendpage .send_to .receive {
+	text-indent: 3px;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+
+.sendpage .send_to .add_student {
+	float: right;
+	width: 42px;
+	height: 42px;
+	margin-right: 15px;
+	margin-top: 2px;
+	background-image: url(../img/icon.png);
+	background-repeat: no-repeat;
+	background-position: -85px 0;
+	-webkit-transform:scale(0.5);
+	        transform:scale(0.5);
+}
+
+.sendpage .send_to .to_klass {
+	text-indent: 21px;
+}
+
+.sendpage .send_to .to_klass i {
+	width: 26px;
+	height: 41px;
+	position: absolute;
+	right: 15px;
+	top: 0;
+	background-image: url(../img/icon.png);
+	background-repeat: no-repeat;
+	background-position: -48px -85px;
+	-webkit-transform:scale(0.5);
+	        transform:scale(0.5);
+}
+
+
+.send_box {
+	width: 100%;
+	height: 49px;
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	overflow: hidden;
+	background-color: #e5e5e5;
+	border-top: solid 1px #e0e0e0;
+}
+
+.send_box #camera {
+	float: left;
+	width: 50px;
+	height: 50px;
+}
+
+.send_box #camera i {
+	display: block;
+	width: 55px;
+	height: 42px;
+	position: relative;
+	top: 5px;
+	background-image: url(../img/icon.png);
+	background-repeat: no-repeat;
+	background-position: -31px -43px;
+	-webkit-transform:scale(0.5);
+	        transform:scale(0.5);
+}
+
+.send_box #camera input {
+	display: block;
+	width: 55px;
+	height: 42px;
+	position: absolute;
+	top: 5px;
+	opacity: 0;
+	background-image: url(../img/icon.png);
+	background-repeat: no-repeat;
+	background-position: -31px -43px;
+	-webkit-transform:scale(0.5);
+	        transform:scale(0.5);
+}
+
+.send_box #send_content {
+	height: 30px;
+	margin: 10px 75px 10px 50px;
+	padding: 0 0.5em;
+	border: solid 1px #d9d9d9;
+	border-radius: 3px;
+	background-color: #fff;
+}
+
+.send_box #send_content #content {
+	height: 25px;
+	width: 99%;
+	border: 0;
+}
+
+
+.send_box #send_btn {
+	float: right;
+	margin: 10px 15px 10px 10px;
+	padding: 8px;
+	border-radius: 2px;
+	background-color: #8acd50;
+	letter-spacing: 2px;
+	font-size: 15px;
+	color: #fff;
+}

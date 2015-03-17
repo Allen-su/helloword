@@ -1,0 +1,321 @@
+@charset "utf-8";
+/* CSS Document */
+
+/* @mooclist mooc列表页 ***********************************************************/
+header .title_left i {
+	float: left;
+}
+
+header .title_left span {
+	line-height: 48px;
+	font-size: 18px;
+}
+
+@media screen and (max-width: 350px) {
+	header .title ul {
+		margin-left: 40px;
+	}
+}
+
+header .title ul {
+	display: inline-block;
+	margin-top: -2px;
+	border: solid 1px #fff;
+	vertical-align: middle;
+	line-height: 1em;
+	font-size: 12px;
+}
+
+header .title ul li {
+	float: left;
+	padding: 4px 13px;
+}
+
+header .title ul li.cur {
+	background-color: #5fa61f;
+}
+
+header .title ul li + li {
+	border-left: solid 1px #fff;
+}
+
+header .title_right {
+	overflow: hidden;
+}
+
+header .title_right .search {
+	width: 43px;
+	height: 43px;
+	display: block;
+	margin-top: 2px;
+	background-image: url(../img/icon.png);
+	background-position: -88px -152px;
+	-webkit-transform:scale(0.5);
+	        transform:scale(0.5);
+}
+
+.scroll_wrap {
+	background-color: #f5f5f5;
+}
+
+.subject_selector {
+	background-color: #fff;
+	padding: 7px;
+	border-bottom: solid 1px #e0e0e0;
+	font-size: 14px;
+}
+
+.subject_selector .all li{
+	width: 21%;
+	height: 34px;
+	float: left;
+	margin: 2%;
+	border: solid 1px #77d028;
+	border-radius: 3px;
+	box-sizing: border-box;
+	background-color: #fff;
+	line-height: 34px;
+	text-align: center;
+	color: #77d028;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+
+.subject_selector .all li.cur {
+	background-color: #77d028;
+	color: #fff;
+}
+
+/*.scroll {
+
+}*/
+
+.course .total {
+	height: 30px;
+	margin-top: 15px;
+	border-top: solid 1px #e0e0e0;
+	background-color: #fff;
+}
+
+.course .total i {
+	height: 26px;
+	width: 26px;
+	float: left;
+	margin-top: 3px;
+	margin-left: 14px;
+	background-image: url(../img/icon.png);
+	background-position: -100px -122px;
+	-webkit-transform:scale(0.5);
+	        transform:scale(0.5);
+}
+
+.course .total span {
+	height: 30px;
+	line-height: 30px;
+	font-size: 12px;
+	color: #555555;
+}
+
+/* 很多页都会有视频提取到 common.css */
+/* .course .list { 
+	width: 100%;
+	background-color: #fff;
+}
+
+.course .list .item {
+	width: 100%;
+	box-sizing: border-box;
+	padding: 15px 25px 15px 15px;
+	border-top: solid 1px #e0e0e0;
+	overflow: hidden;
+}
+
+.course .list .item .avatar {
+	position: relative;
+	float: left;
+}
+
+.course .list .item .avatar img {
+	width: 120px;
+	height: 69px;
+}
+
+.course .list .item .avatar i {
+	width: 57px;
+	height: 57px;
+	position: absolute;
+	top: 6px;
+	left: 32px;
+	background-image: url(../img/icon.png);
+	background-position: -135px 0;
+	-webkit-transform:scale(0.5);
+	        transform:scale(0.5);
+}
+
+
+.course .list .item .desc {
+	margin-left: 135px;
+}
+
+.course .list .item .desc div{
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+
+.course .list .item .desc .title{
+	font-size: 14px;
+	color: #555555;
+	margin-top: 7px;
+}
+
+.course .list .item .desc .author, .course .list .item .desc .time{
+	font-size: 12px;
+	color: #999999;
+	margin-top: 7px;
+} */
+
+
+
+/* @moocplay mooc播放页 ***********************************************************/
+.bg_white {
+	background-color: #fff;
+}
+
+.play_box {
+	background-color: #fff;
+	padding: 15px;
+}
+
+.play_box .title {
+	font-size: 14px;
+	color: #555;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+
+.play_box video {
+	width: 100%;
+	margin: 8px 0 12px 0;
+}
+
+.play_box .info span {
+	display: inline-block;
+	font-size: 14px;
+	color: #555;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+
+.play_box .info span + span {
+	text-indent: 1em;
+}
+
+.tabs {
+	width: 100%;
+	border-top: solid 1px #e0e0e0;
+	background-color: #fff;
+}
+
+.tabs li {
+	width: 33.333%;
+	height: 30px;
+	float: left;
+	box-sizing: border-box;
+	line-height: 30px;
+	text-align: center;
+	font-size: 12px;
+	color:#555;
+}
+
+.tabs li + li {
+	border-left: solid 1px #e0e0e0;
+}
+
+.tabs .list {
+	color:#04adf3;
+}
+
+.tabs .info {
+	color:#50c516;
+}
+
+.tabs .group {
+	color:#ff738a;
+}
+
+.tabs .cur {
+	background-color: #f4f4f4;
+}
+
+.course > section {
+	display: none;
+}
+
+.course .vedio_list {
+	border-top: solid 1px #e0e0e0;
+}
+
+.course .vedio_list .vedio_item:nth-child(1) {
+	border-top: none;
+}
+
+.course .info {
+	background-color: #fff;
+	border-top: solid 1px #e0e0e0;
+	padding: 15px;
+	font-size: 12px;
+	color: #555555;
+	line-height: 1.6em;
+	letter-spacing: 0.05em;
+}
+
+.course .group {
+	background-color: #fff;
+	border-top: solid 1px #e0e0e0;
+	
+}
+
+.group .item {
+	padding: 8px 15px 15px 15px;
+	border-bottom: solid 1px #e0e0e0;
+}
+
+.group .item .avatar {
+	overflow: hidden;
+}
+
+.group .item .avatar img {
+	width: 40px;
+	height: 40px;
+	float: left;
+	margin-right: 8px;
+	border-radius: 40px;
+}
+
+.group .item .avatar .name {
+	margin-top: 6px;
+	font-size: 14px;
+	color: #555;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+
+.group .item .avatar .time {
+	margin-top: 4px;
+	font-size: 12px;
+	color: #999;
+}
+
+.group .item .content {
+	font-size: 12px;
+	color: #999;
+	margin-top: 8px;
+	line-height: 1.5em;
+	letter-spacing: 0.05em;
+}
+

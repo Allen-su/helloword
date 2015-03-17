@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"> 
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+	<title>微课云</title>
+	<link rel="stylesheet" type="text/css" href="../css/reset.css" />
+	<link rel="stylesheet" type="text/css" href="../css/common.css" />
+	<link rel="stylesheet" type="text/css" href="../css/conversation.css" />
+	<link rel="stylesheet" type="text/css" href="../css/newconversation.css" />
+</head>
+<body>
+	<section class="view">
+		<header>
+			<div class="title_left">
+				<a href="home.html"></a>
+			</div>
+			<div class="title_right">
+				<div id="filter"></div>
+				<div id="send"></div>
+			</div>
+			<div class="title">家校沟通</div>
+			<section class="filter_box">
+				<div class="filter_item cur" data-id="all">
+					全部
+				</div>
+			</section>
+		</header>
+		
+		<section class="scroll_wrap">
+			<div class="conversation">
+				<div class="conversation_item">
+					<div class="avatar">
+						<img src="../img/avatar.jpg" alt="avatar">
+					</div>
+					<div class="date">
+						星期一
+					</div>
+					<div class="content">
+						<div class="name">
+							王路路 家长
+						</div>
+						<div class="last_msg">
+							周老师您好，我明天不能去参加家长会了周老师您好，我明天不能去参加家长会了周老师您好，我明天不能去参加家长会了
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+	</section>
+	<script type="text/javascript">
+		window.vko = window.vko || {};
+		vko.userID = '123';
+		vko.userName = 'Allen';
+	</script>
+	<script src="../js/common/common.js"></script>
+	<script type="text/javascript" src="../js/common/util.js"></script>
+	<script type="text/javascript" src="../lib/zepto.js"></script>
+	<script type="text/javascript" src="../lib/iscroll-probe.js"></script>
+	<script type="text/javascript" src="../js/conversation/conversation.js"></script>
+	<script type="text/javascript" src="../js/conversation/new_conversation.js"></script>
+	<script type="text/javascript" src="../js/conversation/message.js"></script>
+</body>
+</html>

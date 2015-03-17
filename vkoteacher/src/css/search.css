@@ -1,0 +1,166 @@
+@charset "utf-8";
+/* CSS Document */
+
+.scroll_wrap {
+	background-color: #f5f5f5;
+}
+
+#search_page {
+	display: none;
+}
+
+.search_box {
+	width: 100%;
+	border: solid 1px #e0e0e0;
+	border-width: 1px 0;	
+	background-color: #fff;
+}
+
+.search_box .search {
+	height: 29px;
+	margin: 20px 15px;
+	border: solid 1px #77d028;
+	padding-left: 3px;
+	border-radius: 5px;
+	font-size: 12px;
+}
+
+#search_content {
+	width: 80%;
+	height: 23px;
+	float: left;
+	font-size: 14px;
+	border:0;
+	text-indent: 0.5em;
+}
+
+#search {
+	width: 14%;
+	height: 29px;
+	float: right;
+	border: 0;
+	border-radius: 0 4px 4px 0;
+	padding: 0;
+	background-color: #77d028;
+	line-height: 29px;
+	text-align: center;
+	color: #fff;
+	-webkit-appearance:none;/*去掉iPhone上默认按钮样式*/
+	appearance:none;
+}
+
+.history {
+	min-height: 300px;
+	margin-top: 15px;
+	background-color: #fff;	
+}
+
+.history .legend {
+	height: 30px;
+	border: solid 1px #e0e0e0;
+	border-width: 1px 0;	
+	line-height: 30px;
+	font-size: 14px;
+}
+
+.history .title {
+	width: 68%;
+	float: left;
+	text-indent: 1.5em;
+	color: #50c516;
+	font-size: 14px;
+}
+
+.history .clear_btn {
+	width: 32%;
+	float: right;
+	background-color: #77d028;
+	text-align: center;
+	color: #fff;
+	font-size: 14px;
+}
+
+.history_item {
+	margin: 16px 1.5em;
+	font-size: 14px;
+	color: #666;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+
+/* @search_result page **********************************************************************/
+
+#result_page {
+	display: none;
+}
+
+.cur_filter {
+	height: 45px;
+	line-height: 45px;
+	background-color: #fff;
+	border: solid 1px #e0e0e0;
+	border-width: 1px 0;
+	padding-left: 15px;
+	color: #555555;
+	font-size: 14px;
+}
+
+.cur_filter i {
+	float: right;
+	width: 26px;
+	height: 41px;
+	margin-right: 15px;
+	background-image: url(../img/icon.png);
+	background-repeat: no-repeat;
+	background-position: -48px -85px;
+	-webkit-transform:scale(0.5);
+	        transform:scale(0.5);
+}
+
+.search_result {
+	margin-top:30px;
+	background-color: #fff;
+}
+
+.search_count {
+	padding: 10px 15px;
+	font-size: 14px;
+	color: #50c516;
+}
+
+
+
+/* @search_filter page *****************************************************************/
+
+#search_filter {
+	margin-top: 30px;
+	background-color: #fff;
+	border: solid 1px #e0e0e0;
+	border-width: 1px 0;
+	display: none;
+}
+
+#search_filter div {
+	height: 45px;
+	padding-left: 15px;	
+	line-height: 45px;
+	color: #555555;
+	font-size: 14px;
+}
+
+#search_filter div + div {
+	border-top: solid 1px #e0e0e0;
+}
+
+#search_filter i {
+	float: right;
+	width: 26px;
+	height: 41px;
+	margin-right: 15px;
+	background-image: url(../img/icon.png);
+	background-repeat: no-repeat;
+	background-position: -48px -85px;
+	-webkit-transform:scale(0.5);
+	        transform:scale(0.5);
+}

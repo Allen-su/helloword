@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		body { 
+		    padding: 120px 0 50px 0; 
+		} 
+		.header { 
+		    position: fixed; 
+		    height: 100px; 
+		    width: 100%; 
+		    top: 0; 
+		    z-index: 1000; 
+		    background: #bada55; 
+		} 
+		.footer { 
+		    position: fixed; 
+		    height: 30px; 
+		    width: 100%; 
+		    bottom: 0; 
+		    z-index: 1000; 
+		    background: #facade; 
+		} 
+		.fixfixed .header, 
+		.fixfixed .footer { 
+		    position: absolute; 
+		} 
+	</style>
+</head>
+<body>
+	<div class="header">Header</div>
+	<div class="container">
+	    <form action="">
+	        <label>Testfield: <input type="text" /></label>
+	    </form>
+	</div>
+	<div class="footer">Footer</div>
+	<script src="../lib/zepto.js"></script>
+	<script type="text/javascript">
+		$(document).on('focus', 'input', function(e) {
+	        $body.addClass('fixfixed');
+	    })
+	    .on('blur', 'input', function(e) {
+	        $body.removeClass('fixfixed');
+	    });
+	</script>
+</body>
+</html>

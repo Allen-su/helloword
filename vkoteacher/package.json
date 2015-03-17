@@ -1,0 +1,22 @@
+{
+  "name": "vko",
+  "version": "1.0.0",
+  "description": "vko",
+  "main": "index.js",
+  "directories": {
+    "doc": "doc"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "vko"
+  ],
+  "author": "Allen",
+  "license": "ISC",
+  "devDependencies": {
+    "gulp-csscomb": "^3.0.3",
+    "gulp-jshint": "^1.9.0",
+    "gulp-livereload": "^3.5.0"
+  }
+}

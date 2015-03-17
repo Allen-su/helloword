@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"> 
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+	<title>微课云</title>
+	<link rel="stylesheet" type="text/css" href="../css/reset.css" />
+	<link rel="stylesheet" type="text/css" href="../css/common.css" />
+	<link rel="stylesheet" type="text/css" href="../css/login.css" />
+
+</head>
+<body>
+	<header>
+		<div class="title">掌上智慧乐园</div>
+	</header>
+	<section class="scroll_wrap">
+		<form action="" method="post" class="login_form">
+			<div class="input_box">
+				<div class="username_box clearfix">
+					<i></i>
+					<i></i>
+					<input type="text" id="username" maxlength="30" name="username" placeholder="请输入手机号/邮箱/身份证/学籍号">
+				</div>
+				<div class="password_box clearfix">
+					<i></i>
+					<input type="password" id="password" maxlength="20" name="password" placeholder="请填写密码">
+				</div>
+			</div>
+			<span class="login_error_tip" id="error_tip"></span>
+			<input id="login" type="button" class="login_btn" value="登录" >
+			<a href="resetpassword.html" class="fl">无法登录或忘记密码？</a>
+		</form>
+	</section>
+</body>
+<script type="text/javascript">
+	var form = document.forms[0],
+		username = form.username,
+		password = form.password,
+		deleteBtn = document.querySelector('.username_box i:nth-child(2)');
+		error_tip = document.getElementById('error_tip'),
+		login = document.getElementById('login');
+
+	login.onclick = function(e) {
+		if ( !username.value.trim() ) {
+			error_tip.innerHTML = '请输入登录账号';
+			error_tip.style.display = 'block';
+			return;
+		}
+		if ( !password.value.trim() ) {
+			error_tip.innerHTML = '请输入密码';
+			error_tip.style.display = 'block';
+			return;
+		} else if ( !/^[a-z0-9]{6,20}$/.test(password.value) ) {
+			error_tip.innerHTML = '密码最少6位，英文或数字组成';
+			error_tip.style.display = 'block';
+			return;
+		}
+		form.submit();
+	}
+
+	username.onkeyup = function(e) {
+		if ( username.value.length > 0 ) {
+			deleteBtn.style.display = 'block';
+		} else {
+			deleteBtn.style.display = 'none';
+		}
+	}
+
+	deleteBtn.onclick = function(e) {
+		username.value = '';
+		deleteBtn.style.display = 'none';
+	}
+</script>
+</html>
