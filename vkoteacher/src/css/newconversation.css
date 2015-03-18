@@ -57,25 +57,19 @@
 	height: 41px;
 	position: absolute;
 	right: 15px;
-	top: 0;
+	top: 2px;
 	background-image: url(../img/icon.png);
 	background-repeat: no-repeat;
 	background-position: -48px -85px;
-	-webkit-transform:scale(0.5);
-	        transform:scale(0.5);
+	-webkit-transform: scale(0.5);
+	        transform: scale(0.5);
+	-webkit-transition: all 100ms ease-in-out;
+			transition: all 100ms ease-in-out;
 }
 
 .single_student_selector .cur_grade i {
-	width: 42px;
-	height: 28px;
-	position: absolute;
-	right: 10px;
-	top: 15px;
-	background-image: url(../img/icon.png);
-	background-repeat: no-repeat;
-	background-position: -43px -144px;
-	-webkit-transform:scale(0.5);
-	        transform:scale(0.5);
+	-webkit-transform:scale(0.5) rotate(90deg);
+	        transform:scale(0.5) rotate(90deg);
 }
 
 

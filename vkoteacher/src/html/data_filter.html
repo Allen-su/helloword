@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"> 
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+	<title>微课云</title>
+	<link rel="stylesheet" type="text/css" href="../css/reset.css" />
+	<link rel="stylesheet" type="text/css" href="../css/common.css" />
+	<link rel="stylesheet" type="text/css" href="../css/studydata.css" />
+</head>
+<body>
+	<header>
+		<div class="title_left">
+			<a href="home.html"></a>
+			<span>数据分析</span>
+		</div>
+		<div class="title">
+			<ul>
+				<li class="cur">作业</li>
+				<li>视频</li>
+			</ul>
+		</div>
+	</header>
+	<section class="scroll_wrap">
+		<section class="crumbs_wrap clearfix">
+			<div class="crumbs">全部</div>
+			<div class="filter_btn"><i></i><span>筛选</span></div>
+		</section>
+		<section class="filter_box">
+			<aside class="klass_selector">
+				<div class="item" data-klassid="0">高一1班</div>
+				<div class="item cur" data-klassid="0">高一2班</div>
+				<div class="item" data-klassid="0">高一3班</div>
+				<div class="item" data-klassid="0">高二1班</div>
+				<div class="item" data-klassid="0">高二2班</div>
+			</aside>
+			<article class="subject_selector">
+				<div data-klassid="0" class="subject_wrap" style="display:block">
+					<dl>
+						<dt class="subject cur" data-subjectid="0">数学<i></i></dt>
+						<dd class="knowledge_point clearfix" data-subjectid="1" style="display:block">
+							<span data-pointid="0">推理证明</span>
+							<span>立体几何</span>
+							<span>集合</span>
+							<span>线性代数</span>
+							<span>微积分</span>
+							<span class="cur">Node与Express开发</span>
+							<span>数据结构</span>
+							<span>算法原理</span>
+							<span>函数的应用概率</span>
+							<span>LINUX</span>
+						</dd>
+					</dl>
+					<dl>
+						<dt class="subject">语文<i></i></dt>
+						<dd class="knowledge_point clearfix">
+							<span>推理证明</span>
+							<span>立体几何</span>
+							<span>集合</span>
+							<span>线性代数</span>
+							<span>微积分</span>
+							<span>Node与Express开发</span>
+							<span>数据结构</span>
+							<span>算法原理</span>
+							<span>函数的应用概率</span>
+							<span>LINUX</span>
+						</dd>
+					</dl>
+				</div>
+			</article>
+		</section>
+	</section>
+	<script src="../lib/zepto.js"></script>
+	<script src="../lib/iscroll-probe.js"></script>
+	<script src="../js/common/common.js"></script>
+	<script src="../js/common/plug_zepto.js"></script>
+	<script src="../js/studydata/studydata.js"></script>
+</body>
+</html>

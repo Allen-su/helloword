@@ -105,7 +105,6 @@
 			arguments.callee.loadMoreEl.className = 'pull_up_refresh_wrap';
 			arguments.callee.loadMoreEl.innerHTML = '<div class="pull_up_refresh"><i></i><span>正在加载...</span></div>';
 		}
-		
 		return arguments.callee.loadMoreEl;
 	}
 
