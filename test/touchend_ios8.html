@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>input file ios test</title>
+	<style>
+		.outer {
+			width: 100%;
+			height: 100%;
+			overflow: hidden;
+			position: absolute;
+			top: 0;
+			left: 0;
+			right: 0;
+			bottom: 0;
+		}
+
+		.inner {
+			width: 100%;
+			height: 1500px;
+			background: -webkit-linear-gradient(top, green, red);
+			position: absolute;
+		}
+
+	</style>
+</head>
+<body>
+	<div class="outer">
+		<div class="inner">
+			在ios8 的webview中，当手指滑动到webview边界外松开后，js不能监听到touched事件。
+		</div>
+	</div>
+	<script>
+		var inner = document.querySelector('.inner');
+		var v_start = 0, curY = 0;
+
+		inner.addEventListener('touchstart', function(e){
+			v_start = e.touches[0].pageY;
+			curY = parseInt(inner.style.top.slice(0, -2)) || 0;
+		}, false);
+
+		inner.addEventListener('touchmove', function(e){
+			var v_end = e.touches[0].pageY;
+			inner.style.top = (curY + v_end - v_start) + 'px';
+			console.log(inner.style.top);
+		}, false);
+
+		inner.addEventListener('touchend', function(e){
+			inner.style.top = '0px';
+			inner.innerHTML += 'touchend<br>';
+		}, false);
+
+		inner.addEventListener('touchcancel', function (e) {
+            e.preventDefault();
+            inner.innerHTML += 'touchcancel<br>';
+        }, false);
+		
+		document.addEventListener('touchmove', function(e){
+			 e.preventDefault();
+		}, false);
+	</script>
+</body>
+</html>
