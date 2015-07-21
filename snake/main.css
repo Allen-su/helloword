@@ -1,0 +1,36 @@
+@charset "utf-8";
+/* CSS Document */
+
+
+body {
+	margin: 0;
+	padding: 0;
+}
+
+.snake {
+	width: 100%;
+	height: 100%;
+	position: absolute;
+}
+
+.snake > .grid {
+	display: inline-block;
+	width: auto;
+	height: 100%;
+	margin: auto;
+	position: relative;
+}
+
+.grid_cell {
+	width: 20px;
+	height: 20px;
+	position: absolute;
+	background-color: #EAE5AE;
+}
+
+.num_cell {
+	width: 0;
+	height: 0;
+	position: absolute;
+	background-color: #3483BD;
+}
