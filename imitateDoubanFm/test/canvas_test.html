@@ -27,9 +27,12 @@
 	<script>
 		var canvas = document.getElementById('canvas');
 		var ctx = canvas.getContext('2d');
-
+		ctx.fillStyle = '#fefdfb';
+		ctx.fill();
+		ctx.fillRect(0,0,300,56);
 		function controlButton(){
 			// #ddd
+			
 			ctx.beginPath();
 			ctx.arc(50, 30, 20.5, 0, 2*Math.PI);
 			ctx.strokeStyle = '#ddd';

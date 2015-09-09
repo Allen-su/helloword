@@ -11,7 +11,7 @@
 	<!-- <link rel="apple-touch-startup-image" href="img/avatar.jpg" /> -->
 	<link rel="stylesheet" type="text/css" href="css/reset.css" />
 	<link rel="stylesheet" type="text/css" href="css/common.css">
-	<link rel="stylesheet" type="text/css" href="css/main.css" />
+	<link rel="stylesheet" type="text/css" href="css/main_1.css" />
 </head>
 <body>
 	<div class="wrapper">
@@ -54,7 +54,10 @@
 			</div>
 			<div id="my_program"></div>
 		</section>
-		<section id="control_box">
+
+		
+
+		<footer id="footer" class="clearfix">
 			<div class="control" >
 				<div class="progress">
 					<canvas id="progress" width="45px" height="45px">0%</canvas>
@@ -62,12 +65,17 @@
 				<div class="control_bg"></div>
 				<div class="pause"></div>
 			</div>
-		</section>
-		<footer id="menu" class="clearfix">
-			<section class="extras clearfix" >
-				<a href="javascript:;" class="like"></a>
-				<a href="javascript:;" class="delete"></a>
-				<a href="javascript:;" class="next"></a>
+
+			<section id="menu">
+				<div class="extras clearfix" >
+					<a href="javascript:;" class="like"></a>
+					<a href="javascript:;" class="delete"></a>
+					<a href="javascript:;" class="next"></a>
+				</div>
+			</section>
+
+			<section id="detail">
+				<div></div>
 			</section>
 		</footer>
 	</div>
@@ -81,7 +89,7 @@
 				'iscroll': '../lib/iscroll/iscroll.js'
 			}
 		});
-		seajs.use('slide_canvas');
+		// seajs.use('slide_canvas');
 	</script>
 </body>
 </html>
