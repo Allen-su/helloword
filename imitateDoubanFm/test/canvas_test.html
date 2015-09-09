@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>canvas_test</title>
+	<style>
+			
+		.wrapper {
+			width:300px;
+			height:400px;
+			background-color:#eee;
+			position:relative
+		}
+
+		#canvas {
+			position: absolute;
+			bottom:0;
+		}
+
+
+	</style>
+</head>
+<body>
+	<div class="wrapper" style="width:300px;height:400px;background-color:#eee;position:relative">
+		<canvas id="canvas" width="300px" height="56px"></canvas>
+	</div>
+	<script>
+		var canvas = document.getElementById('canvas');
+		var ctx = canvas.getContext('2d');
+
+		function controlButton(){
+			// #ddd
+			ctx.beginPath();
+			ctx.arc(50, 30, 20.5, 0, 2*Math.PI);
+			ctx.strokeStyle = '#ddd';
+			ctx.lineWidth = 4;
+			ctx.stroke();
+			ctx.closePath();
+			ctx.fillStyle = '#ddd';
+			ctx.fill();
+
+			// ctx.clip();
+			ctx.beginPath();
+			ctx.moveTo(50, 30);
+			ctx.arc(50, 30, 22.5, 0, 0.5*Math.PI);
+			ctx.closePath();
+			ctx.fillStyle = '#2a2';
+			ctx.fill();
+
+			var img = new Image();
+			var pat=ctx.createPattern(img,"repeat");
+			img.src = '../img/avatar.png';
+			img.onload = function() {
+				ctx.drawImage(img, 29.5, 9.5, 41, 41);
+			}
+		}
+
+		controlButton();
+
+	</script>
+</body>
+</html>

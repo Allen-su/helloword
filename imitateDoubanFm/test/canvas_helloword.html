@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>canvas hello word</title>
+</head>
+<body>
+	<canvas id="diagonal" style="border:1px solid blue;" width="200" height="200"/>
+	<script>
+
+		/*
+		http://www.cnblogs.com/Gyoung/archive/2013/04/08/2994515.html
+		http://blog.chinaunix.net/uid-26672038-id-3757295.html
+		http://www.w3school.com.cn/tags/html_ref_canvas.asp
+		*/
+		//画一条对角线-------------------------------------------------------------------
+		var canvas = document.getElementById("diagonal");
+		var context = canvas.getContext("2d");
+		//用绝对坐标来创建一条路径
+		context.beginPath();
+		context.moveTo(70, 140);
+		context.lineTo(140, 70);
+		//将这条线绘制到Canvas上
+		context.stroke();
+
+
+
+		//用变换的方式绘制对角线------------------------------------------------------------
+		//可以通过变换(缩放、平移、旋转)等达到和上面相同的效果。
+		//保存当前绘图状态
+		context.save();//保存当前环境的状态
+		//向右下方移动绘图上下文 要先移动(向右移动70px,向下移动140px)
+		context.translate(70, 140);// 重新映射画布上的 (0,0) 位置
+		//以原点为起点，绘制与前面相同的线段
+		context.beginPath();
+		context.moveTo(0, 0);
+		context.lineTo(70, -70);
+		context.stroke();
+
+		context.restore();//返回之前保存过的路径状态和属性，和save对应
+
+
+
+		//路径------------------------------------------------------------------------------- 
+		// HTML5 Canvas API中的路径代表你希望呈现的任何形状。
+
+		// beginPath():不论开始绘制何种图形，第一个需要调用的就是beginPath。这个简单的函数不带任何参数，它用来通知canvas将要开始绘制一个新的图形了。
+
+		// moveTo(x,y):不绘制，将当前位置移动到新的目标坐标(x,y)。
+
+		// lineTo(x,y):不仅将当前位置移动到新的目标坐标(x,y)，而且在两个坐标之间画一条直线。
+
+		// closePath():这个函数行为和lineTo很像，唯一的差别在于closePath会将路径的起始坐标自动作为目标坐标。它还会通知canvas当前绘制的图形已经闭合或者形成了完全封闭区域，这对将来的填充和描边都非常有用。
+
+		// 绘制一个松树地树冠
+		function createCanopyPath(context) {
+			// Draw the tree canopy
+			context.beginPath();
+			context.moveTo(170, 150);
+
+			context.lineTo(180, 160);
+			context.lineTo(175, 160);
+			context.lineTo(190, 180);
+			context.lineTo(180, 180);
+			context.lineTo(200, 200);
+
+			context.lineTo(140, 200);
+			context.lineTo(160, 180);
+			context.lineTo(150, 180);
+			context.lineTo(165, 160);
+			context.lineTo(160, 160);
+
+
+
+			// 连接起点，闭合路径
+			context.closePath();
+		}
+
+		function drawTrails() {
+			var canvas = document.getElementById('diagonal');
+			var context = canvas.getContext('2d');
+
+			context.save();
+			// 创建表现树冠的路径
+			createCanopyPath(context);
+
+			//加宽线条
+			context.lineWidth = 4;
+			//平滑路径的接合点
+			context.lineJoin = 'round';
+			//路径颜色
+			context.strokeStyle = '#663300';
+			// 绘制当前路径
+			context.stroke();
+			context.restore();
+			//填充颜色
+			context.fillStyle = "#339900";
+			context.fill();
+		}
+
+		window.addEventListener("load", drawTrails, true);
+
+
+
+		//绘制曲线-----------------------------------------------------------------
+
+		context.save();
+		// context.translate(-10, 350);
+		context.beginPath();
+
+		// 第一条曲线向右上方弯曲
+		context.moveTo(0, 0);
+		//二次贝塞尔曲线 控制点x，控制点y，结束点x，结束点y 起始点是moveTo
+		context.quadraticCurveTo(100, 130, 90, 60);
+
+		// 向右下方弯曲
+		context.quadraticCurveTo(200, 170, 200, 100);
+
+		// Draw the path in a wide brown stroke
+		context.strokeStyle = '#663300';
+		context.lineWidth = 2;
+		context.stroke();
+
+		// Restore the previous canvas state
+		context.restore();
+
+
+		// 加载图片--------------------------------------------------------------------
+        var bark = new Image();
+        bark.src = "../img/avatar.jpg";
+
+        // 图片加载完成后，再调用绘图的函数
+        bark.onload = function () {
+        	context.drawImage(bark, 170, 150, 10, 50);
+        }
+
+
+
+
+        // 渐变------------------------------------------------------------------------
+        // 使用渐变需要三个步骤：
+        // (1)创建渐变对象
+        // (2)为渐变对象设置颜色，指明过渡方式
+        // (3)在context上为填充样式或者描边样式设置渐变
+
+        // 创建用作树干纹理的三阶水平渐变 
+        // 横向渐变
+
+		var trunkGradient = context.createLinearGradient(140, 150, 200, 160);//一般就是一条线的起始和终点坐标
+
+		// 树干的左侧边缘是一般程度的棕色
+		trunkGradient.addColorStop(0, '#663300');
+
+		// 树干中间偏左的位置颜色要谈一些
+		trunkGradient.addColorStop(0.4, '#996600');
+
+		// 右侧边缘的颜色要深一些
+		trunkGradient.addColorStop(1, '#552200');
+
+		// 使用渐变填充树干
+		context.fillStyle = trunkGradient;
+		context.fillRect(140, 150, 200, 200);//填充一个矩形 两个对角线坐标 也可以用context.fill();填充当前路径
+		
+
+
+		// 文本-------------------------------------------------------------------------
+		// context.fillText(text,x,y,maxwidth):text文本内容，x,y指定文本位置,maxwidth是可选参数，限制文本位置。
+		// context.strokeText(text,x,y,maxwidth):text文本内容，x,y指定文本位置,maxwidth是可选参数，限制文本位置。
+
+		// 在canvas上绘制文本
+		context.save();
+
+		// 字号为60,字体为Impact
+		context.font = "60px impact";
+
+		//填充颜色
+		context.fillStyle = '#996600';
+		//居中
+		context.textAlign = 'center';
+
+		//绘制文本
+		context.fillText('Happy Trails!', 100, 60, 200);
+
+
+
+		// 阴影---------------------------------------------------------------------------
+
+		//可以通过几种全局context属性来控制阴影
+		// 属性　				值 					备注
+		// shadowColor　	任何CSS中的颜色值	可以使用透明度（alpha）
+		// shadowOffsetX	像素值　			值为正数，向右移动阴影;为负数，向左移动阴影
+		// shadowOffsetY	像素值				值为正数，向下移动阴影;为负数，向上移动阴影
+		// shadowBlur		高斯模糊值			值越大，阴影边缘越模糊
+
+		// 颜色黑色，20%透明度 , 只有图片有阴影因为图片是异步加载的
+		context.shadowColor = 'rgba(0, 0, 0, 0.2)';
+
+		// 向右移动15px,向左移动10px
+		context.shadowOffsetX = 15;
+		context.shadowOffsetY = -10;
+
+		// 轻微模糊阴影
+		context.shadowBlur = 2;
+		
+
+
+	</script>
+</body>
+</html>

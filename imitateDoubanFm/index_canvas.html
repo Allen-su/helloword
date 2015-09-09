@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>豆瓣 FM</title>
+	<meta name="viewport" content="width=device-width,height=device-height,user-scalable=no,maximumscale=1.0" />
+	<meta name="apple-mobile-web-app-capable" content="yes" /><!-- home screen app 全屏 -->
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+	<link href="img/test_load320_480.png" media="(device-width: 320px)" rel="apple-touch-startup-image">
+	<link href="img/test_load640_960.png" media="(device-width: 320px) and (device-height: 480px) and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image">
+	<!-- <link rel="apple-touch-startup-image" href="img/avatar.jpg" /> -->
+	<link rel="stylesheet" type="text/css" href="css/reset.css" />
+	<link rel="stylesheet" type="text/css" href="css/common.css">
+	<link rel="stylesheet" type="text/css" href="css/main.css" />
+</head>
+<body>
+	<div class="wrapper">
+		<header>
+			<nav class="navigation">
+				<ul class="nav_list">
+					<li class="active">发现音乐</li>
+					<li>我的FM</li>
+				</ul>
+			</nav>
+		</header>
+		<section id="program">
+			<div id="find_program">
+				<nav class="clearfix">
+					<i>搜索</i>
+					<ul class="pro_nav_list">
+						<li class="active">MHz</li>
+						<li>节目</li>
+					</ul>
+				</nav>
+				<section id="channel" style="position:relative">
+					<dl style="position:absolute">
+						<dt class="channel_title">我的兆赫</dt>
+							<dd class="channel_content">我的私人 MHz</dd>
+							<dd class="channel_content">我的红心 MHz</dd>
+							<dd class="channel_content">夏天涌进耳朵里 MHz</dd>
+							<dd class="channel_content">工作学习 MHz</dd>
+						<dt class="channel_title">推荐兆赫</dt>
+							<dd class="channel_content">我的私人 MHz</dd>
+							<dd class="channel_content">我的红心 MHz</dd>
+							<dd class="channel_content">夏天涌进耳朵里 MHz</dd>
+							<dd class="channel_content">工作学习 MHz</dd>
+						<dt class="channel_title">热门兆赫</dt>
+							<dd class="channel_content">我的私人 MHz</dd>
+							<dd class="channel_content">我的红心 MHz</dd>
+							<dd class="channel_content">夏天涌进耳朵里 MHz</dd>
+							<dd class="channel_content">工作学习 MHz</dd>
+					</dl>
+				</section>
+			</div>
+			<div id="my_program"></div>
+		</section>
+		<section id="control_box">
+			<div class="control" >
+				<div class="progress">
+					<canvas id="progress" width="45px" height="45px">0%</canvas>
+				</div>
+				<div class="control_bg"></div>
+				<div class="pause"></div>
+			</div>
+		</section>
+		<footer id="menu" class="clearfix">
+			<section class="extras clearfix" >
+				<a href="javascript:;" class="like"></a>
+				<a href="javascript:;" class="delete"></a>
+				<a href="javascript:;" class="next"></a>
+			</section>
+		</footer>
+	</div>
+	<script src="lib/seajs/sea.js"></script>
+	<script type="text/javascript">
+		seajs.config({
+			base: './js',
+			debug: true,
+			alias: {
+				'jquery': '../lib/jquery/2.11/jquery.js',
+				'iscroll': '../lib/iscroll/iscroll.js'
+			}
+		});
+		seajs.use('slide_canvas');
+	</script>
+</body>
+</html>
