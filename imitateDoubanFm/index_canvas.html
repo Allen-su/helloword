@@ -58,7 +58,8 @@
 		
 
 		<footer id="footer" class="clearfix">
-			<div class="control" >
+			<div class="control" style="-webkit-transform: scale(0.4, 0.4) translate(0px, 0px) translateZ(0px); transform: scale(0.4, 0.4) translate(0px, 0px) translateZ(0px);
+			   -webkit-transition-timing-function: cubic-bezier(0.1, 0.57, 0.1, 1);transition-timing-function: cubic-bezier(0.1, 0.57, 0.1, 1);-webkit-transition-duration: 0ms;transition-duration: 0ms;">
 				<div class="progress">
 					<canvas id="progress" width="45px" height="45px">0%</canvas>
 				</div>
@@ -74,7 +75,11 @@
 				</div>
 			</section>
 
-			<section id="detail">
+			<section id="detail" style="-webkit-transition-duration: 0ms;
+			-webkit-transform: translate(0px, 0px) translateZ(0px);-webkit-transition-timing-function: cubic-bezier(0.1, 0.57, 0.1, 1);
+			transition-duration: 0ms;
+			transform: translate(0px, 0px) translateZ(0px);transition-timing-function: cubic-bezier(0.1, 0.57, 0.1, 1);transition-duration: 0ms;
+			">
 				<div></div>
 			</section>
 		</footer>
@@ -89,7 +94,7 @@
 				'iscroll': '../lib/iscroll/iscroll.js'
 			}
 		});
-		// seajs.use('slide_canvas');
+		seajs.use('main');
 	</script>
 </body>
 </html>
