@@ -26,32 +26,48 @@ define(function(require, exports, module){
 	var Linkage = (function(){
 		var controlEl = control[0],
 			screenWidth = footer.width(),
+			controlScaleMax = 1,
+			controlScaleMin = 0.4,
 			controlMoveMaxX = (screenWidth - 122) / 2,
-			controlMoveMaxY = -300;
+			controlMoveMaxY = -300,
+			controlMoveMinX = -10,
+			//因为高度是122，所以圆心在下面
+			controlMoveMinY = (122 * 0.4 / 2+55 )- 122 / 2 - (122 * 0.4 / 2 + 55), 
+
+			menuEl = menu[0],
+			menuMoveMaxX = 200,
+			menuScaleMax = 0.9,
+			menuScaleMin = 0.5;
 
 		function controlButtonMotion(ratio) {
 			ratio = Math.abs(ratio);
 			var setTranslateX = controlMoveMaxX * ratio,
 				setTranslateY = controlMoveMaxY * ratio,
-				setScaleX = ratio * ( 1 - 0.4 ) + 0.4;
-			controlEl.style[transform] = 'scale('+setScaleX+', '+setScaleX+') '+
-				'translate('+setTranslateX+'px, '+setTranslateY+'px) translateZ(0px);';
-			// controlEl.style.transform = 'scale(0.8, 0.8) translate(0px, 0px) translateZ(0px)';
+				setScaleX = ratio * ( controlScaleMax - controlScaleMin ) + controlScaleMin;
 			controlEl.style[transform] = 'scale('+setScaleX+', '+setScaleX+') translate('+
-				setTranslateX+'px, '+setTranslateY+'px) translateZ(0px)';
+				setTranslateX+'px, '+setTranslateY+'px) translateZ(0px)';//里面不能包含分号
 		}
 
 		function controlButtoninertia(isUpSlide, time) {
 			controlEl.style[transform] = isUpSlide ? 
-				'scale(1, 1) translate('+
+				'scale('+controlScaleMax+', '+controlScaleMax+') translate('+
 					controlMoveMaxX+'px, '+controlMoveMaxY+'px) translateZ(0px)' :
-				'scale(0.4, 0.4) translate('+
+				'scale('+controlScaleMin+', '+controlScaleMin+') translate('+
 					'0px, 0px) translateZ(0px)';
 			controlEl.style[transitionDuration] = time + 'ms';
 			setTimeout(function(){
 				controlEl.style[transitionDuration] = '0ms';
 			}, time);
 
+		}
+
+		function menuMotion(ratio) {
+			ratio = Math.abs(ratio);
+			var setTranslateX = menuMoveMaxX * ( 1 - ratio ),
+				setScaleX = ratio * ( menuScaleMax - menuScaleMin ) + menuScaleMin;
+
+			menuEl.style[transform] = 'scale('+setScaleX+', '+setScaleX+') translate('+
+				setTranslateX+'px, 0) translateZ(0px)';
 		}
 
 		return {
@@ -63,7 +79,7 @@ define(function(require, exports, module){
 			//按钮惯性
 			inertia : function( isUpSlide , time){
 				controlButtoninertia(isUpSlide, time);
-				menuInertia(toTop);
+				// menuInertia(toTop);
 			}
 		};
 	})();
@@ -103,7 +119,7 @@ define(function(require, exports, module){
 				slideEl.style[transitionDuration] = time + 'ms';
 				slideEl.style[transform] = 'translate(0px, 0px) translateZ(0px)';
 			}
-			Linkage.inertia(isUpSlide, time);
+			Linkage.inertia(top <= slide.autoDistance, time);
 			setTimeout(function(){
 				slideEl.style[transitionDuration] = '0ms';
 			}, time);
