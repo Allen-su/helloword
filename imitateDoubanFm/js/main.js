@@ -1,12 +1,12 @@
 define(function(require, exports, module){
 	require('navigation');
-	require('slide');
+	require('slide_canvas');
 	require('iscroll');
 	$(function(){
 		var body = document.body,
 			header = $('header'),
 			nav = $('#find_program > nav'),
-			footer = $('#control_box'),
+			footer = $('#footer'),
 			dl = $('#channel');
 		dl.height( body.clientHeight - header.outerHeight(true) - 
 			nav.outerHeight(true) - footer.outerHeight(true));
@@ -17,7 +17,7 @@ define(function(require, exports, module){
 					nav.outerHeight(true) - footer.outerHeight(true));
 			},100);
 		};
-		new IScroll('#channel', { scrollY: true, freeScroll: true, scrollbars: true, mouseWheel: true});
+		new IScroll('#channel', { scrollY: true, freeScroll: true, mouseWheel: true});
 		
 	});
 });

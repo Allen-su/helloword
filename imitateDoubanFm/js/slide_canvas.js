@@ -1,211 +1,146 @@
 define(function(require, exports, module){
 	require('jquery');
 	// var play = require('play');
-	var controlBox = $('#control_box'),
-		footer = $('#menu');
+	var footer = $('#footer'),
+		control = $('.control'),
+		menu = $('#menu'),
+		detail = $('#detail'),
+		translateY_exec = /translate\(0px,(.*)\) translateZ\(0px\)/,
+		translate_exec = /translate\((.*),(.*)\) translateZ\(0px\)/,
+		scale_exec = /scale\((0.4), 0.4\)/;
+
+	var transform = typeof detail[0].style.transform !== 'undefined' ? 'transform' : 'webkitTransform',
+		transitionDuration = typeof detail[0].style.transitionDuration !== 'undefined' ?
+			'transitionDuration' : 'webkitTransitionDuration';
 	var slide = {
-		maxHeight: 410,//滑动的最高距离
-		minHeight: 55,//控制栏显示最小高度
-		autoDistance: 270,//超过此距离可以自动到达maxHeight值
+		maxTop: -410,//滑动的最高距离
+		defaultTop: 0,//控制栏显示最小高度
+		autoDistance: -205,//超过此距离可以自动到达maxHeight值
+		longSlideTime: 600,
+		speed: Math.abs( -410 ) / 600
 	};
+
+
 	
 	//滑动时的其它联动效果********************************************************************
 	var Linkage = (function(){
-		var wrapWidth = $('.wrapper').width(),
-			progress = $('.progress'),
-			progressStyle = progress[0].style,
-			controlBg = $('.control_bg'),
-			controlBgStyle = controlBg[0].style,
-			pause = $('.pause'),
-			pauseStyle = pause[0].style,
-			extras = $('.extras'),
-			extrasStyle = extras[0].style,
-			progressMinWidth = 2;//进度条最小宽度 2px
-			progressMaxWidth = 5;//进度条宽度 5px
-			slideDistance = slide.maxHeight - slide.minHeight;
-		var progressData = { //进度条参数 （会变 大/小）
-			initTop: 0,
-			initLeft: 30,
-			initSize: 45,
-			finalTop: 60,
-			finalLeft: 0,
-			finalSize: 122,
-			curHeight: 0
-		},
-		pauseData = { //播放按钮和歌曲背景图片参数 （会变 大/小）
-			initTop: progressMinWidth,
-			initLeft: progressData.initLeft + progressMinWidth,
-			initSize: progressData.initSize - progressMinWidth * 2,
-			finalTop: progressData.finalTop + progressMaxWidth,//和progress间距是5px
-			finalLeft: 0,
-			finalSize: progressData.finalSize - progressMaxWidth * 2,
-			curHeight: 0
-		},
-		extrasData = { //控制栏会（喜欢，删除，下一首） 变宽 / 变窄
-			initWidth: extras.width(),
-			finalWidth: wrapWidth
-		};
+		var controlEl = control[0],
+			screenWidth = footer.width(),
+			controlMoveMaxX = (screenWidth - 122) / 2,
+			controlMoveMaxY = -300;
+
+		function controlButtonMotion(ratio) {
+			ratio = Math.abs(ratio);
+			var setTranslateX = controlMoveMaxX * ratio,
+				setTranslateY = controlMoveMaxY * ratio,
+				setScaleX = ratio;
+			controlEl.style[transform] = 'scale('+setScaleX+', '+setScaleX+') '+
+				'translate('+setTranslateX+'px, '+setTranslateY+'px) translateZ(0px);';
+			// controlEl.style.transform = 'scale(0.8, 0.8) translate(0px, 0px) translateZ(0px)';
+			controlEl.style[transform] = 'scale('+setScaleX+', '+setScaleX+') translate('+setTranslateX+'px, '+setTranslateY+'px) translateZ(0px)';
+			console.log('scale('+setScaleX+', '+setScaleX+') '+
+				'translate('+setTranslateX+'px, '+setTranslateY+'px) translateZ(0px);');
 
 
-		progressData.initTop = parseInt( progress.css('top') , 10 ) || 0;
-		progressData.initLeft = parseInt( progress.css('left') , 10 ) || 0;
-		progressData.initSize = parseInt( progress.css('width') , 10 ) || 0;
-		progressData.finalLeft = ( wrapWidth - progressData.finalSize ) / 2;
-
-
-		pauseData.initTop = parseInt( pause.css('top') , 10 ) || 0;
-		pauseData.initLeft = parseInt( pause.css('left') , 10 ) || 0;
-		pauseData.initSize = parseInt( pause.css('width') , 10 ) || 0;
-		pauseData.finalLeft = ( wrapWidth - pauseData.finalSize ) / 2;
-
-		//公式: 获取当前元素位置: 
-		//		( height - init1 ) / distance1 = ( x - init2 ) / distance2;
-		//		x = distance2 * ( height -init1 ) / distance1 + init2
-		var getCurPos = function( height, init2, distance2 ) {
-			return distance2 * ( height - slide.minHeight ) / slideDistance + init2;
-		};
-		//根据鼠标移动**************************************
-		var progressMotion = function( height ){
-			progressStyle.display = 'none';
-		};
-
-		var pauseMotion = function( height ){
-			controlBgStyle.height = controlBgStyle.width = 
-				pauseStyle.height = pauseStyle.width = getCurPos(height, progressData.initSize,
-					progressData.finalSize - progressData.initSize ) + 'px';
-			controlBgStyle.top = pauseStyle.top = getCurPos(height, progressData.initTop,
-					progressData.finalTop - progressData.initTop ) + 'px';
-			controlBgStyle.left = pauseStyle.left = getCurPos(height, progressData.initLeft,
-					progressData.finalLeft - progressData.initLeft ) + 'px';
-
-			//console.log(controlBgStyle.height +'`````'+ pauseStyle.height);
-		};
-		//console.log(extrasData.initWidth + '````' + extrasData.finalWidth);
-		var extrasMotion = function( height ){
-			clearTimeout( arguments.callee.timeoutId );
-			arguments.callee.timeoutId = setTimeout(function(){
-				extrasStyle.width = getCurPos(height, extrasData.initWidth,
-						extrasData.finalWidth - extrasData.initWidth ) + 'px';
-			},10);
-		};
-
-		//惯性移动**********************************
-		var progressInertia = function( toTop ){
-			if ( toTop ) {
-				progressStyle.width = progressData.finalSize + 'px';
-				progressStyle.height = progressData.finalSize + 'px';
-				progressStyle.top = progressData.finalTop + 'px';
-				progressStyle.left = progressData.finalLeft + 'px';
-			} else {
-				progressStyle.width = progressData.initSize + 'px';
-				progressStyle.height = progressData.initSize + 'px';
-				progressStyle.top = progressData.initTop + 'px';
-				progressStyle.left = progressData.initLeft + 'px';
-			}
-			progress.fadeIn();
-		};
-
-		var pauseInertia = function( toTop ) {
-			if ( toTop ) {
-				pause.animate({
-					'width': pauseData.finalSize,
-					'height': pauseData.finalSize,
-					'top': pauseData.finalTop, 'left': pauseData.finalLeft});
-				controlBg.animate({
-					'width': pauseData.finalSize,
-					'height': pauseData.finalSize,
-					'top': pauseData.finalTop, 'left': pauseData.finalLeft}, function(){
-						progressInertia( toTop );
-					});
-			} else {
-				pause.animate({'width': pauseData.initSize,
-					'height': pauseData.initSize,
-					'top': pauseData.initTop, 'left': pauseData.initLeft});
-				controlBg.animate({'width': pauseData.initSize,
-					'height': pauseData.initSize,
-					'top': pauseData.initTop, 'left': pauseData.initLeft}, function(){
-						progressInertia( toTop );
-					});
-			}
-		};
-
-		var extrasInertia = function( toTop ) {
-			if ( toTop ) {
-				extras.animate({'width': extrasData.finalWidth});
-			} else {
-				extras.animate({'width': extrasData.initWidth});
-			}
-		};
+		}
 
 		return {
 			//按钮联动
-			linkage : function( height ){
-				progressMotion(height);
-				pauseMotion(height);
-				extrasMotion(height);
+			linkage : function( ratio ){
+				controlButtonMotion(ratio);
+				// extrasMotion(ratio);
 			},
 			//按钮惯性
 			inertia : function( toTop ){
-				//progressInertia(toTop);
-				pauseInertia(toTop);
-				extrasInertia(toTop);
+				// controlButtonMotion(toTop);
+				// pauseInertia(toTop);
+				// extrasInertia(toTop);
 			}
 		};
 	})();
-	//**********************************************************************************************
+
+
+	/*
+	* 手指中途离开，靠惯性继续移动
+	* @ isUpSlide 手指最后离开时移动的方向
+	* @ endTime 手指按下的时间
+	* @ beginTime 手指离开的时间
+	*/
+	function slideEnd (isUpSlide, endTime, beginTime) {
+		var slideEl = detail[0];
+		var top = parseInt( translateY_exec.exec(slideEl.style[transform])[1], 10 ) || 0;
+		var speed =  slide.speed;
+		if ( endTime - beginTime < 500 ) {//快速滑动松开
+			if ( isUpSlide ) {
+				slideEl.style[transitionDuration] =
+					Math.abs( slide.maxTop - top ) / speed + 'ms';
+				slideEl.style[transform] = 'translate(0px,  -410px) translateZ(0px)';
+			} else {
+				slideEl.style[transitionDuration] =
+					Math.abs( top - slide.defaultTop ) / speed + 'ms';
+				slideEl.style[transform] = 'translate(0px, 0px) translateZ(0px)';
+			}
+			setTimeout(function(){
+				slideEl.style[transitionDuration] = '0ms';
+			}, slide.longSlideTime);
+		} else if ( top != slide.defaultTop && top != slide.maxTop ) {//慢滑松开
+			if ( top <= slide.autoDistance ) {
+				slideEl.style[transitionDuration] =
+					Math.abs( slide.maxTop - top ) / speed + 'ms';
+				slideEl.style[transform] = 'translate(0px,  -410px) translateZ(0px)';
+			} else {
+				slideEl.style[transitionDuration] =
+					Math.abs( top - slide.defaultTop ) / speed + 'ms';
+				slideEl.style[transform] = 'translate(0px, 0px) translateZ(0px)';
+			}
+			setTimeout(function(){
+				slideEl.style[transitionDuration] = '0ms';
+			}, 0);
+		}
+	}
 
 	//鼠标拖动事件
 	var dragDrop = function() {
 		var draging = null,
 			initY = 0,
-			curHeight = 0;
+			isUpSlide = true, //判断最后是否向上滑动
+			beginTime = 0,
+			endTime = 0;
 
-		function slideEnd () {
-			curHeight = controlBox.height();
-			if ( curHeight >= slide.autoDistance ) {
-				controlBox.animate({height:slide.maxHeight});
-				Linkage.inertia( true );
-			} else {
-				controlBox.animate({height:slide.minHeight});
-				Linkage.inertia( false );
-			}
-			draging = null;
-			initY = 0;
-		}
 		function handler( e ) {
 			e = e || window.event;
 			var target = e.target || e.srcElement;
 			switch( e.type ){
 				case 'mousedown' :
-					if ( $(target).closest('#control_box').length > 0 || 
-						$(target).closest('#menu').length > 0 ) {
-						draging = controlBox;
-					}
 					initY = e.clientY;
+					if ( $(target).closest('#footer').length > 0 ) {
+						draging = detail[0];
+						beginTime = Date.now();
+					}
 					break;
 				case 'mousemove' :
-					curHeight = controlBox.height();
-					var distance = initY -  e.clientY;
-					if ( draging !== null &&
-							( ( curHeight < slide.maxHeight && curHeight > slide.minHeight ) ||
-								( curHeight == slide.maxHeight && distance < 0 ) ||
-								( curHeight == slide.minHeight && distance > 0 ) )) {
-						if ( target != controlBox[0] && target != footer[0] &&
-								controlBox.has(target).length === 0 && footer.has(target).length === 0 ) {
-							slideEnd();
-							return;
+					var top ;
+					if ( draging !== null ) {
+						top = parseInt( translateY_exec.exec(draging.style[transform])[1], 10 ) || 0;
+						distance = initY -  e.clientY;
+						isUpSlide = distance > 0;
+						if ( top >= -410 && top <= 0 ) {
+							if ( !(top <= -410 && distance > 0) && !(top >= 0 && distance < 0) ) {
+								distance = top - distance >= 0 ? 0 : top - distance <= -410 ?
+									-410 : top - distance;
+								draging.style[transform] =
+									'translate(0px, ' + distance + 'px) translateZ(0px)';
+								initY = e.clientY;
+								Linkage.linkage( distance / 410 );
+							}
 						}
-						controlBox.height( controlBox.height() + initY -  e.clientY );
-						Linkage.linkage( curHeight );
-						/*console.log(controlBox.height());
-						console.log(e.clientY);
-						console.log(initY);
-						console.log('######################################');*/
-						initY = e.clientY;
 					}
 					break;
 				case 'mouseup' :
-					slideEnd();
+					draging = null;
+					initY = 0;
+					endTime = Date.now();
+					slideEnd(isUpSlide, endTime, beginTime);
 					break;
 			}
 		}
@@ -227,44 +162,46 @@ define(function(require, exports, module){
 	var touchMove = function() {
 		var draging = null,
 			initY = 0,
-			curHeight = 0;
+			isUpSlide = true, //判断最后是否向上滑动
+			beginTime = 0,
+			endTime = 0;
+
 		function handler( e ){
 			e = e || window.event;
 			var target = e.target || e.srcElement;
-				
+			e.preventDefault();
 			switch ( e.type ){
 				case 'touchstart' :
-					if ( $(target).closest('#control_box').length > 0 || 
-						$(target).closest('#menu').length > 0 ) {
-						draging = controlBox;
-					}
 					initY = e.touches[0].pageY;
+					if ( $(target).closest('#footer').length > 0 ) {
+						draging = detail[0];
+						beginTime = Date.now();
+						console.log(target);
+					}
 					break;
 				case 'touchmove' :
-					curHeight = controlBox.height();
-					var distance = initY -  e.changedTouches[0].pageY;
-					if ( draging !== null &&
-							( ( curHeight < slide.maxHeight && curHeight > slide.minHeight ) ||
-								( curHeight == slide.maxHeight && distance < 0 ) ||
-								( curHeight == slide.minHeight && distance > 0 ) )) {
-						controlBox.height( controlBox.height() + initY -  e.changedTouches[0].pageY );
-						Linkage.linkage( curHeight );
-						initY = e.changedTouches[0].pageY;
-						e.preventDefault();
+					var top ;
+					if ( draging !== null ) {
+						top = parseInt( translateY_exec.exec(draging.style[transform])[1], 10 ) || 0;
+						distance = initY -  e.changedTouches[0].pageY;
+						isUpSlide = distance > 0;
+						if ( top >= -410 && top <= 0 ) {
+							if ( !(top <= -410 && distance > 0) && !(top >= 0 && distance < 0) ) {
+
+								distance = top - distance >= 0 ? 0 : top - distance <= -410 ?
+									-410 : top - distance;
+								draging.style[transform] =
+									'translate(0px, ' + distance + 'px) translateZ(0px)';
+								initY = e.changedTouches[0].pageY;
+							}
+						}
 					}
 					break;
-
 				case 'touchend' :
-					curHeight = controlBox.height();
-					if ( curHeight >= slide.autoDistance ) {
-						controlBox.animate({height:slide.maxHeight});
-						Linkage.inertia( true );
-					} else {
-						controlBox.animate({height:slide.minHeight});
-						Linkage.inertia( false );
-					}
 					draging = null;
 					initY = 0;
+					endTime = Date.now();
+					slideEnd(isUpSlide, endTime, beginTime);
 					break;
 			}
 		}
