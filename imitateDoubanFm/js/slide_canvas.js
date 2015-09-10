@@ -33,14 +33,24 @@ define(function(require, exports, module){
 			ratio = Math.abs(ratio);
 			var setTranslateX = controlMoveMaxX * ratio,
 				setTranslateY = controlMoveMaxY * ratio,
-				setScaleX = ratio;
+				setScaleX = ratio * ( 1 - 0.4 ) + 0.4;
 			controlEl.style[transform] = 'scale('+setScaleX+', '+setScaleX+') '+
 				'translate('+setTranslateX+'px, '+setTranslateY+'px) translateZ(0px);';
 			// controlEl.style.transform = 'scale(0.8, 0.8) translate(0px, 0px) translateZ(0px)';
-			controlEl.style[transform] = 'scale('+setScaleX+', '+setScaleX+') translate('+setTranslateX+'px, '+setTranslateY+'px) translateZ(0px)';
-			console.log('scale('+setScaleX+', '+setScaleX+') '+
-				'translate('+setTranslateX+'px, '+setTranslateY+'px) translateZ(0px);');
+			controlEl.style[transform] = 'scale('+setScaleX+', '+setScaleX+') translate('+
+				setTranslateX+'px, '+setTranslateY+'px) translateZ(0px)';
+		}
 
+		function controlButtoninertia(isUpSlide, time) {
+			controlEl.style[transform] = isUpSlide ? 
+				'scale(1, 1) translate('+
+					controlMoveMaxX+'px, '+controlMoveMaxY+'px) translateZ(0px)' :
+				'scale(0.4, 0.4) translate('+
+					'0px, 0px) translateZ(0px)';
+			controlEl.style[transitionDuration] = time + 'ms';
+			setTimeout(function(){
+				controlEl.style[transitionDuration] = '0ms';
+			}, time);
 
 		}
 
@@ -48,13 +58,12 @@ define(function(require, exports, module){
 			//按钮联动
 			linkage : function( ratio ){
 				controlButtonMotion(ratio);
-				// extrasMotion(ratio);
+				menuMotion(ratio);
 			},
 			//按钮惯性
-			inertia : function( toTop ){
-				// controlButtonMotion(toTop);
-				// pauseInertia(toTop);
-				// extrasInertia(toTop);
+			inertia : function( isUpSlide , time){
+				controlButtoninertia(isUpSlide, time);
+				menuInertia(toTop);
 			}
 		};
 	})();
@@ -69,33 +78,35 @@ define(function(require, exports, module){
 	function slideEnd (isUpSlide, endTime, beginTime) {
 		var slideEl = detail[0];
 		var top = parseInt( translateY_exec.exec(slideEl.style[transform])[1], 10 ) || 0;
-		var speed =  slide.speed;
+		var speed =  slide.speed, time;
 		if ( endTime - beginTime < 500 ) {//快速滑动松开
 			if ( isUpSlide ) {
-				slideEl.style[transitionDuration] =
-					Math.abs( slide.maxTop - top ) / speed + 'ms';
+				time = Math.abs( slide.maxTop - top ) / speed;
+				slideEl.style[transitionDuration] = time + 'ms';
 				slideEl.style[transform] = 'translate(0px,  -410px) translateZ(0px)';
 			} else {
-				slideEl.style[transitionDuration] =
-					Math.abs( top - slide.defaultTop ) / speed + 'ms';
+				time = Math.abs( top - slide.defaultTop ) / speed;
+				slideEl.style[transitionDuration] = time + 'ms';
 				slideEl.style[transform] = 'translate(0px, 0px) translateZ(0px)';
 			}
+			Linkage.inertia(isUpSlide, time);
 			setTimeout(function(){
 				slideEl.style[transitionDuration] = '0ms';
-			}, slide.longSlideTime);
+			}, time);
 		} else if ( top != slide.defaultTop && top != slide.maxTop ) {//慢滑松开
 			if ( top <= slide.autoDistance ) {
-				slideEl.style[transitionDuration] =
-					Math.abs( slide.maxTop - top ) / speed + 'ms';
+				time = Math.abs( slide.maxTop - top ) / speed;
+				slideEl.style[transitionDuration] = time + 'ms';
 				slideEl.style[transform] = 'translate(0px,  -410px) translateZ(0px)';
 			} else {
-				slideEl.style[transitionDuration] =
-					Math.abs( top - slide.defaultTop ) / speed + 'ms';
+				time = Math.abs( top - slide.defaultTop ) / speed;
+				slideEl.style[transitionDuration] = time + 'ms';
 				slideEl.style[transform] = 'translate(0px, 0px) translateZ(0px)';
 			}
+			Linkage.inertia(isUpSlide, time);
 			setTimeout(function(){
 				slideEl.style[transitionDuration] = '0ms';
-			}, 0);
+			}, time);
 		}
 	}
 
@@ -193,6 +204,7 @@ define(function(require, exports, module){
 								draging.style[transform] =
 									'translate(0px, ' + distance + 'px) translateZ(0px)';
 								initY = e.changedTouches[0].pageY;
+								Linkage.linkage( distance / 410 );
 							}
 						}
 					}
