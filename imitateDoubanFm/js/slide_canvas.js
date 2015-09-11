@@ -30,20 +30,23 @@ define(function(require, exports, module){
 			controlScaleMin = 0.4,
 			controlMoveMaxX = (screenWidth - 122) / 2,
 			controlMoveMaxY = -300,
-			controlMoveMinX = -10,
-			//因为高度是122，所以圆心在下面
-			controlMoveMinY = (122 * 0.4 / 2+55 )- 122 / 2 - (122 * 0.4 / 2 + 55), 
+			controlMoveMinX = -20,
+			controlMoveMinY = -99,
+			controlMoveRangeX = controlMoveMaxX - controlMoveMinX,
+			controlMoveRangeY = controlMoveMaxY - controlMoveMinY,
 
 			menuEl = menu[0],
-			menuMoveMaxX = 200,
-			menuScaleMax = 0.9,
+			menuMoveMaxX = 160,
+			menuMoveMinX = 0,
+			menuScaleMax = 0.8,
 			menuScaleMin = 0.5;
 
 		function controlButtonMotion(ratio) {
 			ratio = Math.abs(ratio);
-			var setTranslateX = controlMoveMaxX * ratio,
-				setTranslateY = controlMoveMaxY * ratio,
+			var setTranslateX = controlMoveRangeX * ratio + controlMoveMinX,
+				setTranslateY = controlMoveRangeY * ratio + controlMoveMinY,
 				setScaleX = ratio * ( controlScaleMax - controlScaleMin ) + controlScaleMin;
+
 			controlEl.style[transform] = 'scale('+setScaleX+', '+setScaleX+') translate('+
 				setTranslateX+'px, '+setTranslateY+'px) translateZ(0px)';//里面不能包含分号
 		}
@@ -53,7 +56,7 @@ define(function(require, exports, module){
 				'scale('+controlScaleMax+', '+controlScaleMax+') translate('+
 					controlMoveMaxX+'px, '+controlMoveMaxY+'px) translateZ(0px)' :
 				'scale('+controlScaleMin+', '+controlScaleMin+') translate('+
-					'0px, 0px) translateZ(0px)';
+					controlMoveMinX + 'px, '+ controlMoveMinY +'px) translateZ(0px)';
 			controlEl.style[transitionDuration] = time + 'ms';
 			setTimeout(function(){
 				controlEl.style[transitionDuration] = '0ms';
@@ -70,6 +73,18 @@ define(function(require, exports, module){
 				setTranslateX+'px, 0) translateZ(0px)';
 		}
 
+		function menuInertia(isUpSlide, time) {
+			menuEl.style[transform] = isUpSlide ? 
+				'scale('+menuScaleMax+', '+menuScaleMax+') translate('+
+					menuMoveMinX+'px, 0px) translateZ(0px)' :
+				'scale('+menuScaleMin+', '+menuScaleMin+') translate('+
+					menuMoveMaxX + 'px, 0px) translateZ(0px)';
+			menuEl.style[transitionDuration] = time + 'ms';
+			setTimeout(function(){
+				menuEl.style[transitionDuration] = '0ms';
+			}, time);
+		}
+
 		return {
 			//按钮联动
 			linkage : function( ratio ){
@@ -79,7 +94,7 @@ define(function(require, exports, module){
 			//按钮惯性
 			inertia : function( isUpSlide , time){
 				controlButtoninertia(isUpSlide, time);
-				// menuInertia(toTop);
+				menuInertia(isUpSlide, time);
 			}
 		};
 	})();

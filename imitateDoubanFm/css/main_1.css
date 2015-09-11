@@ -146,8 +146,6 @@ header {
 	width: 122px;
 	margin-top: 5px;
 	position: absolute;
-	top: -39px;
-	left: -10px;
 	z-index: 10;
 	background-color: #fefdfb;
 }
