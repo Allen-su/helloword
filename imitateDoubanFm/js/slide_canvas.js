@@ -38,7 +38,7 @@ define(function(require, exports, module){
 			menuEl = menu[0],
 			menuMoveMaxX = 160,
 			menuMoveMinX = 0,
-			menuScaleMax = 0.8,
+			menuScaleMax = 0.9,
 			menuScaleMin = 0.5;
 
 		function controlButtonMotion(ratio) {

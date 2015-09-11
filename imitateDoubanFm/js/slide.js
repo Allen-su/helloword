@@ -138,13 +138,13 @@ define(function(require, exports, module){
 		};
 
 		return {
-			//按钮联动
+			//联动
 			linkage : function( height ){
 				progressMotion(height);
 				pauseMotion(height);
 				extrasMotion(height);
 			},
-			//按钮惯性
+			//惯性
 			inertia : function( toTop ){
 				//progressInertia(toTop);
 				pauseInertia(toTop);
@@ -197,10 +197,6 @@ define(function(require, exports, module){
 						}
 						controlBox.height( controlBox.height() + initY -  e.clientY );
 						Linkage.linkage( curHeight );
-						/*console.log(controlBox.height());
-						console.log(e.clientY);
-						console.log(initY);
-						console.log('######################################');*/
 						initY = e.clientY;
 					}
 					break;
