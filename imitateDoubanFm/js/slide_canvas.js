@@ -13,25 +13,26 @@ define(function(require, exports, module){
 		transitionDuration = typeof detail[0].style.transitionDuration !== 'undefined' ?
 			'transitionDuration' : 'webkitTransitionDuration';
 	var slide = {
-		maxTop: -410,//滑动的最高距离
+		maxTop: -360,//滑动的最高距离
 		defaultTop: 0,//控制栏显示最小高度
-		autoDistance: -205,//超过此距离可以自动到达maxHeight值
-		longSlideTime: 600,
-		speed: Math.abs( -410 ) / 600
+		autoDistance: -130,//超过此距离可以自动到达maxHeight值
+		longSlideTime: 500,
+		speed: Math.abs( -360 ) / 600
 	};
 
 
 	
 	//滑动时的其它联动效果********************************************************************
+	//transform translate属性都是依赖于原点的距离
 	var Linkage = (function(){
 		var controlEl = control[0],
 			screenWidth = footer.width(),
-			controlScaleMax = 1,
+			controlScaleMax = 1.1,
 			controlScaleMin = 0.4,
-			controlMoveMaxX = (screenWidth - 122) / 2,
-			controlMoveMaxY = -300,
 			controlMoveMinX = -20,
 			controlMoveMinY = -99,
+			controlMoveMaxX = (screenWidth - (122 * controlScaleMax)) / 2,
+			controlMoveMaxY = -260,
 			controlMoveRangeX = controlMoveMaxX - controlMoveMinX,
 			controlMoveRangeY = controlMoveMaxY - controlMoveMinY,
 
@@ -40,7 +41,8 @@ define(function(require, exports, module){
 			menuMoveMinX = 0,
 			menuScaleMax = 0.9,
 			menuScaleMin = 0.5;
-
+			console.log(controlMoveMaxX);
+			console.log(screenWidth);
 		function controlButtonMotion(ratio) {
 			ratio = Math.abs(ratio);
 			var setTranslateX = controlMoveRangeX * ratio + controlMoveMinX,
@@ -88,6 +90,7 @@ define(function(require, exports, module){
 		return {
 			//按钮联动
 			linkage : function( ratio ){
+				ratio = Math.abs(ratio);
 				controlButtonMotion(ratio);
 				menuMotion(ratio);
 			},
@@ -114,11 +117,11 @@ define(function(require, exports, module){
 			if ( isUpSlide ) {
 				time = Math.abs( slide.maxTop - top ) / speed;
 				slideEl.style[transitionDuration] = time + 'ms';
-				slideEl.style[transform] = 'translate(0px,  -410px) translateZ(0px)';
+				slideEl.style[transform] = 'translate(0px,  '+slide.maxTop+'px) translateZ(0px)';
 			} else {
 				time = Math.abs( top - slide.defaultTop ) / speed;
 				slideEl.style[transitionDuration] = time + 'ms';
-				slideEl.style[transform] = 'translate(0px, 0px) translateZ(0px)';
+				slideEl.style[transform] = 'translate(0px, '+slide.defaultTop+'px) translateZ(0px)';
 			}
 			Linkage.inertia(isUpSlide, time);
 			setTimeout(function(){
@@ -128,11 +131,11 @@ define(function(require, exports, module){
 			if ( top <= slide.autoDistance ) {
 				time = Math.abs( slide.maxTop - top ) / speed;
 				slideEl.style[transitionDuration] = time + 'ms';
-				slideEl.style[transform] = 'translate(0px,  -410px) translateZ(0px)';
+				slideEl.style[transform] = 'translate(0px,  '+slide.maxTop+'px) translateZ(0px)';
 			} else {
 				time = Math.abs( top - slide.defaultTop ) / speed;
 				slideEl.style[transitionDuration] = time + 'ms';
-				slideEl.style[transform] = 'translate(0px, 0px) translateZ(0px)';
+				slideEl.style[transform] = 'translate(0px, '+slide.defaultTop+'px) translateZ(0px)';
 			}
 			Linkage.inertia(top <= slide.autoDistance, time);
 			setTimeout(function(){
@@ -149,6 +152,9 @@ define(function(require, exports, module){
 			beginTime = 0,
 			endTime = 0;
 
+		var maxTop = slide.maxTop, //因为坐标关系，越向上实际值越小，但是显示越高
+			minTop = slide.defaultTop;
+
 		function handler( e ) {
 			e = e || window.event;
 			var target = e.target || e.srcElement;
@@ -162,27 +168,29 @@ define(function(require, exports, module){
 					break;
 				case 'mousemove' :
 					var top ;
-					if ( draging !== null ) {
-						top = parseInt( translateY_exec.exec(draging.style[transform])[1], 10 ) || 0;
+					if ( draging ) {
+						top = parseInt( translateY_exec.exec(draging.style[transform])[1], 10 ) || minTop;
 						distance = initY -  e.clientY;
 						isUpSlide = distance > 0;
-						if ( top >= -410 && top <= 0 ) {
-							if ( !(top <= -410 && distance > 0) && !(top >= 0 && distance < 0) ) {
-								distance = top - distance >= 0 ? 0 : top - distance <= -410 ?
-									-410 : top - distance;
+						if ( top >= maxTop && top <= minTop ) {
+							if ( !(top <= maxTop && distance > 0) && !(top >= minTop && distance < 0) ) {
+								distance = top - distance >= minTop ? minTop : top - distance <= maxTop ?
+									maxTop : top - distance;
 								draging.style[transform] =
 									'translate(0px, ' + distance + 'px) translateZ(0px)';
 								initY = e.clientY;
-								Linkage.linkage( distance / 410 );
+								Linkage.linkage( distance / maxTop );
 							}
 						}
 					}
 					break;
 				case 'mouseup' :
+					if ( draging ) {
+						initY = 0;
+						endTime = Date.now();
+						slideEnd(isUpSlide, endTime, beginTime);
+					}
 					draging = null;
-					initY = 0;
-					endTime = Date.now();
-					slideEnd(isUpSlide, endTime, beginTime);
 					break;
 			}
 		}
@@ -208,6 +216,8 @@ define(function(require, exports, module){
 			beginTime = 0,
 			endTime = 0;
 
+		var maxTop = slide.maxTop, //因为坐标关系，越向上实际值越小，但是显示越高
+			minTop = slide.defaultTop;
 		function handler( e ){
 			e = e || window.event;
 			var target = e.target || e.srcElement;
@@ -218,33 +228,34 @@ define(function(require, exports, module){
 					if ( $(target).closest('#footer').length > 0 ) {
 						draging = detail[0];
 						beginTime = Date.now();
-						console.log(target);
 					}
 					break;
 				case 'touchmove' :
 					var top ;
 					if ( draging !== null ) {
-						top = parseInt( translateY_exec.exec(draging.style[transform])[1], 10 ) || 0;
+						top = parseInt( translateY_exec.exec(draging.style[transform])[1], 10 ) || minTop;
 						distance = initY -  e.changedTouches[0].pageY;
 						isUpSlide = distance > 0;
-						if ( top >= -410 && top <= 0 ) {
-							if ( !(top <= -410 && distance > 0) && !(top >= 0 && distance < 0) ) {
+						if ( top >= maxTop && top <= minTop ) {
+							if ( !(top <= maxTop && distance > 0) && !(top >= minTop && distance < 0) ) {
 
-								distance = top - distance >= 0 ? 0 : top - distance <= -410 ?
-									-410 : top - distance;
+								distance = top - distance >= minTop ? minTop : top - distance <= maxTop ?
+									maxTop : top - distance;
 								draging.style[transform] =
 									'translate(0px, ' + distance + 'px) translateZ(0px)';
 								initY = e.changedTouches[0].pageY;
-								Linkage.linkage( distance / 410 );
+								Linkage.linkage( distance / maxTop );
 							}
 						}
 					}
 					break;
 				case 'touchend' :
+					if ( draging ) {
+						initY = 0;
+						endTime = Date.now();
+						slideEnd(isUpSlide, endTime, beginTime);
+					}
 					draging = null;
-					initY = 0;
-					endTime = Date.now();
-					slideEnd(isUpSlide, endTime, beginTime);
 					break;
 			}
 		}
