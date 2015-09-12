@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>canvas hello word</title>
+	<title>canvas arc</title>
 </head>
 <body>
 	<canvas id="diagonal" style="border:1px solid blue;" width="200" height="200"/>
@@ -10,9 +10,11 @@
 		var canvas = document.getElementById("diagonal");
 		var ctx = canvas.getContext("2d");
 		ctx.beginPath();
-		ctx.arc(100, 100, 50, -0.5 * Math.PI, 1 * Math.PI);
+		//一般画线宽比如1px 要把绘制点设置在一个像素的中间，这样两边各平分.5个像素刚好1px 绘制偶数的，绘制点取整数
+		//所以这里在半径95的位置上 画 5px 的线，会变成在 95 的两侧各2.5px , 所以在97.5的位置上则会正好
+		ctx.arc(100, 100, 97.5, -0.5 * Math.PI, 1 * Math.PI);
 		ctx.strokeStyle = '#2a2';
-		ctx.lineWidth = 5;
+		ctx.lineWidth = 4;
 		ctx.lineCap = 'round';
 		ctx.stroke();
 		
