@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>canvas_test</title>
+	<style>
+			
+		.wrapper {
+			width:500px;
+			height:200px;
+			background-color:#eee;
+			position:relative;
+		}
+
+		#move , #ani{
+			position: absolute;
+			width: 100px;
+			height: 100px;
+			background-color: red;
+			transition-duration: 100ms;
+			transform: translate(450px, 0) scale(0.9);
+		}
+
+		#ani{
+			background-color: blue;
+			transform: translate(-20px, 100px) scale(0.4);
+		}
+
+		.center_line {
+			width: 50px;
+			height: 100px;
+			border-right: solid 1px;
+		}
+
+
+	</style>
+</head>
+<body>
+	<div class="wrapper" >
+		<div id="move"><div class="center_line"></div></div>
+		<div id="ani"><div class="center_line"></div></div>
+	</div>
+	<script>
+		var ani = document.getElementById('ani');
+		setTimeout(function () {
+			ani.style.transform = 'translate(450px, 50px) translateZ(0px) scale(1.1)';
+		}, 500);
+		setTimeout(function () {
+			ani.style.transform = 'translate(-20px, 100px) translateZ(0px) scale(0.4)';
+		}, 1500);
+	</script>
+</body>
+</html>

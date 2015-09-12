@@ -23,23 +23,25 @@ define(function(require, exports, module){
 
 	
 	//滑动时的其它联动效果********************************************************************
-	//transform translate属性都是依赖于原点的距离
+	//transform translate 等css3 属性 都是默认依赖于元素圆心的位置计算的
 	var Linkage = (function(){
 		var controlEl = control[0],
 			screenWidth = footer.width(),
 			controlScaleMax = 1.1,
 			controlScaleMin = 0.4,
-			controlMoveMinX = -20,
-			controlMoveMinY = -99,
-			controlMoveMaxX = (screenWidth - (122 * controlScaleMax)) / 2,
-			controlMoveMaxY = -260,
+			controlMoveMinX = -10,
+			controlMoveMinY = -40,
+			controlMoveMaxX = screenWidth / 2 - 122 / 2,
+			controlMoveMaxY = -285,
 			controlMoveRangeX = controlMoveMaxX - controlMoveMinX,
 			controlMoveRangeY = controlMoveMaxY - controlMoveMinY,
 
 			menuEl = menu[0],
-			menuMoveMaxX = 160,
+			menuMoveMaxX = 80,
 			menuMoveMinX = 0,
-			menuScaleMax = 0.9,
+			menuMoveMaxY = -10,
+			menuMoveMinY = 0,
+			menuScaleMax = 0.8,
 			menuScaleMin = 0.5;
 			console.log(controlMoveMaxX);
 			console.log(screenWidth);
@@ -49,16 +51,16 @@ define(function(require, exports, module){
 				setTranslateY = controlMoveRangeY * ratio + controlMoveMinY,
 				setScaleX = ratio * ( controlScaleMax - controlScaleMin ) + controlScaleMin;
 
-			controlEl.style[transform] = 'scale('+setScaleX+', '+setScaleX+') translate('+
-				setTranslateX+'px, '+setTranslateY+'px) translateZ(0px)';//里面不能包含分号
+			controlEl.style[transform] = 'translate('+setTranslateX+'px, '+setTranslateY+
+				'px) translateZ(0px) scale('+setScaleX+', '+setScaleX+')';//里面不能包含分号
 		}
 
 		function controlButtoninertia(isUpSlide, time) {
 			controlEl.style[transform] = isUpSlide ? 
-				'scale('+controlScaleMax+', '+controlScaleMax+') translate('+
-					controlMoveMaxX+'px, '+controlMoveMaxY+'px) translateZ(0px)' :
-				'scale('+controlScaleMin+', '+controlScaleMin+') translate('+
-					controlMoveMinX + 'px, '+ controlMoveMinY +'px) translateZ(0px)';
+				'translate('+controlMoveMaxX+'px, '+controlMoveMaxY+'px) translateZ(0px)'+
+					'scale('+controlScaleMax+', '+controlScaleMax+')' :
+				'translate('+controlMoveMinX + 'px, '+ controlMoveMinY +'px) translateZ(0px)'+
+					'scale('+controlScaleMin+', '+controlScaleMin+')';
 			controlEl.style[transitionDuration] = time + 'ms';
 			setTimeout(function(){
 				controlEl.style[transitionDuration] = '0ms';
@@ -68,19 +70,21 @@ define(function(require, exports, module){
 
 		function menuMotion(ratio) {
 			ratio = Math.abs(ratio);
+			// 如果需要设置了非0的最小值，setTranslateX则需要减去最小值
 			var setTranslateX = menuMoveMaxX * ( 1 - ratio ),
+				setTranslateY = menuMoveMaxY * ratio,
 				setScaleX = ratio * ( menuScaleMax - menuScaleMin ) + menuScaleMin;
 
-			menuEl.style[transform] = 'scale('+setScaleX+', '+setScaleX+') translate('+
-				setTranslateX+'px, 0) translateZ(0px)';
+			menuEl.style[transform] = 'translate('+setTranslateX+'px, '+setTranslateY+'px) translateZ(0px)'+
+				'scale('+setScaleX+', '+setScaleX+')';
 		}
 
 		function menuInertia(isUpSlide, time) {
 			menuEl.style[transform] = isUpSlide ? 
-				'scale('+menuScaleMax+', '+menuScaleMax+') translate('+
-					menuMoveMinX+'px, 0px) translateZ(0px)' :
-				'scale('+menuScaleMin+', '+menuScaleMin+') translate('+
-					menuMoveMaxX + 'px, 0px) translateZ(0px)';
+				'translate('+menuMoveMinX+'px, '+menuMoveMaxY+'px) translateZ(0px)'+
+					'scale('+menuScaleMax+', '+menuScaleMax+')' :
+				'translate('+menuMoveMaxX + 'px, '+menuMoveMinY+'px) translateZ(0px)'+
+					'scale('+menuScaleMin+', '+menuScaleMin+')';
 			menuEl.style[transitionDuration] = time + 'ms';
 			setTimeout(function(){
 				menuEl.style[transitionDuration] = '0ms';

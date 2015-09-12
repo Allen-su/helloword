@@ -283,30 +283,25 @@ header {
 }
 
 .extra_opa i {
-	width: 38px;
+	width: 73px;
 	height: 45px;
 	display: inline-block;
-	margin: 0 10px;
 	background-image: url(../img/icon.png);
 	-webkit-transform: scale(0.5, 0.5);
 	transform: scale(0.5, 0.5);
 }
 
 .extra_opa .same_audio {
-	width: 73px;
-	height: 45px;
+	margin-right: -10px;
 	background-position: 0 0;
 }
 
 .extra_opa .lyric {
-	width: 73px;
-	height: 45px;
-	background-position: 146px 0;
+	background-position: -84px 0;
 }
 
 .extra_opa .more {
-	width: 73px;
-	height: 45px;
-	background-position: 85px 0;
+	margin-left: -10px;
+	background-position: -165px 0;
 }
 
