@@ -43,7 +43,6 @@ define(function(require, exports, module){
 		var width;
 		intervalId = setInterval( function(){
 			time = audio.getTime();
-			progressBar.setSize( progressBox.width() );
 			progressBar.draw(time.curTime / time.allTime);
 		} ,10);
 	}

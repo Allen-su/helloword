@@ -1,7 +1,6 @@
 define(function(require, exports, module){
 	require('jquery');
 	var play = require('play');
-	// var play = require('play');
 	var footer = $('#footer'),
 		control = $('.control'),
 		menu = $('#menu'),
