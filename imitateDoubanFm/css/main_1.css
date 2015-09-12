@@ -227,8 +227,9 @@ header {
 	vertical-align: middle;
 	color: #6bbd7a;
 	overflow: hidden;
-	-webkit-transition: opacity 1s;
-	transition: opacity 1s;
+	-webkit-transition: opacity 500ms;
+	transition: opacity 500ms;
+	opacity: 0;
 }
 
 .channel .small_dot {
@@ -258,8 +259,9 @@ header {
 	margin-top: 185px;
 	padding: 0 20px;
 	text-align: center;
-	-webkit-transition: opacity 1s;
-	transition: opacity 1s;
+	-webkit-transition: opacity 500ms;
+	transition: opacity 500ms;
+	opacity: 0;
 }
 
 .audio_info .name {
@@ -281,6 +283,9 @@ header {
 #detail .extra_opa {
 	margin-top: 12px;
 	text-align: center;
+	-webkit-transition: opacity 500ms;
+	transition: opacity 500ms;
+	opacity: 0;
 }
 
 .extra_opa i {
@@ -290,8 +295,6 @@ header {
 	background-image: url(../img/icon.png);
 	-webkit-transform: scale(0.5, 0.5);
 	transform: scale(0.5, 0.5);
-	-webkit-transition: opacity 1s;
-	transition: opacity 1s;
 }
 
 .extra_opa .same_audio {
