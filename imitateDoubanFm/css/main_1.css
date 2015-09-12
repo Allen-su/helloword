@@ -271,13 +271,13 @@ header {
 .audio_info .author {
 	margin-top: 10px;
 	overflow: hidden;
-	font-size: 14px;
+	font-size: 12px;
 	height: 18px;
 	color: #a8a8a2;
 }
 
 #detail .extra_opa {
-	margin-top: 10px;
+	margin-top: 12px;
 	text-align: center;
 }
 
