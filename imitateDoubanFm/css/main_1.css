@@ -146,8 +146,7 @@ header {
 	height: 122px;
 	margin-top: 5px;
 	border-radius: 300px;
-	/*background-color: #e8f3ea;*/
-	background-color: #ddd;
+	background-color: #e8f3ea;
 	position: absolute;
 }
 
@@ -228,6 +227,8 @@ header {
 	vertical-align: middle;
 	color: #6bbd7a;
 	overflow: hidden;
+	-webkit-transition: opacity 1s;
+	transition: opacity 1s;
 }
 
 .channel .small_dot {
@@ -236,7 +237,7 @@ header {
 	height: 5px;
 	border-radius: 5px;
 	vertical-align: middle;
-	background-color: #d3edd5;
+	background-color: #6bbd7a;
 }
 
 .channel .big_dot {
@@ -257,18 +258,20 @@ header {
 	margin-top: 185px;
 	padding: 0 20px;
 	text-align: center;
+	-webkit-transition: opacity 1s;
+	transition: opacity 1s;
 }
 
 .audio_info .name {
 	overflow: hidden;
 	font-size: 18px;
 	line-height: 18px;
-	height: 18px;/*没有使用white-space: nowrap;让他自动换行 避免出现半个字*/
-	color: #040202;
+	height: 22px;/*没有使用white-space: nowrap;让他自动换行 避免出现半个字*/
+	color: #404040;
 }
 
 .audio_info .author {
-	margin-top: 10px;
+	margin-top: 6px;
 	overflow: hidden;
 	font-size: 12px;
 	height: 18px;
@@ -287,6 +290,8 @@ header {
 	background-image: url(../img/icon.png);
 	-webkit-transform: scale(0.5, 0.5);
 	transform: scale(0.5, 0.5);
+	-webkit-transition: opacity 1s;
+	transition: opacity 1s;
 }
 
 .extra_opa .same_audio {

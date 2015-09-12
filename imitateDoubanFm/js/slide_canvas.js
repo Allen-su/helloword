@@ -1,10 +1,13 @@
 define(function(require, exports, module){
 	require('jquery');
-	var play = require('play');
+	// var play = require('play');
 	var footer = $('#footer'),
 		control = $('.control'),
 		menu = $('#menu'),
 		detail = $('#detail'),
+		channel = $('.channel')[0],
+		audioInfo = $('.audio_info')[0],
+		extraOpa = $('.extra_opa')[0],
 		translateY_exec = /translate\(0px,(.*)\) translateZ\(0px\)/,
 		translate_exec = /translate\((.*),(.*)\) translateZ\(0px\)/,
 		scale_exec = /scale\((0.4), 0.4\)/;
@@ -91,17 +94,48 @@ define(function(require, exports, module){
 			}, time);
 		}
 
+		//频道和音乐信息的显示与隐藏
+		extraMotion.prevRatio = 0;
+		function extraMotion(ratio) {
+			if ( ratio >= 0.87 && extraMotion.prevRatio < 0.87 ) {
+				channel.style.opacity = 1;
+				audioInfo.style.opacity = 1;
+				extraOpa.style.opacity = 1;
+			} else if ( ratio < 0.87 && extraMotion.prevRatio >= 0.87 ){
+				channel.style.opacity = 0;
+				audioInfo.style.opacity = 0;
+				extraOpa.style.opacity = 0;
+			}
+			extraMotion.prevRatio = ratio;
+		}
+
+		//频道和音乐信息的显示与隐藏
+		function extraInertia(isUpSlide) {
+			if ( isUpSlide ) {
+				channel.style.opacity = 1;
+				audioInfo.style.opacity = 1;
+				extraOpa.style.opacity = 1;
+			} else {
+				channel.style.opacity = 0;
+				audioInfo.style.opacity = 0;
+				extraOpa.style.opacity = 0;
+			}
+		}
+
+
 		return {
 			//按钮联动
 			linkage : function( ratio ){
 				ratio = Math.abs(ratio);
 				controlButtonMotion(ratio);
 				menuMotion(ratio);
+				extraMotion(ratio);
 			},
 			//按钮惯性
 			inertia : function( isUpSlide , time){
 				controlButtoninertia(isUpSlide, time);
 				menuInertia(isUpSlide, time);
+				extraInertia(isUpSlide);
 			}
 		};
 	})();
