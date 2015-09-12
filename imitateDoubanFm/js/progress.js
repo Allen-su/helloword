@@ -27,7 +27,7 @@ define(function(require, exports, module){
 				context.beginPath();
 				context.arc(61, 61, 58, -0.5 * Math.PI, ( percent * 2 - 0.5) * Math.PI);
 				context.strokeStyle = '#2a2';
-				context.lineWidth = 4;
+				context.lineWidth = 5;
 				context.lineCap = 'round';
 				context.stroke();
 			});
