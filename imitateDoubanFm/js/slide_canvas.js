@@ -37,7 +37,7 @@ define(function(require, exports, module){
 			controlMoveRangeY = controlMoveMaxY - controlMoveMinY,
 
 			menuEl = menu[0],
-			menuMoveMaxX = 80,
+			menuMoveMaxX = 58,
 			menuMoveMinX = 0,
 			menuMoveMaxY = -10,
 			menuMoveMinY = 0,
