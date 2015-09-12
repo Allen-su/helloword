@@ -41,8 +41,8 @@ define(function(require, exports, module){
 			menuMoveMinX = 0,
 			menuMoveMaxY = -10,
 			menuMoveMinY = 0,
-			menuScaleMax = 0.8,
-			menuScaleMin = 0.5;
+			menuScaleMax = 1,
+			menuScaleMin = 0.7;
 			console.log(controlMoveMaxX);
 			console.log(screenWidth);
 		function controlButtonMotion(ratio) {
@@ -117,7 +117,7 @@ define(function(require, exports, module){
 		var slideEl = detail[0];
 		var top = parseInt( translateY_exec.exec(slideEl.style[transform])[1], 10 ) || 0;
 		var speed =  slide.speed, time;
-		if ( endTime - beginTime < 500 ) {//快速滑动松开
+		if ( endTime - beginTime < 300 ) {//快速滑动松开
 			if ( isUpSlide ) {
 				time = Math.abs( slide.maxTop - top ) / speed;
 				slideEl.style[transitionDuration] = time + 'ms';
