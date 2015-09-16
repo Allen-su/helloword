@@ -10,6 +10,11 @@ body {
 	/*margin: 5px;*/
 	background-color: #fff;
 	font-family: MicrosoftYaHei, '微软雅黑';
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	-o-user-select: none;
+	user-select: none;
 }
 .wrapper {
 	max-width: 768px;
