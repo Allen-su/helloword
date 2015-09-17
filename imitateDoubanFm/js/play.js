@@ -35,6 +35,12 @@ define(function(require, exports, module){
 		audio.next();
 	});
 
+	audio.initConfig({
+		renderCallback: function(){
+			
+		}
+	});
+
 	audio.play();
 	drawProgress();
 
