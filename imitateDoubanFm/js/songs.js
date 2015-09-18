@@ -5,43 +5,49 @@ define(function(require, exports, module){
 		{
 			id: 0,
 			title:'Get Ready For It',
-			autor: '',
+			avatar: '',
+			author: 'Take That',
 			like: false,
 			isDel: false,
-			path: url + 'Get Ready For It.mp3'
+			path: url + 'm1.mp3'
 		},
 		{
 			id: 1,
 			title:'See You Again',
-			autor: '',
+			avatar: '',
+			author: 'Wiz Khalifa',
 			like: false,
 			isDel: false,
-			path: url + 'See You Again.mp3'
+			path: url + 'm2.mp3'
 		},
 		{
 			id: 2,
 			title:'该死的温柔',
-			autor: '',
+			avatar: '',
+			author: '马天宇',
 			like: false,
 			isDel: false,
-			path: url + '该死的温柔.mp3'
+			path: url + 'm3.mp3'
 		},
 		{
 			id: 3,
 			title:'一直下雨的星期天',
-			autor: '',
+			avatar: '',
+			author: '赵薇',
 			like: false,
 			isDel: false,
-			path: url + '一直下雨的星期天.mp3'
+			path: url + 'm4.mp3'
 		},
 		{
 			id: 4,
 			title:'醉清风',
-			autor: '',
+			avatar: '',
+			author: '弦子',
 			like: false,
 			isDel: false,
-			path: url + '醉清风.mp3'
+			path: url + 'm5.mp3'
 		},
 
 	];
+	module.exports = songs;
 });

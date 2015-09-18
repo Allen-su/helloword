@@ -1,6 +1,6 @@
 define(function(require, exports, module){
 	require('jquery');
-	// var play = require('play');
+	var play = require('play');
 	var footer = $('#footer'),
 		control = $('.control'),
 		menu = $('#menu'),
@@ -23,6 +23,8 @@ define(function(require, exports, module){
 		speed: Math.abs( -360 ) / 600
 	};
 
+	exports.slide = slide;
+	exports.draging = null;//用于判断是否进行拖动过，如果拖动过表示不是点击事件
 
 	
 	//滑动时的其它联动效果********************************************************************
@@ -46,8 +48,6 @@ define(function(require, exports, module){
 			menuMoveMinY = 0,
 			menuScaleMax = 1,
 			menuScaleMin = 0.7;
-			console.log(controlMoveMaxX);
-			console.log(screenWidth);
 		function controlButtonMotion(ratio) {
 			ratio = Math.abs(ratio);
 			var setTranslateX = controlMoveRangeX * ratio + controlMoveMinX,
@@ -207,6 +207,7 @@ define(function(require, exports, module){
 				case 'mousemove' :
 					var top ;
 					if ( draging ) {
+						exports.draging = 1;
 						top = parseInt( translateY_exec.exec(draging.style[transform])[1], 10 ) || minTop;
 						distance = initY -  e.clientY;
 						isUpSlide = distance > 0;
@@ -229,6 +230,7 @@ define(function(require, exports, module){
 						slideEnd(isUpSlide, endTime, beginTime);
 					}
 					draging = null;
+					exports.draging = 0;
 					break;
 			}
 		}
@@ -271,6 +273,7 @@ define(function(require, exports, module){
 				case 'touchmove' :
 					var top ;
 					if ( draging !== null ) {
+						exports.draging = 1;
 						top = parseInt( translateY_exec.exec(draging.style[transform])[1], 10 ) || minTop;
 						distance = initY -  e.changedTouches[0].pageY;
 						isUpSlide = distance > 0;
@@ -294,6 +297,7 @@ define(function(require, exports, module){
 						slideEnd(isUpSlide, endTime, beginTime);
 					}
 					draging = null;
+					exports.draging = 0;
 					break;
 			}
 		}
@@ -313,7 +317,11 @@ define(function(require, exports, module){
 	};
 
 	//启动***************************
-	dragDrop().enable();
-	touchMove().enable();
-
+	if ( navigator.userAgent.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/) || 
+		navigator.userAgent.match(/Android/i)) {
+		touchMove().enable();
+	} else {
+		dragDrop().enable();
+	}
+	
 });

@@ -195,6 +195,8 @@ header {
 	float: left;
 	background-size: 30%;
 	background-size: contain;
+	-webkit-tap-highlight-color: rgba(0, 0, 0, 0); 
+	tap-highlight-color: rgba(0, 0, 0, 0); 
 }
 
 #menu .like {
@@ -232,8 +234,8 @@ header {
 	vertical-align: middle;
 	color: #6bbd7a;
 	overflow: hidden;
-	-webkit-transition: opacity 500ms;
-	transition: opacity 500ms;
+	-webkit-transition: opacity 100ms;
+	transition: opacity 100ms;
 	opacity: 0;
 }
 
@@ -264,8 +266,8 @@ header {
 	margin-top: 185px;
 	padding: 0 20px;
 	text-align: center;
-	-webkit-transition: opacity 500ms;
-	transition: opacity 500ms;
+	-webkit-transition: opacity 100ms;
+	transition: opacity 100ms;
 	opacity: 0;
 }
 
@@ -288,8 +290,8 @@ header {
 #detail .extra_opa {
 	margin-top: 12px;
 	text-align: center;
-	-webkit-transition: opacity 500ms;
-	transition: opacity 500ms;
+	-webkit-transition: opacity 100ms;
+	transition: opacity 100ms;
 	opacity: 0;
 }
 
@@ -300,6 +302,8 @@ header {
 	background-image: url(../img/icon.png);
 	-webkit-transform: scale(0.5, 0.5);
 	transform: scale(0.5, 0.5);
+	-webkit-tap-highlight-color: rgba(0, 0, 0, 0); 
+	tap-highlight-color: rgba(0, 0, 0, 0); 
 }
 
 .extra_opa .same_audio {

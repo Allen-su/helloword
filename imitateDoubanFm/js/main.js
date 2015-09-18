@@ -1,6 +1,6 @@
 define(function(require, exports, module){
 	require('navigation');
-	require('slide_canvas');
+	require('play');
 	require('iscroll');
 	$(function(){
 		var body = document.body,

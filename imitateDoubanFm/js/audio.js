@@ -1,5 +1,5 @@
 define(function(require, exports, module){
-	var sounds = require('sounds');
+	var sounds = require('songs');
 	var audio = {
 		allSound : sounds,//播放列表，以后要配置到sound文件中
 		curIndex : 0, //当前播放到列表第几首
@@ -32,26 +32,34 @@ define(function(require, exports, module){
 		if ( ++this.curIndex && this.curIndex  >= this.allSound.length ) {
 			this.curIndex = 0;
 		}
-		this.curAudio.src = this.url + this.allSound[this.curIndex];
+		this.curAudio.src = this.allSound[this.curIndex].path;
+		this.config.playCallback(this.allSound[this.curIndex]);
 		this.play();
+	};
+
+	//删除当前播放歌曲
+	audio.del = function(){
+		if ( this.allSound.length === 1 ) { return; }
+		this.next();
+		this.allSound.splice(this.curIndex === 0 ? this.allSound.length - 1 : this.curIndex - 1, 1);
 	};
 
 	//初始化
 	audio.init = function(){
-		this.config.renderCallback(this.allSound[this.curIndex]);
+		this.config.playCallback(this.allSound[this.curIndex]);
 		this.curAudio.addEventListener( 'ended', $.proxy(function(){
 			this.next();
-			this.config.renderCallback(this.allSound[this.curIndex]);
+			this.config.playCallback(this.allSound[this.curIndex]);
 		}, this));
 	};
 
 	//配置对象，暂时没用
 	audio.config = {
-		renderCallback: function(){}
+		playCallback: function(){}
 	};
 	
 	audio.initConfig = function(config){
-		this.config.renderCallback = config.renderCallback;
+		this.config.playCallback = config.playCallback;
 	};
 
 	//获取当前播放歌曲总时间与当前播放时间
