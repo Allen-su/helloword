@@ -1,7 +1,7 @@
 define(function(require, exports, module){
 	var sounds = require('songs');
 	var audio = {
-		allSound : sounds,//播放列表，以后要配置到sound文件中
+		allSound : $.extend([], sounds),//播放列表，以后要配置到sound文件中
 		curIndex : 0, //当前播放到列表第几首
 		curAudio : null,//当前播放歌曲
 		paused : 'yes'
@@ -53,7 +53,7 @@ define(function(require, exports, module){
 		}, this));
 	};
 
-	//配置对象，暂时没用
+	
 	audio.config = {
 		playCallback: function(){}
 	};
@@ -72,4 +72,17 @@ define(function(require, exports, module){
 	};
 
 	module.exports = audio;
+
+
+	//切换频道
+	var playingLabel = $('<ul class="playing_label"><li></li><li></li><li></li><li></li></ul>');
+	$('#channel dd:first').append(playingLabel);
+	$('#channel').on('click', 'dd', function(e){
+		$(this).append(playingLabel);
+		audio.allSound = $.extend([], sounds);
+		audio.curIndex = -1;
+		audio.next();
+	});
+
+
 });

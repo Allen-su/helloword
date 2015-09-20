@@ -17,7 +17,7 @@ define(function(require, exports, module){
 					nav.outerHeight(true) - footer.outerHeight(true));
 			},100);
 		};
-		new IScroll('#channel', { scrollY: true, freeScroll: true, mouseWheel: true});
+		new IScroll('#channel', { scrollY: true, freeScroll: true, mouseWheel: true, click: true});
 		
 	});
 });
