@@ -236,8 +236,8 @@ header {
 	vertical-align: middle;
 	color: #6bbd7a;
 	overflow: hidden;
-	-webkit-transition: opacity 100ms;
-	transition: opacity 100ms;
+	-webkit-transition: opacity 400ms;
+	transition: opacity 400ms;
 	opacity: 0;
 }
 
@@ -268,8 +268,8 @@ header {
 	margin-top: 185px;
 	padding: 0 20px;
 	text-align: center;
-	-webkit-transition: opacity 100ms;
-	transition: opacity 100ms;
+	-webkit-transition: opacity 400ms;
+	transition: opacity 400ms;
 	opacity: 0;
 }
 
@@ -292,8 +292,8 @@ header {
 #detail .extra_opa {
 	margin-top: 12px;
 	text-align: center;
-	-webkit-transition: opacity 100ms;
-	transition: opacity 100ms;
+	-webkit-transition: opacity 400ms;
+	transition: opacity 400ms;
 	opacity: 0;
 }
 
