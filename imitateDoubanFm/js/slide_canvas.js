@@ -1,6 +1,5 @@
 define(function(require, exports, module){
 	require('jquery');
-	var play = require('play');
 	var footer = $('#footer'),
 		control = $('.control'),
 		menu = $('#menu'),
@@ -25,6 +24,7 @@ define(function(require, exports, module){
 
 	exports.slide = slide;
 	exports.draging = null;//用于判断是否进行拖动过，如果拖动过表示不是点击事件
+	exports.isPlaying = 'yes';//会在play.js中替换成获取是否在播放的 方法
 
 	
 	//滑动时的其它联动效果********************************************************************
@@ -112,8 +112,14 @@ define(function(require, exports, module){
 		//频道和音乐信息的显示与隐藏
 		function extraInertia(isUpSlide) {
 			if ( isUpSlide ) {
-				channel.style.opacity = 1;
-				audioInfo.style.opacity = 1;
+				if ( exports.isPlaying() == 'yes' ) {
+					channel.style.opacity = 1;
+					audioInfo.style.opacity = 1;
+				} else {
+					channel.style.opacity = 0.5;
+					audioInfo.style.opacity = 0.5;
+				}
+				
 				extraOpa.style.opacity = 1;
 			} else {
 				channel.style.opacity = 0;

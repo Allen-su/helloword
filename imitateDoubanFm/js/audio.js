@@ -76,9 +76,13 @@ define(function(require, exports, module){
 
 	//切换频道
 	var playingLabel = $('<ul class="playing_label"><li></li><li></li><li></li><li></li></ul>');
+	var channelTitleEl = $('.channel .title');
 	$('#channel dd:first').append(playingLabel);
 	$('#channel').on('click', 'dd', function(e){
-		$(this).append(playingLabel);
+		var self = $(this);
+		if ( self.has(playingLabel).length > 0 ) { return; }
+		channelTitleEl.html(this.innerHTML);
+		self.append(playingLabel);
 		audio.allSound = $.extend([], sounds);
 		audio.curIndex = -1;
 		audio.next();

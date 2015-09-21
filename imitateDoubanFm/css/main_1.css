@@ -91,6 +91,7 @@ header {
 	display: block;
 	float: right;
 	font-style: normal;
+	cursor: pointer;
 }
 
 /* channel */
@@ -224,6 +225,7 @@ header {
 	width: 100%;
 	height: 360px;
 	border-top: 1px solid #cbcac9;
+	box-shadow: 0 0 0 #cfcecc, 0 -4px 4px -4px #cfcecc, 0 0 0  #cfcecc, 0 0 0  #cfcecc;
 	top: 0;
 }
 
@@ -323,6 +325,7 @@ header {
 
 
 
+/* 正在播放频道的标志 */
 .playing_label {
 	float: right;
 	width: 20px;
@@ -338,7 +341,7 @@ header {
 	width: 2px;
 	border-radius: 1px;
 	margin-right: 2px;
-	background-color: green;
+	background-color: #6bbd7a;
 	position: absolute;
 	bottom: 0;
 }
