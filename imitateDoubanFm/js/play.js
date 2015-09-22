@@ -23,6 +23,9 @@ define(function(require, exports, module){
 		transform = typeof detailEl.style.transform !== 'undefined' ? 'transform' : 'webkitTransform',
 		clickEvent = 'click';
 
+
+	var rlrc = /^\[(\d{2}):(\d{2}).\d{2}\](.*)/;
+
 	if ( navigator.userAgent.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/) ||
 		navigator.userAgent.match(/Android/i)) {
 		clickEvent = 'touchend';
@@ -73,6 +76,7 @@ define(function(require, exports, module){
 	function nextMusic(e) {
 		if ( slidePanel.draging ) { return; }
 		audio.next();
+		getLrc();
 	}
 	$('.next')[0].addEventListener(clickEvent, nextMusic, false);
 
@@ -94,6 +98,7 @@ define(function(require, exports, module){
 	function delMusic(e) {
 		if ( slidePanel.draging ) { return; }
 		audio.del();
+		getLrc();
 	}
 	$('.delete')[0].addEventListener(clickEvent, delMusic, false);
 
@@ -122,9 +127,40 @@ define(function(require, exports, module){
 		} ,100);
 	}
 
+
+	function getLrc() {
+		audio = audio.allSound[audio.curIndex];
+		if ( !audio.lrcPaht ) {
+			return;
+		} else {
+			$.ajax({
+				url: 'lrc/m7.lrc',
+				type: 'get',
+				success: function(res) {
+					fillLrc(res);
+				}
+			});
+		}
+	}
+
+	//rlrc = /^\[(\d{2}):(\d{2}).\d{2}\](.*)/; [00:17.84]
+	function fillLrc(res) {
+		var lrc = res.replace(/\[/g, '&&&[').split('&&&');
+		var lrcMpa = [], item, time, sentence;
+		for ( var i = 1, len = lrc.length; i < len; i++ ) {
+			item = rlrc.exec(lrc[i]);
+			time = parseInt(item[1], 10) * 60 + parseInt(item[2], 10);
+			sentence = item[3];
+			lrcMpa.push({time: sentence});
+		}
+	}
+
+	//当前是否在播放歌曲
 	function isPlaying() {
 		return isPlay;
 	}
 	slidePanel.isPlaying = isPlaying;
+
+
 
 });

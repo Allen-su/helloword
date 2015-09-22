@@ -323,6 +323,54 @@ header {
 }
 
 
+#lyric {
+	position: absolute;
+	background-color: #f9f8f7;
+	width: 100%;
+	top: 0px;
+	bottom: 70px;
+	z-index: 20;
+}
+
+#lyric .content {
+	position: absolute;
+	width: 100%;
+	top: 50px;
+	bottom: 50px;
+	line-height: 2em;
+	text-align: center;
+	color: #989898;
+	background-color: rgba(249, 249, 248, 0.7);
+	overflow: hidden;
+	text-shadow: 0.2px 0.2px 0.3px #989898;
+}
+
+#lyric .content div {
+	background-color: transparent;
+}
+
+#lyric .content .active {
+	color: #5DB16C;
+}
+
+#lyric .info {
+	position: absolute;
+	bottom: 0;
+	height: 35px;
+	width: 100%;
+	line-height: 35px;
+	border-top: 1px solid #f3f2f2;
+	text-align: center;
+}
+
+#lyric .info .title {
+	color: #353535;
+}
+
+#lyric .info .author {
+	color: #999999;
+}
+
 
 
 /* 正在播放频道的标志 */

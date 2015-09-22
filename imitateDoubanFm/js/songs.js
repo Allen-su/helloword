@@ -1,6 +1,7 @@
 define(function(require, exports, module){
 
 	var url = 'sound/';
+	var lrcUrl = 'lrc/';
 	var songs = [
 		{
 			id: 0,
@@ -31,22 +32,41 @@ define(function(require, exports, module){
 		},
 		{
 			id: 3,
-			title:'一直下雨的星期天',
+			title:'Hold On \'Til The Night',
 			avatar: '',
-			author: '赵薇',
+			author: 'Greyson Chance',
 			like: false,
 			isDel: false,
-			path: url + 'm4.mp3'
+			path: url + 'm4.m4a'
 		},
 		{
 			id: 4,
-			title:'醉清风',
+			title:'Summertrain',
 			avatar: '',
-			author: '弦子',
+			author: 'Greyson Chance',
 			like: false,
 			isDel: false,
 			path: url + 'm5.mp3'
 		},
+		{
+			id: 5,
+			title:'Take My Heart',
+			avatar: '',
+			author: 'Greyson Chance',
+			like: false,
+			isDel: false,
+			path: url + 'm6.m4a'
+		},
+		{
+			id: 6,
+			title:'Waiting Outside The Lines',
+			avatar: '',
+			author: 'Greyson Chance',
+			like: false,
+			isDel: false,
+			path: url + 'm7.m4a',
+			lrcPaht: lrcUrl + 'm7.lrc'
+		}
 
 	];
 	module.exports = songs;
