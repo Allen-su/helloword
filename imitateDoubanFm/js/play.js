@@ -206,6 +206,7 @@ define(function(require, exports, module){
 			item = rlrc.exec(lrc[i]);
 			time = parseInt(item[1], 10) * 60 + parseInt(item[2], 10);
 			sentence = item[3];
+			if ( sentence ) { continue; }
 			cloneDiv = sentenceDiv.cloneNode();
 			cloneDiv.id = time;
 			cloneDiv.innerHTML = sentence;
