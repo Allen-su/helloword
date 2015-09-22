@@ -230,7 +230,7 @@ define(function(require, exports, module){
 					}
 					break;
 				case 'mouseup' :
-					if ( draging ) {
+					if ( draging && exports.draging) {
 						initY = 0;
 						endTime = Date.now();
 						slideEnd(isUpSlide, endTime, beginTime);
@@ -297,7 +297,7 @@ define(function(require, exports, module){
 					}
 					break;
 				case 'touchend' :
-					if ( draging ) {
+					if ( draging && exports.draging) {
 						initY = 0;
 						endTime = Date.now();
 						slideEnd(isUpSlide, endTime, beginTime);

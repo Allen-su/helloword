@@ -325,7 +325,8 @@ header {
 
 #lyric {
 	position: absolute;
-	background-color: #f9f8f7;
+	/*background-color: #f9f8f7;*/
+	background-color: rgba(249, 249, 248, 0.97);
 	width: 100%;
 	top: 0px;
 	bottom: 70px;
@@ -335,18 +336,21 @@ header {
 #lyric .content {
 	position: absolute;
 	width: 100%;
-	top: 50px;
-	bottom: 50px;
+	top: 65px;
+	bottom: 75px;
 	line-height: 2em;
 	text-align: center;
 	color: #989898;
-	background-color: rgba(249, 249, 248, 0.7);
 	overflow: hidden;
 	text-shadow: 0.2px 0.2px 0.3px #989898;
 }
 
 #lyric .content div {
 	background-color: transparent;
+}
+
+#lyric .content .lrc_blank {
+	margin-top: 50%;
 }
 
 #lyric .content .active {
