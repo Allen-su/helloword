@@ -1,5 +1,5 @@
 define(function(require, exports, module){
-	require('jquery');
+	require('zepto');
 	//进度条默认参数
 	var _default = {
 		size : 122,//进度条canvas的边长

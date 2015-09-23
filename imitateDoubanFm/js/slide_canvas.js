@@ -1,5 +1,5 @@
 define(function(require, exports, module){
-	require('jquery');
+	require('zepto');
 	var footer = $('#footer'),
 		control = $('.control'),
 		menu = $('#menu'),
@@ -214,10 +214,11 @@ define(function(require, exports, module){
 				case 'mousemove' :
 					var top ;
 					if ( draging && exports.lyricPanelHide() ) {
+						distance = initY -  e.clientY;
+						if ( distance === 0 ) { return; }//在pc端有时没有移动距离，也会进入
+						isUpSlide = distance > 0;
 						exports.draging = 1;
 						top = parseInt( translateY_exec.exec(draging.style[transform])[1], 10 ) || minTop;
-						distance = initY -  e.clientY;
-						isUpSlide = distance > 0;
 						if ( top >= maxTop && top <= minTop ) {
 							if ( !(top <= maxTop && distance > 0) && !(top >= minTop && distance < 0) ) {
 								distance = top - distance >= minTop ? minTop : top - distance <= maxTop ?
@@ -232,6 +233,7 @@ define(function(require, exports, module){
 					break;
 				case 'mouseup' :
 					if ( draging && exports.draging) {
+						console.log(exports.draging);
 						initY = 0;
 						endTime = Date.now();
 						slideEnd(isUpSlide, endTime, beginTime);

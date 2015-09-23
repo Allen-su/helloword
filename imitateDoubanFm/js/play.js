@@ -1,5 +1,5 @@
 define(function(require, exports, module){
-	require('jquery');
+	require('zepto');
 	var audio = require('audio'),//获取audio对象
 		slidePanel = require('slide_canvas'),
 		progressBox = $('.progress'),
@@ -175,6 +175,7 @@ define(function(require, exports, module){
 			lyricWrap.innerHTML = '';
 			lyricWrap.appendChild(blankDiv);
 			lyricWrap.appendChild(contentDiv);
+			lrcScroll.refresh();
 			lrcScroll.scrollToElement(blankDiv);
 			return;
 		} else {

@@ -77,7 +77,7 @@ define(function(require, exports, module){
 	//切换频道
 	var playingLabel = $('<ul class="playing_label"><li></li><li></li><li></li><li></li></ul>');
 	var channelTitleEl = $('.channel .title');
-	$('#channel dd:first').append(playingLabel);
+	$('#channel dd').eq(0).append(playingLabel);
 	$('#channel').on('click', 'dd', function(e){
 		var self = $(this);
 		if ( self.has(playingLabel).length > 0 ) { return; }
