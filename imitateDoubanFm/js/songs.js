@@ -1,12 +1,13 @@
 define(function(require, exports, module){
 
-	var url = 'sound/';
-	var lrcUrl = 'lrc/';
+	var url = 'media/sounds/',
+		lrcUrl = 'media/lrc/',
+		avatar = 'media/avatar/';
 	var songs = [
 		{
 			id: 0,
 			title:'Get Ready For It',
-			avatar: '',
+			avatar: avatar + 'm1.jpg',
 			author: 'Take That',
 			like: false,
 			isDel: false,
@@ -15,7 +16,7 @@ define(function(require, exports, module){
 		{
 			id: 1,
 			title:'See You Again',
-			avatar: '',
+			avatar: avatar + 'm2.jpg',
 			author: 'Wiz Khalifa',
 			like: false,
 			isDel: false,
@@ -24,9 +25,9 @@ define(function(require, exports, module){
 		},
 		{
 			id: 2,
-			title:'该死的温柔',
-			avatar: '',
-			author: '马天宇',
+			title:'オセンチな歩美',
+			avatar: avatar + 'm3.jpg',
+			author: '大野克夫',
 			like: false,
 			isDel: false,
 			path: url + 'm3.mp3'
@@ -34,7 +35,7 @@ define(function(require, exports, module){
 		{
 			id: 3,
 			title:'Hold On \'Til The Night',
-			avatar: '',
+			avatar: avatar + 'm4.jpg',
 			author: 'Greyson Chance',
 			like: false,
 			isDel: false,
@@ -44,7 +45,7 @@ define(function(require, exports, module){
 		{
 			id: 4,
 			title:'Summertrain',
-			avatar: '',
+			avatar: avatar + 'm4.jpg',
 			author: 'Greyson Chance',
 			like: false,
 			isDel: false,
@@ -54,7 +55,7 @@ define(function(require, exports, module){
 		{
 			id: 5,
 			title:'Take My Heart',
-			avatar: '',
+			avatar: avatar + 'm6.jpg',
 			author: 'Greyson Chance',
 			like: false,
 			isDel: false,
@@ -64,7 +65,7 @@ define(function(require, exports, module){
 		{
 			id: 6,
 			title:'Waiting Outside The Lines',
-			avatar: '',
+			avatar: avatar + 'm7.jpg',
 			author: 'Greyson Chance',
 			like: false,
 			isDel: false,

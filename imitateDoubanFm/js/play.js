@@ -129,6 +129,7 @@ define(function(require, exports, module){
 			lyricTitleEl.text(song.title);
 			songAuthorEl.text(song.author);
 			lyricAuthorEl.text(' / ' + song.author);
+			bg.css('background', 'url('+ song.avatar +')');
 			playOpa();
 			if ( song.like ) {
 				likeEl[0].style.backgroundImage = 'url(img/like.png)';
@@ -174,6 +175,7 @@ define(function(require, exports, module){
 			lyricWrap.innerHTML = '';
 			lyricWrap.appendChild(blankDiv);
 			lyricWrap.appendChild(contentDiv);
+			lrcScroll.scrollToElement(blankDiv);
 			return;
 		} else {
 			$.ajax({
@@ -215,6 +217,7 @@ define(function(require, exports, module){
 		}
 		lyricWrap.appendChild(frag);
 		lrcScroll.refresh();
+		lrcScroll.scrollToElement(blankDiv);
 	}
 
 	//当前是否在播放歌曲
@@ -223,6 +226,10 @@ define(function(require, exports, module){
 	}
 	slidePanel.isPlaying = isPlaying;
 
+	function isLrcPanelHide() {
+		return lyricPanelHide;
+	}
 
+	slidePanel.lyricPanelHide = isLrcPanelHide;
 
 });

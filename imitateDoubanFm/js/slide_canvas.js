@@ -24,7 +24,8 @@ define(function(require, exports, module){
 
 	exports.slide = slide;
 	exports.draging = null;//用于判断是否进行拖动过，如果拖动过表示不是点击事件
-	exports.isPlaying = 'yes';//会在play.js中替换成获取是否在播放的 方法
+	exports.isPlaying = function(){};//会在play.js中替换成获取是否在播放的 方法，如果是暂停，在画上去时要设置透明度
+	exports.lyricPanelHide = function(){};//会在play.js中替换成获取是否在显示歌词的函数，当在显示歌词时，不能滑动
 
 	
 	//滑动时的其它联动效果********************************************************************
@@ -59,7 +60,7 @@ define(function(require, exports, module){
 		}
 
 		function controlButtoninertia(isUpSlide, time) {
-			controlEl.style[transform] = isUpSlide ? 
+			controlEl.style[transform] = isUpSlide ?
 				'translate('+controlMoveMaxX+'px, '+controlMoveMaxY+'px) translateZ(0px)'+
 					'scale('+controlScaleMax+', '+controlScaleMax+')' :
 				'translate('+controlMoveMinX + 'px, '+ controlMoveMinY +'px) translateZ(0px)'+
@@ -83,7 +84,7 @@ define(function(require, exports, module){
 		}
 
 		function menuInertia(isUpSlide, time) {
-			menuEl.style[transform] = isUpSlide ? 
+			menuEl.style[transform] = isUpSlide ?
 				'translate('+menuMoveMinX+'px, '+menuMoveMaxY+'px) translateZ(0px)'+
 					'scale('+menuScaleMax+', '+menuScaleMax+')' :
 				'translate('+menuMoveMaxX + 'px, '+menuMoveMinY+'px) translateZ(0px)'+
@@ -212,7 +213,7 @@ define(function(require, exports, module){
 					break;
 				case 'mousemove' :
 					var top ;
-					if ( draging ) {
+					if ( draging && exports.lyricPanelHide() ) {
 						exports.draging = 1;
 						top = parseInt( translateY_exec.exec(draging.style[transform])[1], 10 ) || minTop;
 						distance = initY -  e.clientY;
@@ -278,7 +279,7 @@ define(function(require, exports, module){
 					break;
 				case 'touchmove' :
 					var top ;
-					if ( draging !== null ) {
+					if ( draging !== null && exports.lyricPanelHide() ) {
 						exports.draging = 1;
 						top = parseInt( translateY_exec.exec(draging.style[transform])[1], 10 ) || minTop;
 						distance = initY -  e.changedTouches[0].pageY;
