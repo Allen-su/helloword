@@ -355,6 +355,7 @@ header {
 
 #lyric .content .active {
 	color: #5DB16C;
+	font-size: 16px;
 }
 
 #lyric .info {

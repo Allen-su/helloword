@@ -19,7 +19,8 @@ define(function(require, exports, module){
 			author: 'Wiz Khalifa',
 			like: false,
 			isDel: false,
-			path: url + 'm2.mp3'
+			path: url + 'm2.mp3',
+			lrcPaht: lrcUrl + 'm2.lrc'
 		},
 		{
 			id: 2,
@@ -37,7 +38,8 @@ define(function(require, exports, module){
 			author: 'Greyson Chance',
 			like: false,
 			isDel: false,
-			path: url + 'm4.m4a'
+			path: url + 'm4.m4a',
+			lrcPaht: lrcUrl + 'm4.lrc'
 		},
 		{
 			id: 4,
@@ -46,7 +48,8 @@ define(function(require, exports, module){
 			author: 'Greyson Chance',
 			like: false,
 			isDel: false,
-			path: url + 'm5.mp3'
+			path: url + 'm5.mp3',
+			lrcPaht: lrcUrl + 'm5.lrc'
 		},
 		{
 			id: 5,
@@ -55,7 +58,8 @@ define(function(require, exports, module){
 			author: 'Greyson Chance',
 			like: false,
 			isDel: false,
-			path: url + 'm6.m4a'
+			path: url + 'm6.m4a',
+			lrcPaht: lrcUrl + 'm6.lrc'
 		},
 		{
 			id: 6,

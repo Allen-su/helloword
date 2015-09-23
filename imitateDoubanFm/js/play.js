@@ -34,6 +34,7 @@ define(function(require, exports, module){
 		lyricAuthorEl = $('#lyric .author'),
 		lyricPanelHide = true;
 	lyricPanelEl.style.display = 'none'; //先设 none 后拿不到高度
+	lyricPanelEl.style.visibility = 'visible';
 
 	if ( navigator.userAgent.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/) ||
 		navigator.userAgent.match(/Android/i)) {
@@ -41,6 +42,7 @@ define(function(require, exports, module){
 	}
 
 	//绑定开始暂停事件
+	//暂停
 	function pauseOpa() {
 		var top = parseInt( /translate\(0px,(.*)\) translateZ\(0px\)/.exec(detailEl.style[transform])[1], 10 );
 		pause.css('z-index', 100);
@@ -55,7 +57,7 @@ define(function(require, exports, module){
 			}, 0);
 		}
 	}
-
+	//播放
 	function playOpa() {
 		var top = parseInt( /translate\(0px,(.*)\) translateZ\(0px\)/.exec(detailEl.style[transform])[1], 10 );
 		pause.css('z-index', 99);
@@ -85,7 +87,6 @@ define(function(require, exports, module){
 	function nextMusic(e) {
 		if ( slidePanel.draging ) { return; }
 		audio.next();
-		getLrc();
 	}
 	$('.next')[0].addEventListener(clickEvent, nextMusic, false);
 
@@ -107,7 +108,6 @@ define(function(require, exports, module){
 	function delMusic(e) {
 		if ( slidePanel.draging ) { return; }
 		audio.del();
-		getLrc();
 	}
 	$('.delete')[0].addEventListener(clickEvent, delMusic, false);
 
@@ -135,6 +135,7 @@ define(function(require, exports, module){
 			} else {
 				likeEl[0].style.backgroundImage = 'url(img/unlike.png)';
 			}
+			getLrc();
 		}
 	});
 
@@ -156,7 +157,6 @@ define(function(require, exports, module){
 					preLrc = preLrc ? ( preLrc.className = '', lrc ) : lrc;
 					lrcScroll.scrollToElement(lrc, 0, 0, -lyricShowHalfHeight);
 				}
-				//lrcScroll.refresh();
 			}
 			
 		} ,100);
@@ -176,22 +176,22 @@ define(function(require, exports, module){
 			lyricWrap.appendChild(contentDiv);
 			return;
 		} else {
-			/*$.ajax({
-				url: 'lrc/m7.lrc',
+			$.ajax({
+				url: music.lrcPaht,
 				type: 'get',
 				success: function(res) {
 					fillLrc(res);
 				}
-			});*/
-			var res = "[00:17.84]Watching the minute hand [00:19.56]Frozen solid not moving [00:25.80]Still we believe we can [00:27.77]But we're afraid of losing [00:33.86]Watching from over here [00:35.78]It's hardly worth competing [00:42.06]I'm almost out of here [00:44.09]Why break a heart that's beating? [00:47.95] [00:50.02]Just as I start giving up [00:54.19]I'm not backing off [00:57.99] [00:58.17]Running to the light [00:59.94]Get out of your own way [01:02.16]Not afraid to fight [01:03.67]Believing what you say [01:06.24]I'll hold on till the night [01:14.30]Hanging by a thread [01:15.83]I'm not scared to let go [01:18.40]Thoughts inside your head [01:19.95]They creep up to get you [01:22.46]I believe this is right [01:28.20]So I'll hold on til the night [01:32.72] [01:39.18]I climbed up on a tree [01:41.03]To get a new perspective [01:47.07]If love is worth a dime [01:48.99]The price is being rejected [01:54.24] [01:55.21]Just as I start falling down [01:59.07]I turn this around [02:03.03] [02:03.20]Running to the light [02:04.51]Get out of your own way [02:07.12]Not afraid to fight [02:08.61]Believing what you say [02:11.29]I'll hold on till the night [02:19.35]Hanging by a thread [02:20.90]I'm not scared to let go [02:23.37]Thoughts inside your head [02:24.95]They creep up to get you [02:27.49]I believe this is right [02:33.42]So I'll hold on til the night [02:38.72] [02:39.98]Hold on til I'm with you [02:44.14]All I've got to give you [02:47.78]All my fears are slowly fading to never know [02:53.40]Yes I start running running running running! [02:56.40] [02:56.61]Running to the light [02:58.48]Get out of your own way [02:59.96]Not afraid to fight [03:01.54]Believing what you say [03:04.12]I'll hold on till the night [03:10.90](Believe that this is the night) [03:12.23]Hanging by a thread [03:13.77]I'm not scared to let go [03:16.24]Thoughts inside your head [03:17.80]They creep up to get you [03:20.35]I believe this is right [03:26.13]So I'll hold on til the night [03:29.59]";
-			fillLrc(res);
+			});
+			/*var res = "[00:17.84]Watching the minute hand [00:19.56]Frozen solid not moving [00:25.80]Still we believe we can [00:27.77]But we're afraid of losing [00:33.86]Watching from over here [00:35.78]It's hardly worth competing [00:42.06]I'm almost out of here [00:44.09]Why break a heart that's beating? [00:47.95] [00:50.02]Just as I start giving up [00:54.19]I'm not backing off [00:57.99] [00:58.17]Running to the light [00:59.94]Get out of your own way [01:02.16]Not afraid to fight [01:03.67]Believing what you say [01:06.24]I'll hold on till the night [01:14.30]Hanging by a thread [01:15.83]I'm not scared to let go [01:18.40]Thoughts inside your head [01:19.95]They creep up to get you [01:22.46]I believe this is right [01:28.20]So I'll hold on til the night [01:32.72] [01:39.18]I climbed up on a tree [01:41.03]To get a new perspective [01:47.07]If love is worth a dime [01:48.99]The price is being rejected [01:54.24] [01:55.21]Just as I start falling down [01:59.07]I turn this around [02:03.03] [02:03.20]Running to the light [02:04.51]Get out of your own way [02:07.12]Not afraid to fight [02:08.61]Believing what you say [02:11.29]I'll hold on till the night [02:19.35]Hanging by a thread [02:20.90]I'm not scared to let go [02:23.37]Thoughts inside your head [02:24.95]They creep up to get you [02:27.49]I believe this is right [02:33.42]So I'll hold on til the night [02:38.72] [02:39.98]Hold on til I'm with you [02:44.14]All I've got to give you [02:47.78]All my fears are slowly fading to never know [02:53.40]Yes I start running running running running! [02:56.40] [02:56.61]Running to the light [02:58.48]Get out of your own way [02:59.96]Not afraid to fight [03:01.54]Believing what you say [03:04.12]I'll hold on till the night [03:10.90](Believe that this is the night) [03:12.23]Hanging by a thread [03:13.77]I'm not scared to let go [03:16.24]Thoughts inside your head [03:17.80]They creep up to get you [03:20.35]I believe this is right [03:26.13]So I'll hold on til the night [03:29.59]";
+			fillLrc(res);*/
 		}
 			
 	}
 
 	//rlrc = /^\[(\d{2}):(\d{2}).\d{2}\](.*)/; [00:17.84]
 	function fillLrc(res) {
-		var lrc = res.replace(/\[/g, '&&&[').split('&&&');
+		var lrc = res.replace(/\[(\d{2}:\d{2}.\d{2})\]/g, '&&&[$1]').split('&&&');
 		var item, time, sentence;
 		var frag = document.createDocumentFragment(),
 			sentenceDiv = document.createElement('div'),
@@ -206,7 +206,7 @@ define(function(require, exports, module){
 			item = rlrc.exec(lrc[i]);
 			time = parseInt(item[1], 10) * 60 + parseInt(item[2], 10);
 			sentence = item[3];
-			if ( sentence ) { continue; }
+			if ( !sentence ) { continue; }
 			cloneDiv = sentenceDiv.cloneNode();
 			cloneDiv.id = time;
 			cloneDiv.innerHTML = sentence;
