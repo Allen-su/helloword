@@ -23,7 +23,6 @@ define(function(require){
 	function switchProNav( e ) {
 		var item = e.target;
 		if ( item.tagName.toLowerCase() !== 'li') { return; }
-		alert(item.tagName);
 		var index = -1;
 		findProgramLi.removeClass('active');
 		item.className = 'active';
