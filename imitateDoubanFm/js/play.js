@@ -1,7 +1,7 @@
 define(function(require, exports, module){
 	require('zepto');
 	var audio = require('audio'),//获取audio对象
-		slidePanel = require('slide_canvas'),
+		slidePanel = require('slide_new'),
 		progressBox = $('.progress'),
 		canvas = $('#progress')[0],
 		Progress = require('progress');
