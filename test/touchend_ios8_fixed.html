@@ -34,18 +34,18 @@
 		var inner = document.querySelector('.inner');
 		var v_start = 0, curY = 0;
 
-		inner.addEventListener('touchstart', function(e){
+		window.addEventListener('touchstart', function(e){
 			v_start = e.touches[0].pageY;
 			curY = parseInt(inner.style.top.slice(0, -2)) || 0;
 		}, false);
 
-		inner.addEventListener('touchmove', function(e){
+		window.addEventListener('touchmove', function(e){
 			var v_end = e.touches[0].pageY;
 			inner.style.top = (curY + v_end - v_start) + 'px';
 			console.log(inner.style.top);
 		}, false);
 
-		inner.addEventListener('touchend', function(e){
+		window.addEventListener('touchend', function(e){
 			inner.style.top = '0px';
 			inner.innerHTML += 'touchend<br>';
 		}, false);
@@ -58,6 +58,7 @@
 		document.addEventListener('touchmove', function(e){
 			 e.preventDefault();
 		}, false);
+
 	</script>
 </body>
 </html>
