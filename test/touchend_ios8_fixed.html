@@ -34,18 +34,18 @@
 		var inner = document.querySelector('.inner');
 		var v_start = 0, curY = 0;
 
-		window.addEventListener('touchstart', function(e){
+		document.addEventListener('touchstart', function(e){
 			v_start = e.touches[0].pageY;
 			curY = parseInt(inner.style.top.slice(0, -2)) || 0;
 		}, false);
 
-		window.addEventListener('touchmove', function(e){
+		document.addEventListener('touchmove', function(e){
 			var v_end = e.touches[0].pageY;
 			inner.style.top = (curY + v_end - v_start) + 'px';
 			console.log(inner.style.top);
 		}, false);
 
-		window.addEventListener('touchend', function(e){
+		document.addEventListener('touchend', function(e){
 			inner.style.top = '0px';
 			inner.innerHTML += 'touchend<br>';
 		}, false);
