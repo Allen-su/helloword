@@ -1,0 +1,113 @@
+@charset "utf-8";
+/*CSS Document*/
+
+html, body {
+	width: 100%;
+	height: 100%;
+	margin: 0;
+	padding: 0;
+}
+
+canvas {
+	display: block;
+}
+
+body {
+	background-color: #000;
+	color: #fff;
+	font-family: Verdana, Arial, sans-serif;
+	font-size: 18px;
+}
+
+h1 {
+	font-size: 30px;
+}
+
+p {
+	margin: 0 20px;
+}
+
+a {
+	color: #fff;
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a.button {
+	background-color: #185da8;
+	border-radius: 5px;
+	display: block;
+	font-size: 30px;
+	margin: 40px 0 0 45px;
+	padding: 10px;
+	width: 200px;
+}
+
+a.button:hover {
+	background-color: #2488f5;
+	color: #fff;
+	text-decoration: none;
+}
+
+#game {
+	height: 600px;
+	left: 50%;
+	margin: -300px 0 0 -175px;
+	position: relative;
+	top: 50%;
+	width: 350px;
+}
+
+#gameCanvas {
+	background-color: #001022;
+}
+
+#game_ui {
+	height: 600px;
+	position: absolute;
+	width: 350px;
+}
+
+#game_intro, #game_complete {
+	background-color: rgba(0, 0, 0, 0.5);
+	margin-top: 100px;
+	padding: 40px 0;
+	text-align: center;
+}
+
+#game_starts {
+	font-size: 14px;
+	margin: 20px 0;
+}
+
+#game_starts .game_reset {
+	margin: 20px 20px 0 0;
+	position: absolute;
+	right: 0;
+	top: 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

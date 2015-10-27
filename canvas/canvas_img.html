@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>canvas</title>
+</head>
+<body>
+	<canvas id="canvas" width="1200px;" height="1200px" style="border:solid 1px orange;margin:auto;display:block"></canvas>
+	<script>
+		var canvas = document.getElementById('canvas');
+		var context = canvas.getContext('2d');
+
+		context.shadowBlur = '20';
+		context.shadowColor = 'rgb(0, 0, 0)';
+
+		var img = new Image();
+		img.src = 'http://www.xxjxsj.cn/article/UploadPic/2009-10/2009101018545196251.jpg';
+
+		img.onload = function() {
+			context.drawImage(img, 0, 0, 500, 333);
+			/*var imgData = context.getImageData(0, 0, 500, 333);
+			var pixel = imgData.data;
+			var color1 = pixel[2];
+			console.log(pixel);*/
+		}
+
+		
+		/*
+			//颜色拾色器：
+			canvas.onclick = function(e) {
+				var canvasX = Math.floor(e.pageX - canvas.offsetLeft);
+				var canvasY = Math.floor(e.pageY - canvas.offsetTop);
+				var imgData = context.getImageData(canvasX, canvasY, 1, 1);
+				var pixel = imgData.data;
+				var pixelColor = 'rgba('+pixel[0]+', '+pixel[1]+', '+pixel[2]+', '+pixel[3]+')';
+				document.body.style.backgroundColor = pixelColor;
+				console.log(pixelColor);
+			}
+		*/
+
+
+		// 创建马赛克效果
+		var imageData = context.createImageData(200, 200);
+		var pixels = imageData.data,
+
+			// 马赛克块的个数
+			numTileRows = 4,
+			numTileCols = 4,
+
+			// 每个马赛克块 的尺寸
+			tileWidth = imageData.width / numTileRows,
+			tileHeight = imageData.height / numTileCols;
+
+		var red, green, blue, tureX, tureY, pos;
+		for ( var r = 0; r < numTileRows; r++ ) {
+			for ( var c = 0; c < numTileCols; c++ ) {
+				// 为每个块设置随机的像素颜色值
+				red = Math.floor( Math.random() * 255 );
+				green = Math.floor( Math.random() * 255 );
+				blue = Math.floor( Math.random() * 255 );
+
+				// 为每个块中的每个像素值 设置颜色
+				for ( var tr = 0; tr < tileHeight; tr++ ) {
+					for ( var tc = 0; tc < tileWidth; tc++ ) {
+						// var pixelRed = (( y - 1 ) * ( width * 4 )) + (( x - 1 ) * 4)
+						tureX = (c * tileWidth) + tc; // 当前列数 * 边长 + 在当前块中的像素数
+						tureY = (r * tileHeight) + tr; // 当前行数 * 边长 + 在当前块中的像素数
+						pos = (tureY * (imageData.width * 4)) + (tureX * 4);
+						pixels[pos] = red;
+						pixels[pos + 1] = green;
+						pixels[pos + 2] = blue;
+						pixels[pos + 3] = 255;
+					}
+				}
+			}
+		}
+		context.putImageData(imageData, 0, 400);
+
+
+
+	</script>
+</body>
+</html>

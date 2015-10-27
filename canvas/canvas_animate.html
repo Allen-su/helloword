@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>canvas</title>
+</head>
+<body>
+	<canvas id="canvas" width="1400px;" height="700px" style="border:solid 1px orange;margin:auto;display:block"></canvas>
+	<button id="start">start</button><button id="stop">stop</button>
+	<script>
+		var start = document.getElementById('start'),
+			stop = document.getElementById('stop'),
+			startAnimation = false;
+		start.onclick = function(){
+			if ( startAnimation == true ) { return;}
+			startAnimation = true;
+			animate();
+		}
+
+		stop.onclick = function(){
+			startAnimation = false;
+		}
+
+
+		var canvas = document.getElementById('canvas');
+		var context = canvas.getContext('2d');
+		var canvasWidth = canvas.width,
+			canvasHeight= canvas.height;
+
+		
+		var shape = function(x, y, width, height) {
+			this.x = x;
+			this.y = y;
+			this.width = width;
+			this.height = height;
+
+			this.radius = Math.random() * 30;
+			this.angle = 0;
+		}
+
+		var shapes = [];
+		// shapes.push( new shape(50, 50));
+		// shapes.push( new shape(100, 100));
+		// shapes.push( new shape(150, 150));
+
+		for ( var i = 0; i < 10; i++ ) {
+			var x = Math.random() * 250;
+			var y = Math.random() * 250;
+			var width = height = Math.random() * 50;
+			shapes.push( new shape(x, y, width, height));
+		}
+
+		function animate() {
+			context.clearRect(0, 0, canvasWidth, canvasHeight);
+			var shapeLength = shapes.length;
+			for ( var i = 0; i < shapeLength; i++ ) {
+				var tmpShape = shapes[i],
+					x = tmpShape.x + ( tmpShape.x * Math.cos(tmpShape.angle * Math.PI / 180) ),
+					y = tmpShape.y + ( tmpShape.y * Math.sin(tmpShape.angle * Math.PI / 180) );
+				tmpShape.angle += 5;
+
+				if ( tmpShape.angle > 360 ) {
+					tmpShape.angle = 0;
+				}
+				context.fillRect(x, y, tmpShape.width, tmpShape.height);
+			}
+
+			if ( startAnimation ) {
+				setTimeout(animate, 33);
+			}
+		}
+	</script>
+</body>
+</html>

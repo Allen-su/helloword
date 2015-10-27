@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>canvas</title>
+</head>
+<body>
+	<canvas id="canvas" width="1200px;" height="700px" style="border:solid 1px orange;margin:auto;display:block"></canvas>
+	<script>
+		var canvas = document.getElementById('canvas');
+		var context = canvas.getContext('2d');
+
+	// 变形
+
+		// 缩放
+		context.save(); // 并保存当前状态，以备下次使用
+		// context.translate(150, 150);
+		context.translate(-150, -150);
+		context.scale(2, 2);
+		context.fillRect(150, 150, 100, 100);
+
+		context.restore(); // 还原状态
+		context.save(); // 并保存当前状态，以备下次使用
+		context.fillRect(0, 0, 100, 100);
+
+	</script>
+</body>
+</html>

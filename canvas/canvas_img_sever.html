@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>canvas</title>
+</head>
+<body>
+	<canvas id="canvas" width="1300px;" height="1200px" style="border:solid 1px orange;margin:auto;display:block"></canvas>
+	<script>
+
+		// 此文件一定要 运行在服务器中才能执行，且下面的图片 aaa.jpg 也一定要在当前服务器中
+
+		var canvas = document.getElementById('canvas');
+		var context = canvas.getContext('2d');
+
+		context.shadowBlur = '20';
+		context.shadowColor = 'rgb(0, 0, 0)';
+
+		var img = new Image();
+		img.src = 'img/aaa.jpg';
+
+		img.onload = function() {
+			context.drawImage(img, 0, 0, 300, 200);
+			var imgData = context.getImageData(0, 0, 300, 200);
+			var pixels = imgData.data;
+
+			// 翻转颜色
+			for (var i = 0, len = pixels.length; i < len; i += 4) {
+				pixels[i] = Math.floor(255 - pixels[i + 0]);
+				pixels[i + 1] = Math.floor(255 - pixels[i + 1]);
+				pixels[i + 2] = Math.floor(255 - pixels[i + 2]);
+				pixels[i + 3] = 255;
+			}
+			context.putImageData(imgData, 300, 0);
+
+			//转换为灰度
+			imgData = context.getImageData(0, 0, 300, 200);
+			pixels = imgData.data;
+			var average;
+			for (i = 0, len = pixels.length; i < len; i += 4) {
+				average = (imgData.data[i] + pixels[i + 1] + pixels[i + 2]) / 3;
+				pixels[i] = average;
+				pixels[i + 1] = average;
+				pixels[i + 2] = average;
+				pixels[i + 3] = 255;
+			}
+			context.putImageData(imgData, 600, 0);
+
+			// 像素化
+			imgData = context.getImageData(0, 0, 300, 200);
+			pixels = imgData.data;
+			// 用一个 40 * 40 的格子显示当前图片，每个格子统一用同一种颜色（格子中心的颜色）
+			var	numTileRows = 20, 
+				numTileCols = 20,
+
+				// 每个格子 的尺寸
+				tileWidth = imgData.width / numTileRows,
+				tileHeight = imgData.height / numTileCols;
+
+			var red, green, blue, x, y, pos;
+			for ( var r = 0; r < numTileRows; r++ ) {
+				for ( var c = 0; c < numTileCols; c++ ) {
+					x =  Math.floor(c * tileWidth + tileWidth / 2);
+					y =  Math.floor(r * tileHeight + tileHeight / 2);
+					pos = (y * (imgData.width * 4)) + (x * 4); // 获取每个格子中心的颜色
+					red = pixels[pos];
+					green = pixels[pos + 1];
+					blue = pixels[pos + 2];
+					context.fillStyle = 'rgb('+ red +', '+ green +', '+ blue +')';
+					context.fillRect(x - tileWidth / 2, y - tileHeight / 2, tileWidth, tileHeight);
+					// 改成一圆形的表格
+					context.beginPath();
+					context.arc(x, y, tileWidth / 2, 0, Math.PI * 2, false);
+					context.closePath();
+					context.fill();
+				}
+			}
+		}
+
+		//颜色拾色器：
+		canvas.onclick = function(e) {
+			var canvasX = Math.floor(e.pageX - canvas.offsetLeft);
+			var canvasY = Math.floor(e.pageY - canvas.offsetTop);
+			var imgData = context.getImageData(canvasX, canvasY, 1, 1);
+			var pixel = imgData.data;
+			var pixelColor = 'rgba('+pixel[0]+', '+pixel[1]+', '+pixel[2]+', '+pixel[3]+')';
+			document.body.style.backgroundColor = pixelColor;
+			console.log(pixelColor);
+		}
+		var imgData = context.createImageData(100, 100);
+		for (var i = 0; i < imgData.data.length; i += 4) {
+			imgData.data[i+0] = Math.floor(Math.random() * 255);
+			imgData.data[i+1] = Math.floor(Math.random() * 255);
+			imgData.data[i+2] = Math.floor(Math.random() * 255);
+			imgData.data[i+3] = 255;
+		}
+		context.putImageData(imgData, 10, 400);
+
+	</script>
+</body>
+</html>

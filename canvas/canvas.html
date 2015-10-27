@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>canvas</title>
+</head>
+<body>
+	<canvas id="canvas" width="1200px;" height="700px" style="border:solid 1px black;margin:auto;display:block"></canvas>
+	<script>
+		var canvas = document.getElementById('canvas');
+		var context = canvas.getContext('2d');
+
+		//绘制矩形
+		context.fillRect(10, 10, 50, 50);
+		context.strokeRect(10, 70, 50, 50);
+
+		//绘制线条
+		context.beginPath(); //开始路径
+		context.moveTo(10, 130); //设置路径的原点
+		context.lineTo(30, 180); //设置路径的锚点
+		context.lineTo(60, 130); //设置路径的锚点
+		context.closePath(); //创建从当前点到开始点的路径，并结束路径
+		context.stroke(); //绘制出路径的轮廓
+
+		//绘制圆形
+		context.beginPath();
+		context.arc(90, 30, 20, 0, Math.PI * 2, false);
+		context.closePath();
+		context.fill();
+
+		//样式
+		context.clearRect(10, 10, 50, 50);
+		context.fillStyle = 'rgba(255, 0, 0, 0.5)'
+		context.fillRect(10, 10, 50, 50);
+
+	</script>
+</body>
+</html>

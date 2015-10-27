@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>canvas</title>
+</head>
+<body>
+	<canvas id="canvas" width="1200px;" height="700px" style="border:solid 1px orange;margin:auto;display:block"></canvas>
+	<script>
+		var canvas = document.getElementById('canvas');
+		var context = canvas.getContext('2d');
+
+	// 保存与读取状态
+		context.fillStyle = 'rgb(255, 0, 0)'; // 红色
+		context.save(); // 保存画布状态
+		context.fillRect(50, 50, 100, 100);
+
+		context.fillStyle = 'rgb(0, 0, 255)';// 蓝色
+		context.fillRect(200, 50, 100, 100);
+
+		context.restore(); // 恢复画布状态
+		context.fillRect(350, 50, 100, 100); // 将会绘制一个红色的矩形
+
+
+	// 变形
+		// 平移
+		context.save();
+		context.fillStyle = 'rgb(0, 255, 0)'; // 绿色
+		context.fillRect(150, 150, 100, 100);
+		context.translate(150, 150); // 移动原点
+		context.fillRect(150, 150, 100, 100);
+
+		// 旋转
+		context.rotate(Math.PI / 180 * 45);
+		context.fillRect(150, 150, 100, 100);
+
+		// context.restore();
+		// context.save();
+		context.setTransform(1, 0, 0, 1, 0, 0);//重置矩阵
+		var radian = Math.PI / 180 * 45;
+		var xScale = Math.cos(radian),
+			ySkew = Math.sin(radian),
+			xSkew = -Math.sin(radian),
+			yScale = Math.cos(radian),
+			xTrans = 200,
+			yTrans = 200;
+		context.transform(xScale, ySkew, xSkew, yScale, xTrans, yTrans);
+		// context.transform(radian, -radian, radian, radian, xTrans, yTrans);
+		context.fillRect(-50, -50, 100, 100);
+
+
+		//globalAlpha
+		context.fillStyle = 'rgb(63, 169, 245)';
+		context.fillRect(50, 50, 100, 100);
+		context.globalAlpha = 0.5;
+		context.fillStyle = 'rgb(255, 123, 172)';
+		context.fillRect(100, 100, 100, 100);
+
+		context.restore();
+		context.save();
+		context.shadowColor = 'rgb(255, 0, 0)';
+		context.shadowBlur = 50;
+		context.shadowOffsetX = 0;
+		context.shadowOffsetY = 0;
+		context.beginPath();
+		context.arc(600, 100, 50, 0, Math.PI * 2, false);
+		context.closePath();
+		context.fill();
+
+		//渐变
+
+		var gradient = context.createLinearGradient(0, 0, 0, canvas.height);
+		gradient.addColorStop(0, 'rgb(0, 0, 0)'); // 黑色
+		gradient.addColorStop(1, 'rgb(255, 255, 255)'); // 白色
+		context.fillStyle = gradient;
+		context.fillRect(0, 0, canvas.width, canvas.height);
+
+
+		context.restore();
+		context.save();
+		var radialGradient = context.createRadialGradient(300, 300, 10, 100, 100, 50);
+		radialGradient.addColorStop(0, 'rgb(0, 0, 0)'); // 黑色
+		radialGradient.addColorStop(1, 'rgb(150, 150, 150)');
+		context.fillStyle = radialGradient;
+		context.fillRect(0, 0, canvas.width, canvas.height);
+
+	</script>
+</body>
+</html>

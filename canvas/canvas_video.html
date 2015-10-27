@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>canvas</title>
+</head>
+<body>
+	<canvas id="canvas" width="500px;" height="281px" style="border:solid 1px orange;display:block">
+		<video id="myVideo" width="500px" height="281px" controls="true">
+			<source type="video/mp4" src="img/waiting.mp4"></source>
+		</video>
+	</canvas>
+	<div>
+		<button id="play">play</button>
+		<button id="stop">stop</button>
+	</div>
+	<script>
+
+		var canvas = document.getElementById('canvas');
+		var context = canvas.getContext('2d');
+
+		var video = document.getElementById('myVideo');
+		var play = document.getElementById('play');
+		var stop = document.getElementById('stop');
+
+		play.addEventListener('click', function(){
+			if ( video.paused || video.ended ) {
+				video.play();
+			}
+		}, false);
+
+		stop.addEventListener('click', function(){
+			if ( video.played ) {
+				video.pause();
+			}
+		}, false);
+
+		video.addEventListener('play', function(){
+			drawCanvas();
+		}, false);
+
+		function drawCanvas() {
+			if ( video.paused || video.ended ) {
+				return;
+			}
+			context.drawImage(video, 0, 0, 500, 281);
+			imgData = context.getImageData(0, 0, 500, 281);
+			pixels = imgData.data;
+			// 用一个 36 * 64 的格子显示当前图片，每个格子统一用同一种颜色（格子中心的颜色）,这里的格子行列比例要按照
+			// 宽高比例来：如281/500 = 0.562, 36 行对应的就是 64列。
+			var	numTileRows = 36, 
+				numTileCols = 64,
+
+				// 每个格子 的尺寸
+				tileWidth = imgData.width / numTileRows,
+				tileHeight = imgData.height / numTileCols;
+
+			var red, green, blue, x, y, pos;
+			for ( var r = 0; r < numTileRows; r++ ) {
+				for ( var c = 0; c < numTileCols; c++ ) {
+					x =  Math.floor(c * tileWidth + tileWidth / 2);
+					y =  Math.floor(r * tileHeight + tileHeight / 2);
+					pos = (y * (imgData.width * 4)) + (x * 4); // 获取每个格子中心的颜色
+					red = pixels[pos];
+					green = pixels[pos + 1];
+					blue = pixels[pos + 2];
+					context.fillStyle = 'rgb('+ red +', '+ green +', '+ blue +')';
+					context.fillRect(x - tileWidth / 2, y - tileHeight / 2, tileWidth, tileHeight);
+					// 改成一圆形的表格
+					// context.beginPath();
+					// context.arc(x, y, tileWidth / 2, 0, Math.PI * 2, false);
+					// context.closePath();
+					// context.fill();
+				}
+			}
+			setTimeout(drawCanvas, 30);
+		}
+		
+
+	</script>
+</body>
+</html>
